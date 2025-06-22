@@ -72,7 +72,7 @@ export default function Portfolio() {
         "Configuration complète d'une infrastructure réseau avec services DNS/Web, sécurisation et haute disponibilité.",
       technologies: ["Linux", "DNS (BIND)", "Apache", "IPv4/IPv6", "Sécurité"],
       category: "System Administration",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "/setup.png",
       features: [
         "Configuration DNS maître/esclave",
         "Virtual hosts Apache",
@@ -86,7 +86,7 @@ export default function Portfolio() {
         "Projet d'analyse comparative de performance entre différents algorithmes de tri (Tri Fusion, Tri Rapide, Tri à Bulles) avec mesures de complexité temporelle et optimisations.",
       technologies: ["Java", "Algorithmique", "Analyse de Performance", "Tests Unitaires"],
       category: "Algorithm Analysis",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "/tri.png",
       features: [
         "Implémentation Tri Fusion O(n log n)",
         "Tri Rapide avec pivot optimisé",
@@ -100,7 +100,7 @@ export default function Portfolio() {
         "Conception et exploitation d'une base de données relationnelle complexe avec modélisation hiérarchique et requêtes optimisées.",
       technologies: ["SQL", "PostgreSQL", "Modélisation", "Optimisation"],
       category: "Database",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "/bd.png",
       features: ["Modélisation hiérarchique", "Jointures optimisées", "Requêtes sécurisées", "Protection des données"],
     },
   ]
