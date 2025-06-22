@@ -41,6 +41,7 @@ export default function Portfolio() {
   const projects = [
     {
       title: "BioSymphonie - Site Web Écoresponsable",
+      slug: "biosymphonie",
       description:
         "Création d'un site web complet pour une entreprise d'événements écoresponsables avec navigation multilingue, carousel d'images et design responsive.",
       technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
@@ -50,6 +51,7 @@ export default function Portfolio() {
     },
     {
       title: "Jeu d'Échecs Interactif",
+      slug: "echecs",
       description:
         "Application web de jeu d'échecs en ligne avec interface graphique complète, gestion des tours et système de promotion des pions.",
       technologies: ["Java", "JavaFX", "Interface Web", "Logique de jeu"],
@@ -59,6 +61,7 @@ export default function Portfolio() {
     },
     {
       title: "Bomberman - Jeu 2D JavaFX",
+      slug: "bomberman",
       description:
         "Développement d'un jeu Bomberman complet avec architecture MVC, animations fluides et gestion des explosions.",
       technologies: ["JavaFX", "MVC Pattern", "Animation", "Observer Pattern"],
@@ -68,6 +71,7 @@ export default function Portfolio() {
     },
     {
       title: "Infrastructure Réseau Procyon",
+      slug: "procyon",
       description:
         "Configuration complète d'une infrastructure réseau avec services DNS/Web, sécurisation et haute disponibilité.",
       technologies: ["Linux", "DNS (BIND)", "Apache", "IPv4/IPv6", "Sécurité"],
@@ -82,6 +86,7 @@ export default function Portfolio() {
     },
     {
       title: "Analyse d'Algorithmes de Tri - Optimisation Performance",
+      slug: "algorithmes-tri",
       description:
         "Projet d'analyse comparative de performance entre différents algorithmes de tri (Tri Fusion, Tri Rapide, Tri à Bulles) avec mesures de complexité temporelle et optimisations.",
       technologies: ["Java", "Algorithmique", "Analyse de Performance", "Tests Unitaires"],
@@ -96,6 +101,7 @@ export default function Portfolio() {
     },
     {
       title: "Base de Données Démographique",
+      slug: "base-de-donnees",
       description:
         "Conception et exploitation d'une base de données relationnelle complexe avec modélisation hiérarchique et requêtes optimisées.",
       technologies: ["SQL", "PostgreSQL", "Modélisation", "Optimisation"],
@@ -334,10 +340,12 @@ export default function Portfolio() {
                   </div>
 
                   <div className="flex space-x-2">
-                    <Button size="sm" variant="outline" className="flex-1 text-xs">
-                      <ExternalLink className="w-3 h-3 mr-1" />
-                      Détails
-                    </Button>
+                    <Link href={`/projects/${project.slug}`} className="flex-1">
+                      <Button size="sm" variant="outline" className="w-full text-xs">
+                        <ExternalLink className="w-3 h-3 mr-1" />
+                        Détails
+                      </Button>
+                    </Link>
                   </div>
                 </CardContent>
               </Card>
