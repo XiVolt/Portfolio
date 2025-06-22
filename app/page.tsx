@@ -450,11 +450,13 @@ export default function Portfolio() {
 
             <div>
               <h3 className="text-2xl font-semibold mb-6">Envoyez-moi un message</h3>
-              <form className="space-y-6">
+              <form action="https://formspree.io/f/xovwkvdp" method="POST" className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium mb-2">Nom complet</label>
                   <input
                     type="text"
+                    name="name"
+                    required
                     className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white"
                     placeholder="Votre nom"
                   />
@@ -463,6 +465,8 @@ export default function Portfolio() {
                   <label className="block text-sm font-medium mb-2">Email</label>
                   <input
                     type="email"
+                    name="email"
+                    required
                     className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white"
                     placeholder="votre@email.com"
                   />
@@ -471,6 +475,7 @@ export default function Portfolio() {
                   <label className="block text-sm font-medium mb-2">Sujet</label>
                   <input
                     type="text"
+                    name="subject"
                     className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white"
                     placeholder="Opportunité d'alternance"
                   />
@@ -478,12 +483,14 @@ export default function Portfolio() {
                 <div>
                   <label className="block text-sm font-medium mb-2">Message</label>
                   <textarea
+                    name="message"
                     rows={5}
+                    required
                     className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white resize-none"
                     placeholder="Votre message..."
                   ></textarea>
                 </div>
-                <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3">
+                <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3">
                   Envoyer le message
                 </Button>
               </form>
