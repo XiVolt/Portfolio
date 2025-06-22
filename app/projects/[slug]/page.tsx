@@ -15,7 +15,7 @@ const projectsData = {
 Le site devait répondre aux besoins spécifiques du client avec une approche moderne et respectueuse de l'environnement. J'ai travaillé sur tous les aspects du développement, de la conception à la mise en ligne.`,
     technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "RGPD"],
     category: "Web Development",
-    images: ["/biosymphonie.png", "/biosymphonie-mobile.png"],
+    images: ["/biosymphonie.png", "/biosymphonie-anglais.png"],
     features: [
       "Navigation multilingue (Français/Anglais)",
       "Design responsive adaptatif",
@@ -99,11 +99,10 @@ window.addEventListener("scroll", () => {
       "Respect complet des règles officielles",
       "Performance optimisée",
     ],
-     codeExamples: [], 
+    codeExamples: []
   },
   bomberman: {
-    
-    title: "Bomberman - Jeu 2D JavaFX",
+   title: "Bomberman - Jeu 2D JavaFX",
     description:
       "Développement d'un jeu Bomberman complet avec architecture MVC, animations fluides et système de jeu avancé.",
     longDescription: `Création d'un jeu Bomberman en JavaFX avec une architecture MVC robuste. Le projet incluait la gestion des personnages, des explosions, des animations et une interface utilisateur complète.`,
@@ -119,8 +118,8 @@ window.addEventListener("scroll", () => {
       "Binding JavaFX avancé",
       "Thread-safety avec Platform.runLater",
     ],
-    challenges: [],
-    results: [],    
+    challenges: [], 
+    results: [],   
     codeExamples: [
       {
         title: "Gestion des Explosions",
@@ -142,6 +141,193 @@ public void showExplosion(List<Tile> tiles) {
     }
   });
 }`,
+      },
+    ],
+  },
+  procyon: {
+    title: "Infrastructure Réseau Procyon",
+    description:
+      "Configuration complète d'une infrastructure réseau avec services DNS/Web, sécurisation et haute disponibilité dans le cadre de la SAE 2.03.",
+    longDescription: `Ce projet consistait à configurer une infrastructure réseau complète pour l'entreprise fictive Procyon. 
+
+L'objectif était de mettre en place une architecture réseau robuste avec des services DNS maître/esclave, des serveurs web Apache avec virtual hosts, et une sécurisation complète par zones.
+
+J'ai travaillé sur la configuration des serveurs Linux, l'implémentation des services réseau et la sécurisation de l'ensemble de l'infrastructure.`,
+    technologies: ["Linux", "DNS (BIND)", "Apache", "IPv4/IPv6", "Sécurité"],
+    category: "System Administration",
+    images: ["/setup.png"],
+    features: [
+      "Configuration DNS maître/esclave",
+      "Virtual hosts Apache multiples",
+      "Sécurisation par zones réseau",
+      "Haute disponibilité des services",
+      "Gestion des certificats SSL",
+      "Monitoring des services",
+      "Configuration IPv4/IPv6",
+      "Pare-feu et règles de sécurité",
+    ],
+    challenges: [
+      "Configuration complexe du DNS BIND",
+      "Synchronisation maître/esclave",
+      "Sécurisation des communications",
+      "Gestion des certificats SSL",
+    ],
+    results: [
+      "Infrastructure 100% opérationnelle",
+      "Haute disponibilité garantie",
+      "Sécurité renforcée",
+      "Performance optimisée",
+    ],
+    codeExamples: [
+      {
+        title: "Configuration DNS BIND",
+        code: `// Configuration zone DNS
+zone "procyon.local" {
+    type master;
+    file "/etc/bind/db.procyon.local";
+    allow-transfer { 192.168.1.11; };
+};
+
+// Fichier de zone
+$TTL    604800
+@       IN      SOA     ns1.procyon.local. admin.procyon.local. (
+                        2024010101      ; Serial
+                        604800          ; Refresh
+                        86400           ; Retry
+                        2419200         ; Expire
+                        604800 )        ; Negative Cache TTL
+
+@       IN      NS      ns1.procyon.local.
+@       IN      A       192.168.1.10
+www     IN      A       192.168.1.10`,
+      },
+    ],
+  },
+  "algorithmes-tri": {
+    title: "Analyse d'Algorithmes de Tri - Optimisation Performance",
+    description:
+      "Projet d'analyse comparative de performance entre différents algorithmes de tri avec mesures de complexité temporelle et optimisations.",
+    longDescription: `Ce projet consistait à implémenter et analyser les performances de différents algorithmes de tri : Tri Fusion, Tri Rapide, et Tri à Bulles.
+
+L'objectif était de mesurer et comparer les performances de ces algorithmes sur différentes tailles de données, d'analyser leur complexité temporelle et spatiale, et d'optimiser leur implémentation.
+
+J'ai développé un framework de test complet avec mesures de performance en temps réel et génération de rapports d'analyse.`,
+    technologies: ["Java", "Algorithmique", "Analyse de Performance", "Tests Unitaires"],
+    category: "Algorithm Analysis",
+    images: ["/tri.png"],
+    features: [
+      "Implémentation Tri Fusion O(n log n)",
+      "Tri Rapide avec pivot optimisé",
+      "Mesures de performance temps réel",
+      "Analyse comparative sur grandes données",
+      "Génération de graphiques de performance",
+      "Tests unitaires complets",
+      "Optimisations mémoire",
+      "Rapport d'analyse détaillé",
+    ],
+    challenges: [
+      "Optimisation du Tri Rapide",
+      "Gestion mémoire pour grandes données",
+      "Mesures précises de performance",
+      "Analyse statistique des résultats",
+    ],
+    results: [
+      "Tri Fusion 40% plus rapide que l'implémentation standard",
+      "Tri Rapide optimisé pour éviter le pire cas",
+      "Framework de test réutilisable",
+      "Documentation complète des performances",
+    ],
+    codeExamples: [
+      {
+        title: "Tri Fusion Optimisé",
+        code: `public static void mergeSort(int[] arr, int left, int right) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+        
+        // Tri récursif des deux moitiés
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+        
+        // Fusion des deux moitiés triées
+        merge(arr, left, mid, right);
+    }
+}
+
+private static void merge(int[] arr, int left, int mid, int right) {
+    int[] temp = new int[right - left + 1];
+    int i = left, j = mid + 1, k = 0;
+    
+    while (i <= mid && j <= right) {
+        temp[k++] = (arr[i] <= arr[j]) ? arr[i++] : arr[j++];
+    }
+    
+    while (i <= mid) temp[k++] = arr[i++];
+    while (j <= right) temp[k++] = arr[j++];
+    
+    System.arraycopy(temp, 0, arr, left, temp.length);
+}`,
+      },
+    ],
+  },
+  "base-de-donnees": {
+    title: "Base de Données Démographique",
+    description:
+      "Conception et exploitation d'une base de données relationnelle complexe avec modélisation hiérarchique et requêtes optimisées.",
+    longDescription: `Ce projet consistait à concevoir et implémenter une base de données relationnelle complète pour gérer des données démographiques complexes.
+
+L'objectif était de créer un modèle de données hiérarchique avec des relations complexes, d'optimiser les requêtes pour de gros volumes de données, et d'assurer la sécurité et l'intégrité des données.
+
+J'ai travaillé sur la modélisation conceptuelle, l'implémentation physique, et l'optimisation des performances avec PostgreSQL.`,
+    technologies: ["SQL", "PostgreSQL", "Modélisation", "Optimisation"],
+    category: "Database",
+    images: ["/bd.png"],
+    features: [
+      "Modélisation hiérarchique complexe",
+      "Jointures optimisées multi-tables",
+      "Requêtes sécurisées avec paramètres",
+      "Protection des données sensibles",
+      "Index optimisés pour performance",
+      "Procédures stockées avancées",
+      "Triggers pour intégrité référentielle",
+      "Sauvegarde et restauration automatisées",
+    ],
+    challenges: [
+      "Modélisation de relations complexes",
+      "Optimisation des requêtes lourdes",
+      "Gestion de la sécurité des données",
+      "Performance sur gros volumes",
+    ],
+    results: [
+      "Base de données normalisée 3NF",
+      "Requêtes optimisées < 100ms",
+      "Sécurité renforcée des accès",
+      "Intégrité des données garantie",
+    ],
+    codeExamples: [
+      {
+        title: "Requête Optimisée avec Jointures",
+        code: `-- Requête optimisée pour récupérer les statistiques démographiques
+SELECT 
+    r.nom_region,
+    d.nom_departement,
+    c.nom_commune,
+    p.annee,
+    p.population_totale,
+    p.population_masculine,
+    p.population_feminine,
+    ROUND((p.population_feminine::decimal / p.population_totale) * 100, 2) as pourcentage_femmes
+FROM population p
+INNER JOIN communes c ON p.id_commune = c.id_commune
+INNER JOIN departements d ON c.id_departement = d.id_departement  
+INNER JOIN regions r ON d.id_region = r.id_region
+WHERE p.annee BETWEEN $1 AND $2
+    AND r.nom_region = $3
+ORDER BY p.population_totale DESC
+LIMIT 20;
+
+-- Index pour optimiser cette requête
+CREATE INDEX idx_population_annee_region ON population(annee) 
+WHERE annee BETWEEN 2010 AND 2024;`,
       },
     ],
   },
