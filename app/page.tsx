@@ -45,7 +45,7 @@ export default function Portfolio() {
         "Création d'un site web complet pour une entreprise d'événements écoresponsables avec navigation multilingue, carousel d'images et design responsive.",
       technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
       category: "Web Development",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "/biosymphonie.png",
       features: ["Navigation multilingue", "Design responsive", "Carousel interactif", "Conformité RGPD"],
     },
     {
@@ -54,7 +54,7 @@ export default function Portfolio() {
         "Application web de jeu d'échecs en ligne avec interface graphique complète, gestion des tours et système de promotion des pions.",
       technologies: ["Java", "JavaFX", "Interface Web", "Logique de jeu"],
       category: "Game Development",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "/echecs.png",
       features: ["Interface graphique", "Gestion des tours", "Promotion des pions", "Validation des mouvements"],
     },
     {
@@ -63,7 +63,7 @@ export default function Portfolio() {
         "Développement d'un jeu Bomberman complet avec architecture MVC, animations fluides et gestion des explosions.",
       technologies: ["JavaFX", "MVC Pattern", "Animation", "Observer Pattern"],
       category: "Game Development",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "/bomberman.png",
       features: ["Architecture MVC", "Animations Timeline", "Gestion des explosions", "Interface responsive"],
     },
     {
@@ -81,13 +81,18 @@ export default function Portfolio() {
       ],
     },
     {
-      title: "Système de Gestion Stock Eau",
+      title: "Analyse d'Algorithmes de Tri - Optimisation Performance",
       description:
-        "Application Java enterprise pour la gestion de stock avec persistance des données, tri personnalisé et interface utilisateur.",
-      technologies: ["Java", "Serialization", "Comparator", "Tests Unitaires"],
-      category: "Enterprise Application",
+        "Projet d'analyse comparative de performance entre différents algorithmes de tri (Tri Fusion, Tri Rapide, Tri à Bulles) avec mesures de complexité temporelle et optimisations.",
+      technologies: ["Java", "Algorithmique", "Analyse de Performance", "Tests Unitaires"],
+      category: "Algorithm Analysis",
       image: "/placeholder.svg?height=300&width=500",
-      features: ["Persistance des objets", "Tri personnalisé", "Tests unitaires", "Encapsulation sécurisée"],
+      features: [
+        "Implémentation Tri Fusion O(n log n)",
+        "Tri Rapide avec pivot optimisé",
+        "Mesures de performance temps réel",
+        "Analyse comparative sur grandes données",
+      ],
     },
     {
       title: "Base de Données Démographique",
