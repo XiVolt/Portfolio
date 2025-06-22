@@ -1,9 +1,7 @@
 "use client"
-
-import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, ExternalLink, Github } from "lucide-react"
+import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useParams } from "next/navigation"
 
@@ -101,8 +99,10 @@ window.addEventListener("scroll", () => {
       "Respect complet des règles officielles",
       "Performance optimisée",
     ],
+     codeExamples: [], 
   },
   bomberman: {
+    
     title: "Bomberman - Jeu 2D JavaFX",
     description:
       "Développement d'un jeu Bomberman complet avec architecture MVC, animations fluides et système de jeu avancé.",
@@ -119,6 +119,8 @@ window.addEventListener("scroll", () => {
       "Binding JavaFX avancé",
       "Thread-safety avec Platform.runLater",
     ],
+    challenges: [],
+    results: [],    
     codeExamples: [
       {
         title: "Gestion des Explosions",
@@ -278,17 +280,6 @@ export default function ProjectDetail() {
                 ))}
               </div>
             </Card>
-
-            <div className="space-y-3">
-              <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
-                <ExternalLink className="w-4 h-4 mr-2" />
-                Voir le projet
-              </Button>
-              <Button variant="outline" className="w-full">
-                <Github className="w-4 h-4 mr-2" />
-                Code source
-              </Button>
-            </div>
           </div>
         </div>
       </div>
