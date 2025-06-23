@@ -173,7 +173,7 @@ export default function Portfolio() {
       image: "/bd.png",
       features: ["Modélisation hiérarchique", "Jointures optimisées", "Requêtes sécurisées", "Protection des données"],
     },
-    // Nouveaux projets personnels
+    
     {
       title: "Portfolio Personnel - Next.js",
       slug: "portfolio-nextjs",
@@ -186,14 +186,14 @@ export default function Portfolio() {
       features: ["Mode sombre/clair", "Animations fluides", "Performance optimisée", "SEO avancé"],
     },
     {
-      title: "FootConnect - Réseau social football",
-      slug: "footconnect",
+      title: "OnlyFoot - Réseau social football",
+      slug: "onlyfoot",
       description:
         "Site web communautaire sur le football : partage de photos, profils utilisateurs, commentaires, likes et base de données PostgreSQL.",
       technologies: ["React", "Node.js", "Express", "PostgreSQL", "SQL", "Cloudinary"],
       category: "Web Development",
       semester: "Projet Personnel",
-      image: "/footconnect.png",
+      image: "/onlyfoot.png",
       features: [
         "Création de profils utilisateurs",
         "Publication de photos de football",

@@ -380,14 +380,14 @@ WHERE annee BETWEEN 2010 AND 2024;`,
       },
     ],
   },
-  footconnect: {
-    title: "FootConnect - Réseau social football",
+  onlyfoot: {
+    title: "Onlyfoot - Réseau social football",
     description:
       "Site web communautaire sur le football : partage de photos, profils utilisateurs, commentaires, likes et base de données PostgreSQL.",
-    longDescription: `FootConnect est un réseau social dédié aux passionnés de football. Les utilisateurs peuvent créer un profil, publier des photos, commenter et liker les publications des autres membres. Le backend est réalisé en Node.js avec Express et la base de données PostgreSQL. Les images sont stockées sur Cloudinary.`,
+    longDescription: `Onlyfoot est un réseau social dédié aux passionnés de football. Les utilisateurs peuvent créer un profil, publier des photos, commenter et liker les publications des autres membres. Le backend est réalisé en Node.js avec Express et la base de données PostgreSQL. Les images sont stockées sur Cloudinary.`,
     technologies: ["React", "Node.js", "Express", "PostgreSQL", "SQL", "Cloudinary"],
     category: "Web Development",
-    images: ["/footconnect.png"],
+    images: ["/onlyfoot.png"],
     features: [
       "Création de profils utilisateurs",
       "Publication de photos de football",
