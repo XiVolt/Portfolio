@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -9,6 +11,8 @@ import Link from "next/link"
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("hero")
+  const [formStatus, setFormStatus] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,6 +39,39 @@ export default function Portfolio() {
     const element = document.getElementById(sectionId)
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setFormStatus("Envoi en cours...")
+
+    const form = e.currentTarget
+    const formData = new FormData(form)
+
+    try {
+      const response = await fetch("https://formspree.io/f/xovwkvdp", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      })
+
+      if (response.ok) {
+        setFormStatus("✅ Message envoyé avec succès ! Je vous répondrai rapidement.")
+        form.reset()
+      } else {
+        const data = await response.json()
+        setFormStatus("❌ Erreur lors de l'envoi. Veuillez réessayer.")
+        console.error("Erreur Formspree:", data)
+      }
+    } catch (error) {
+      setFormStatus("❌ Erreur réseau. Veuillez vérifier votre connexion.")
+      console.error("Erreur:", error)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -450,14 +487,15 @@ export default function Portfolio() {
 
             <div>
               <h3 className="text-2xl font-semibold mb-6">Envoyez-moi un message</h3>
-              <form action="https://formspree.io/f/xovwkvdp" method="POST" className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium mb-2">Nom complet</label>
                   <input
                     type="text"
                     name="name"
                     required
-                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white disabled:opacity-50"
                     placeholder="Votre nom"
                   />
                 </div>
@@ -467,7 +505,8 @@ export default function Portfolio() {
                     type="email"
                     name="email"
                     required
-                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white disabled:opacity-50"
                     placeholder="votre@email.com"
                   />
                 </div>
@@ -476,7 +515,8 @@ export default function Portfolio() {
                   <input
                     type="text"
                     name="subject"
-                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white disabled:opacity-50"
                     placeholder="Opportunité d'alternance"
                   />
                 </div>
@@ -486,13 +526,30 @@ export default function Portfolio() {
                     name="message"
                     rows={5}
                     required
-                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white resize-none"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white resize-none disabled:opacity-50"
                     placeholder="Votre message..."
                   ></textarea>
                 </div>
-                <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3">
-                  Envoyer le message
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 disabled:opacity-50"
+                >
+                  {isSubmitting ? "Envoi en cours..." : "Envoyer le message"}
                 </Button>
+
+                {formStatus && (
+                  <div
+                    className={`mt-4 p-3 rounded-lg text-sm ${
+                      formStatus.includes("✅")
+                        ? "bg-green-900/50 text-green-200 border border-green-700"
+                        : "bg-red-900/50 text-red-200 border border-red-700"
+                    }`}
+                  >
+                    {formStatus}
+                  </div>
+                )}
               </form>
             </div>
           </div>

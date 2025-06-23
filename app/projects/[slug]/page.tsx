@@ -15,7 +15,7 @@ const projectsData = {
 Le site devait répondre aux besoins spécifiques du client avec une approche moderne et respectueuse de l'environnement. J'ai travaillé sur tous les aspects du développement, de la conception à la mise en ligne.`,
     technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "RGPD"],
     category: "Web Development",
-    images: ["/biosymphonie.png", "/biosymphonie-anglais.png"],
+    images: ["/biosymphonie.png", "/biosymphonie-mobile.png"],
     features: [
       "Navigation multilingue (Français/Anglais)",
       "Design responsive adaptatif",
@@ -99,10 +99,9 @@ window.addEventListener("scroll", () => {
       "Respect complet des règles officielles",
       "Performance optimisée",
     ],
-    codeExamples: []
   },
   bomberman: {
-   title: "Bomberman - Jeu 2D JavaFX",
+    title: "Bomberman - Jeu 2D JavaFX",
     description:
       "Développement d'un jeu Bomberman complet avec architecture MVC, animations fluides et système de jeu avancé.",
     longDescription: `Création d'un jeu Bomberman en JavaFX avec une architecture MVC robuste. Le projet incluait la gestion des personnages, des explosions, des animations et une interface utilisateur complète.`,
@@ -118,8 +117,6 @@ window.addEventListener("scroll", () => {
       "Binding JavaFX avancé",
       "Thread-safety avec Platform.runLater",
     ],
-    challenges: [], 
-    results: [],   
     codeExamples: [
       {
         title: "Gestion des Explosions",
