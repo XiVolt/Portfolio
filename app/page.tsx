@@ -20,6 +20,9 @@ export default function Portfolio() {
   const [formStatus, setFormStatus] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
 
+  // Force component refresh - Version 2.0
+  console.log("Portfolio loaded - Version 2.0 with all new components")
+
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -376,7 +379,7 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Alternance Section */}
+      {/* Alternance Section - NOUVELLE SECTION */}
       <section id="alternance" className="py-20 bg-muted/30">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <AlternanceBanner />
@@ -619,12 +622,7 @@ export default function Portfolio() {
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-slate-900 dark:bg-slate-950 text-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
+          <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}>
             <h2 className="text-4xl font-bold mb-4">Contactez-moi</h2>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
               Intéressé par mon profil ? N'hésitez pas à me contacter pour discuter d'opportunités d'alternance.
@@ -770,14 +768,4 @@ export default function Portfolio() {
       </footer>
     </div>
   )
-}
-
-// Extend window interface for tracking functions
-declare global {
-  interface Window {
-    gtag?: (...args: any[]) => void
-    trackContactSubmission?: () => void
-    trackCVDownload?: () => void
-    trackProjectView?: (projectName: string) => void
-  }
 }
