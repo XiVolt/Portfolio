@@ -6,14 +6,12 @@ import { Button } from "@/components/ui/button"
 
 export function CVDownload() {
   const handleDownload = () => {
-    // Track download
     if (typeof window !== "undefined" && window.trackCVDownload) {
       window.trackCVDownload()
     }
 
-    // Create download link
     const link = document.createElement("a")
-    link.href = "/cv-tristan-bras.pdf" // Vous devrez ajouter ce fichier
+    link.href = "/Tristan_Bras_CV.pdf" 
     link.download = "CV-Tristan-Bras-BUT-Informatique.pdf"
     document.body.appendChild(link)
     link.click()
