@@ -5,7 +5,19 @@ import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useParams } from "next/navigation"
 
-const projectsData = {
+type Project = {
+  title: string
+  description: string
+  longDescription: string
+  technologies: string[]
+  category: string
+  images: string[]
+  features: string[]
+  challenges?: string[]
+  results?: string[]
+  codeExamples?: { title: string; code: string }[]
+}
+const projectsData: Record<string, Project> = {
   biosymphonie: {
     title: "BioSymphonie - Site Web Écoresponsable",
     description:
@@ -333,7 +345,7 @@ WHERE annee BETWEEN 2010 AND 2024;`,
 export default function ProjectDetail() {
   const params = useParams()
   const slug = params.slug as string
-  const project = projectsData[slug as keyof typeof projectsData]
+  const project = projectsData[slug]
 
   if (!project) {
     return <div>Projet non trouvé</div>
@@ -359,7 +371,7 @@ export default function ProjectDetail() {
           <p className="text-xl text-slate-600 mb-8">{project.description}</p>
 
           <div className="flex flex-wrap gap-2 mb-8">
-            {project.technologies.map((tech, idx) => (
+            {project.technologies?.map((tech: string, idx: number) => (
               <Badge key={idx} variant="outline">
                 {tech}
               </Badge>
@@ -371,7 +383,7 @@ export default function ProjectDetail() {
         {project.images && (
           <div className="mb-12">
             <div className="grid md:grid-cols-2 gap-6">
-              {project.images.map((image, idx) => (
+              {project.images?.map((image: string, idx: number) => (
                 <img
                   key={idx}
                   src={image || "/placeholder.svg"}
@@ -393,29 +405,31 @@ export default function ProjectDetail() {
             </Card>
 
             {/* Code Examples */}
-            {project.codeExamples && (
+            {project.codeExamples?.length && project.codeExamples.length > 0 && (
               <Card className="p-8">
                 <h2 className="text-2xl font-semibold text-slate-900 mb-6">Extraits de code</h2>
                 <div className="space-y-6">
-                  {project.codeExamples.map((example, idx) => (
-                    <div key={idx}>
-                      <h3 className="text-lg font-medium text-slate-900 mb-3">{example.title}</h3>
-                      <pre className="bg-slate-900 text-slate-100 p-4 rounded-lg overflow-x-auto text-sm">
-                        <code>{example.code}</code>
-                      </pre>
-                    </div>
-                  ))}
+                  {project.codeExamples.map(
+                    (example: { title: string; code: string }, idx: number) => (
+                      <div key={idx}>
+                        <h3 className="text-lg font-medium text-slate-900 mb-3">{example.title}</h3>
+                        <pre className="bg-slate-900 text-slate-100 p-4 rounded-lg overflow-x-auto text-sm">
+                          <code>{example.code}</code>
+                        </pre>
+                      </div>
+                    )
+                  )}
                 </div>
               </Card>
             )}
 
             {/* Challenges & Results */}
-            {project.challenges && (
+            {(project.challenges?.length || 0) > 0 || (project.results?.length || 0) > 0 ? (
               <div className="grid md:grid-cols-2 gap-6">
                 <Card className="p-6">
                   <h3 className="text-xl font-semibold text-slate-900 mb-4">Défis techniques</h3>
                   <ul className="space-y-2">
-                    {project.challenges.map((challenge, idx) => (
+                    {project.challenges?.map((challenge: string, idx: number) => (
                       <li key={idx} className="flex items-start">
                         <div className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
                         <span className="text-slate-600 text-sm">{challenge}</span>
@@ -427,7 +441,7 @@ export default function ProjectDetail() {
                 <Card className="p-6">
                   <h3 className="text-xl font-semibold text-slate-900 mb-4">Résultats obtenus</h3>
                   <ul className="space-y-2">
-                    {project.results.map((result, idx) => (
+                    {project.results?.map((result: string, idx: number) => (
                       <li key={idx} className="flex items-start">
                         <div className="w-2 h-2 bg-emerald-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
                         <span className="text-slate-600 text-sm">{result}</span>
@@ -436,7 +450,7 @@ export default function ProjectDetail() {
                   </ul>
                 </Card>
               </div>
-            )}
+            ) : null}
           </div>
 
           {/* Sidebar */}
@@ -444,7 +458,7 @@ export default function ProjectDetail() {
             <Card className="p-6">
               <h3 className="text-xl font-semibold text-slate-900 mb-4">Fonctionnalités</h3>
               <ul className="space-y-2">
-                {project.features.map((feature, idx) => (
+                {project.features?.map((feature: string, idx: number) => (
                   <li key={idx} className="flex items-start">
                     <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
                     <span className="text-slate-600 text-sm">{feature}</span>
@@ -456,7 +470,7 @@ export default function ProjectDetail() {
             <Card className="p-6">
               <h3 className="text-xl font-semibold text-slate-900 mb-4">Technologies</h3>
               <div className="flex flex-wrap gap-2">
-                {project.technologies.map((tech, idx) => (
+                {project.technologies?.map((tech: string, idx: number) => (
                   <Badge key={idx} variant="outline" className="text-xs">
                     {tech}
                   </Badge>
