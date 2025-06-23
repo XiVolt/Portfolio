@@ -14,13 +14,13 @@ import { AlternanceBanner } from "@/components/alternance-banner"
 import { FormationTimeline } from "@/components/formation-timeline"
 import { SkillsEvolution } from "@/components/skills-evolution"
 import { CVDownload } from "@/components/cv-download"
+import { Analytics } from "@vercel/analytics/next"
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("hero")
   const [formStatus, setFormStatus] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  // Force component refresh - Version 2.0
   console.log("Portfolio loaded - Version 2.0 with all new components")
 
   const { scrollYProgress } = useScroll()
@@ -755,7 +755,8 @@ export default function Portfolio() {
           </div>
         </div>
       </footer>
+      {/* Vercel Analytics */}
+      <Analytics />
     </div>
   )
 }
-//erreur chargement de la page
