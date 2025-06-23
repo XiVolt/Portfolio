@@ -769,3 +769,4 @@ export default function Portfolio() {
     </div>
   )
 }
+//erreur chargement de la page
