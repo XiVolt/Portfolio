@@ -496,7 +496,7 @@ export default function Portfolio() {
             transition={{ delay: index * 0.1 }}
             whileHover={{ y: -5 }}
           >
-            <Card className="group hover:shadow-xl transition-all duration-300 border-0 bg-card h-full">
+            <Card className="group hover:shadow-xl transition-all duration-300 border-0 bg-card h-full flex flex-col">
               <CardContent className="p-6 flex flex-col h-full">
                 <img
                   src={project.image}
@@ -505,12 +505,29 @@ export default function Portfolio() {
                 />
                 <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mt-auto">
+                {/* Fonctionnalités clés */}
+                <ul className="mb-4 list-disc list-inside text-xs text-foreground/80">
+                  {project.features?.slice(0, 4).map((feature, idx) => (
+                    <li key={idx}>{feature}</li>
+                  ))}
+                </ul>
+                {/* Technologies */}
+                <div className="flex flex-wrap gap-2 mb-4">
                   {project.technologies.map((tech, idx) => (
                     <Badge key={idx} variant="outline" className="text-xs">
                       {tech}
                     </Badge>
                   ))}
+                </div>
+                {/* Bouton Détails */}
+                <div className="mt-auto">
+                  <Link
+                    href={`/projects/${project.slug}`}
+
+                    className="inline-block mt-2 px-4 py-2 rounded bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition"
+                  >
+                    Détails
+                  </Link>
                 </div>
               </CardContent>
             </Card>
