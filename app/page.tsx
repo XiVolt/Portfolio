@@ -186,17 +186,6 @@ export default function Portfolio() {
       features: ["Mode sombre/clair", "Animations fluides", "Performance optimisée", "SEO avancé"],
     },
     {
-      title: "Calculatrice Scientifique - React",
-      slug: "calculatrice-react",
-      description:
-        "Application web de calculatrice scientifique avec historique des calculs, thèmes personnalisables et fonctions avancées.",
-      technologies: ["React", "JavaScript", "CSS3", "Local Storage"],
-      category: "Web Development",
-      semester: "Projet Personnel",
-      image: "/placeholder.svg?height=300&width=500&text=Calculatrice+React",
-      features: ["Fonctions scientifiques", "Historique des calculs", "Thèmes personnalisables", "Responsive design"],
-    },
-    {
       title: "FootConnect - Réseau social football",
       slug: "footconnect",
       description:
