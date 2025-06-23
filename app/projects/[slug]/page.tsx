@@ -340,6 +340,83 @@ WHERE annee BETWEEN 2010 AND 2024;`,
       },
     ],
   },
+  "portfolio-nextjs": {
+    title: "Portfolio Personnel - Next.js",
+    description:
+      "Développement de ce portfolio avec Next.js, animations Framer Motion, mode sombre/clair et optimisations performance.",
+    longDescription: `Ce projet est le site que vous consultez actuellement. Il a été réalisé avec Next.js, TypeScript, Tailwind CSS et Framer Motion pour les animations. Il inclut un mode sombre/clair, une gestion avancée de l'accessibilité, et des optimisations SEO et performance.`,
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    category: "Web Development",
+    images: ["/portfolio.png"],
+    features: [
+      "Mode sombre/clair",
+      "Animations fluides",
+      "Performance optimisée",
+      "SEO avancé",
+      "Responsive design",
+      "Accessibilité renforcée",
+    ],
+    challenges: [
+      "Mise en place du mode sombre/clair avec next-themes",
+      "Animations complexes avec Framer Motion",
+      "Optimisation Lighthouse",
+      "Déploiement sur Vercel",
+    ],
+    results: [
+      "Portfolio moderne et performant",
+      "Expérience utilisateur fluide",
+      "Bonne visibilité SEO",
+    ],
+    codeExamples: [
+      {
+        title: "Exemple d'animation Framer Motion",
+        code: `<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+>
+  {/* Contenu animé */}
+</motion.div>`,
+      },
+    ],
+  },
+  footconnect: {
+    title: "FootConnect - Réseau social football",
+    description:
+      "Site web communautaire sur le football : partage de photos, profils utilisateurs, commentaires, likes et base de données PostgreSQL.",
+    longDescription: `FootConnect est un réseau social dédié aux passionnés de football. Les utilisateurs peuvent créer un profil, publier des photos, commenter et liker les publications des autres membres. Le backend est réalisé en Node.js avec Express et la base de données PostgreSQL. Les images sont stockées sur Cloudinary.`,
+    technologies: ["React", "Node.js", "Express", "PostgreSQL", "SQL", "Cloudinary"],
+    category: "Web Development",
+    images: ["/footconnect.png"],
+    features: [
+      "Création de profils utilisateurs",
+      "Publication de photos de football",
+      "Commentaires et likes sur les posts",
+      "Base de données relationnelle PostgreSQL",
+      "API Node.js sécurisée",
+      "Gestion des images avec Cloudinary",
+    ],
+    challenges: [
+      "Authentification sécurisée",
+      "Gestion des fichiers images",
+      "Relations complexes en SQL",
+      "Déploiement fullstack",
+    ],
+    results: [
+      "Communauté active",
+      "Expérience utilisateur moderne",
+      "Sécurité et performance",
+    ],
+    codeExamples: [
+      {
+        title: "Exemple de route Express pour poster une image",
+        code: `app.post("/api/posts", upload.single("image"), async (req, res) => {
+  // Sauvegarde de l'image sur Cloudinary et enregistrement en base
+  // ...
+});`,
+      },
+    ],
+  },
 }
 
 export default function ProjectDetail() {

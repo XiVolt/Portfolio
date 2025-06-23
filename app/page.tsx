@@ -182,7 +182,7 @@ export default function Portfolio() {
       technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
       category: "Web Development",
       semester: "Projet Personnel",
-      image: "/placeholder.svg?height=300&width=500&text=Portfolio+Next.js",
+      image: "/portfolio.png",
       features: ["Mode sombre/clair", "Animations fluides", "Performance optimisée", "SEO avancé"],
     },
     {
@@ -195,6 +195,24 @@ export default function Portfolio() {
       semester: "Projet Personnel",
       image: "/placeholder.svg?height=300&width=500&text=Calculatrice+React",
       features: ["Fonctions scientifiques", "Historique des calculs", "Thèmes personnalisables", "Responsive design"],
+    },
+    {
+      title: "FootConnect - Réseau social football",
+      slug: "footconnect",
+      description:
+        "Site web communautaire sur le football : partage de photos, profils utilisateurs, commentaires, likes et base de données PostgreSQL.",
+      technologies: ["React", "Node.js", "Express", "PostgreSQL", "SQL", "Cloudinary"],
+      category: "Web Development",
+      semester: "Projet Personnel",
+      image: "/footconnect.png",
+      features: [
+        "Création de profils utilisateurs",
+        "Publication de photos de football",
+        "Commentaires et likes sur les posts",
+        "Base de données relationnelle PostgreSQL",
+        "API Node.js sécurisée",
+        "Gestion des images avec Cloudinary"
+      ],
     },
   ]
 
