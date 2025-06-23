@@ -22,7 +22,7 @@ export function AlternanceBanner() {
           >
             <GraduationCap className="w-5 h-5 mr-2" />
             <span className="font-semibold">RECHERCHE ALTERNANCE</span>
-          </motion.div>
+          </motion.div> 
           <h2 className="text-3xl font-bold mb-2">Alternance BUT Informatique - 18 mois</h2>
           <p className="text-emerald-100 text-lg">Étudiant motivé recherche entreprise pour alternance longue durée</p>
         </div>
@@ -36,7 +36,7 @@ export function AlternanceBanner() {
           >
             <Calendar className="w-8 h-8 mb-2 text-emerald-200" />
             <h3 className="font-semibold mb-1">Disponibilité</h3>
-            <p className="text-emerald-100 text-sm">Septembre 2025 - Février 2027</p>
+            <p className="text-emerald-100 text-sm">fin Janvier 2026 - Juin/Juillet  2027</p>
           </motion.div>
 
           <motion.div
@@ -47,7 +47,7 @@ export function AlternanceBanner() {
           >
             <Clock className="w-8 h-8 mb-2 text-emerald-200" />
             <h3 className="font-semibold mb-1">Rythme</h3>
-            <p className="text-emerald-100 text-sm">3 jours entreprise / 2 jours école</p>
+            <p className="text-emerald-100 text-sm">1 ou 2 semaine en entreprise / 1 ou 2 semaine école  (le caldendrier de formation sera transmis par l'école )</p>
           </motion.div>
 
           <motion.div
@@ -69,7 +69,7 @@ export function AlternanceBanner() {
           className="mt-6 text-center"
         >
           <p className="text-emerald-100 text-sm">
-            💼 Recherche dans les domaines : Développement web, Applications métier, Infrastructure IT
+            💼 Recherche dans les domaines : Réseau, Cybersécurité (Obligation d'avois du code/Development durant l'alternance a la demande de l'école)
           </p>
         </motion.div>
       </Card>
