@@ -470,90 +470,55 @@ export default function Portfolio() {
 
           {/* Projects organized by semester */}
           {Object.entries(projectsBySemester).map(([semester, semesterProjects], semesterIndex) => (
+        <motion.div
+        key={semester}
+        className="mb-16"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: semesterIndex * 0.1 }}
+        >
+        <div className="flex items-center mb-8">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent to-border"></div>
+          <Badge variant="outline" className="mx-4 px-4 py-2 text-sm font-semibold">
+            {semester}
+          </Badge>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent to-border"></div>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {semesterProjects.map((project, index) => (
             <motion.div
-              key={semester}
-              className="mb-16"
+              key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: semesterIndex * 0.1 }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ y: -5 }}
             >
-              <div className="flex items-center mb-8">
-                <div className="flex-1 h-px bg-gradient-to-r from-transparent to-border"></div>
-                <Badge variant="outline" className="mx-4 px-4 py-2 text-sm font-semibold">
-                  {semester}
-                </Badge>
-                <div className="flex-1 h-px bg-gradient-to-l from-transparent to-border"></div>
-              </div>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {semesterProjects.map((project, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ y: -5 }}
-                  >
-                    <Card className="group hover:shadow-xl transition-all duration-300 border-0 bg-card h-full">
-                      <div className="relative overflow-hidden rounded-t-lg">
-                        <motion.img
-                          src={project.image || "/placeholder.svg"}
-                          alt={project.title}
-                          className="w-full h-48 object-cover"
-                          whileHover={{ scale: 1.05 }}
-                          transition={{ duration: 0.3 }}
-                        />
-                        <div className="absolute top-4 left-4">
-                          <Badge className="bg-emerald-600 text-white">{project.category}</Badge>
-                        </div>
-                      </div>
-                      <CardContent className="p-6 flex flex-col h-full">
-                        <h3 className="text-xl font-semibold mb-3 group-hover:text-emerald-600 transition-colors">
-                          {project.title}
-                        </h3>
-                        <p className="text-muted-foreground mb-4 text-sm leading-relaxed flex-1">
-                          {project.description}
-                        </p>
-
-                        <div className="mb-4">
-                          <h4 className="text-sm font-medium mb-2">Fonctionnalités clés :</h4>
-                          <ul className="text-xs text-muted-foreground space-y-1">
-                            {project.features.map((feature, idx) => (
-                              <li key={idx} className="flex items-center">
-                                <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-2"></div>
-                                {feature}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        <div className="flex flex-wrap gap-1 mb-4">
-                          {project.technologies.map((tech, idx) => (
-                            <Badge key={idx} variant="outline" className="text-xs">
-                              {tech}
-                            </Badge>
-                          ))}
-                        </div>
-
-                        <div className="flex space-x-2 mt-auto">
-                          <Link href={`/projects/${project.slug}`} className="flex-1">
-                            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                              <Button size="sm" variant="outline" className="w-full text-xs">
-                                <ExternalLink className="w-3 h-3 mr-1" />
-                                Détails
-                              </Button>
-                            </motion.div>
-                          </Link>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
+              <Card className="group hover:shadow-xl transition-all duration-300 border-0 bg-card h-full">
+                <CardContent className="p-6 flex flex-col h-full">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-40 object-cover rounded-lg mb-4"
+                  />
+                  <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {project.technologies.map((tech, idx) => (
+                      <Badge key={idx} variant="outline" className="text-xs">
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </motion.div>
           ))}
+        </div>
+        </motion.div>
+        ))}
         </div>
       </section>
 
