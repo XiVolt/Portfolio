@@ -9,32 +9,32 @@ const skillsData = [
   {
     category: "Développement Web",
     skills: [
-      { name: "HTML/CSS", level: 90, evolution: "+30% cette année" },
-      { name: "JavaScript", level: 75, evolution: "+45% cette année" },
-      { name: "React/Next.js", level: 60, evolution: "Nouveau cette année" },
+      { name: "HTML/CSS", level: 90, evolution: "+70% cette année" },
+      { name: "JavaScript", level: 75, evolution: "+90% cette année" },
+      { name: "React/Next.js", level: 50, evolution: "Nouveau cette année" },
     ],
   },
   {
     category: "Programmation",
     skills: [
-      { name: "Java", level: 80, evolution: "+25% cette année" },
-      { name: "Python", level: 65, evolution: "+20% cette année" },
-      { name: "Algorithmique", level: 85, evolution: "+35% cette année" },
+      { name: "Java", level: 70, evolution: "Nouveau cette année" },
+      { name: "Python", level: 55, evolution: "+80% cette année" },
+      { name: "Algorithmique", level:  60, evolution: "+70% cette année" },
     ],
   },
   {
     category: "Bases de données",
     skills: [
-      { name: "SQL", level: 75, evolution: "+40% cette année" },
-      { name: "PostgreSQL", level: 70, evolution: "Nouveau cette année" },
-      { name: "Modélisation", level: 80, evolution: "+30% cette année" },
+      { name: "SQL", level: 50, evolution: "Nouveau cette année" },
+      { name: "PostgreSQL", level: 45, evolution: "Nouveau cette année" },
+      { name: "Modélisation", level: 50, evolution: "Nouveau cette année" },
     ],
   },
   {
     category: "Système & Réseau",
     skills: [
-      { name: "Linux", level: 70, evolution: "+50% cette année" },
-      { name: "Administration", level: 65, evolution: "+35% cette année" },
+      { name: "Linux", level: 70, evolution: "Nouveau cette année" },
+      { name: "Administration", level: 65, evolution: "Nouveau cette année" },
       { name: "DNS/Apache", level: 75, evolution: "Nouveau cette année" },
     ],
   },
@@ -66,7 +66,7 @@ export function SkillsEvolution() {
               <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">{category.category}</h4>
 
               <div className="space-y-4">
-                {category.skills.map((skill, skillIndex) => (
+                {category.skills.map((skill, skillIndex) => ( 
                   <div key={skillIndex} className="space-y-2">
                     <div className="flex justify-between items-center">
                       <span className="text-sm font-medium text-slate-700 dark:text-slate-300">{skill.name}</span>

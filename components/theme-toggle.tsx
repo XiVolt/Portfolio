@@ -34,7 +34,7 @@ export function ThemeToggle() {
         transition={{ duration: 0.2 }}
         className="absolute inset-0 flex items-center justify-center"
       >
-        <Sun className="h-4 w-4" />
+        <Sun className="h-4 w-4" /> 
       </motion.div>
       <motion.div
         initial={false}

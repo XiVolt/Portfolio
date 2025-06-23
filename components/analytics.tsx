@@ -2,17 +2,12 @@
 
 import { useEffect } from "react"
 
-interface Window {
-  gtag?: (...args: any[]) => void;
-  trackContactSubmission?: () => void;
-  trackCVDownload?: () => void;
-  trackProjectView?: (projectName: string) => void;
-}
+
 export function Analytics() {
   useEffect(() => {
-    // Google Analytics
+
     if (typeof window !== "undefined") {
-      // Track page views
+
       const trackPageView = () => {
         if (window.gtag) {
           window.gtag("config", "GA_MEASUREMENT_ID", {
@@ -22,7 +17,6 @@ export function Analytics() {
         }
       }
 
-      // Track contact form submissions
       const trackContactSubmission = () => {
         if (window.gtag) {
           window.gtag("event", "contact_form_submission", {
@@ -32,7 +26,6 @@ export function Analytics() {
         }
       }
 
-      // Track CV downloads
       const trackCVDownload = () => {
         if (window.gtag) {
           window.gtag("event", "cv_download", {
@@ -42,7 +35,6 @@ export function Analytics() {
         }
       }
 
-      // Track project views
       const trackProjectView = (projectName: string) => {
         if (window.gtag) {
           window.gtag("event", "project_view", {
@@ -52,7 +44,6 @@ export function Analytics() {
         }
       }
 
-      // Make tracking functions globally available
       window.trackContactSubmission = trackContactSubmission
       window.trackCVDownload = trackCVDownload
       window.trackProjectView = trackProjectView

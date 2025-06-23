@@ -10,7 +10,7 @@ const timelineData = [
     period: "2024-2025 (S1-S2)",
     title: "BUT Informatique - 1ère année",
     institution: "IUT de Lens",
-    status: "En cours",
+    status: "Fini",
     competences: ["Algorithmique", "Programmation Java", "Web (HTML/CSS/JS)", "Bases de données"],
     projets: ["BioSymphonie", "Jeu d'Échecs", "Base de données démographique"],
     icon: <Code className="w-5 h-5" />,
@@ -21,8 +21,8 @@ const timelineData = [
     title: "BUT Informatique - 2ème année",
     institution: "IUT de Lens + Alternance",
     status: "À venir",
-    competences: ["Développement avancé", "Architecture logicielle", "Gestion de projet", "DevOps"],
-    projets: ["Projets en entreprise", "Applications métier", "Infrastructure cloud"],
+    competences: ["Développement avancé", "Architecture logicielle", "Gestion de projet", "DevOps", "etc"],
+    projets: ["Projets en entreprise", "Applications métier", "Infrastructure cloud", "et autres projets a découvrir"],
     icon: <Server className="w-5 h-5" />,
     color: "bg-blue-500",
   },
@@ -31,8 +31,8 @@ const timelineData = [
     title: "BUT Informatique - 3ème année",
     institution: "IUT de Lens + Alternance",
     status: "À venir",
-    competences: ["Spécialisation", "Management", "Innovation", "Entrepreneuriat"],
-    projets: ["Projet de fin d'études", "Mémoire professionnel"],
+    competences: ["A découvir"],
+    projets: ["Projet de fin d'études"],
     icon: <GraduationCap className="w-5 h-5" />,
     color: "bg-purple-500",
   },
@@ -69,7 +69,7 @@ export function FormationTimeline() {
               className={`${item.color} w-16 h-16 rounded-full flex items-center justify-center text-white shadow-lg z-10`}
             >
               {item.icon}
-            </div>
+            </div> 
 
             {/* Content */}
             <Card className="ml-8 p-6 flex-1 hover:shadow-lg transition-shadow">
