@@ -282,7 +282,7 @@ export default function Portfolio() {
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="pt-16 min-h-screen flex items-center">
+      <section id="hero" className="pt-16 min-h-screen flex items-center relative z-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center">
             <motion.div
@@ -404,14 +404,14 @@ export default function Portfolio() {
       </section>
 
       {/* Alternance Section - NOUVELLE SECTION */}
-      <section id="alternance" className="py-20 bg-muted/30">
+      <section id="alternance" className="py-20 bg-muted/30 relative z-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <AlternanceBanner />
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-background">
+      <section id="about" className="py-20 bg-background relative z-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -478,7 +478,7 @@ export default function Portfolio() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 bg-muted/30">
+      <section id="projects" className="py-20 bg-muted/30 relative z-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -564,7 +564,7 @@ export default function Portfolio() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 bg-background">
+      <section id="skills" className="py-20 bg-background relative z-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -626,7 +626,7 @@ export default function Portfolio() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-slate-900 dark:bg-slate-950 text-white">
+      <section id="contact" className="py-20 bg-slate-900 dark:bg-slate-950 text-white relative z-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}>
             <h2 className="text-4xl font-bold mb-4">Contactez-moi</h2>
