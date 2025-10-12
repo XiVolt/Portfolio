@@ -14,6 +14,7 @@ import { AlternanceBanner } from "@/components/alternance-banner"
 import { FormationTimeline } from "@/components/formation-timeline"
 import { SkillsEvolution } from "@/components/skills-evolution"
 import { CVDownload } from "@/components/cv-download"
+import { ParticlesBackground } from "@/components/particles-background"
 import { Analytics } from "@vercel/analytics/next"
 
 export default function Portfolio() {
@@ -232,6 +233,9 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+      {/* Particles Background */}
+      <ParticlesBackground />
+      
       {/* Progress bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-500 transform-origin-0 z-50"
