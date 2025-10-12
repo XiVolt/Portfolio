@@ -210,6 +210,9 @@ export default function Portfolio() {
     { name: "Java/Python", level: "Opérationnel", icon: <Code className="w-5 h-5" /> },
     { name: "Bases de données SQL", level: "Opérationnel", icon: <Database className="w-5 h-5" /> },
     { name: "Administration Système", level: "Opérationnel", icon: <Server className="w-5 h-5" /> },
+    { name: "Git/GitHub", level: "Opérationnel", icon: <Code className="w-5 h-5" /> },
+    { name: "UI/UX Design", level: "Opérationnel", icon: <Globe className="w-5 h-5" /> },
+    { name: "PHP/Laravel", level: "Avancé", icon: <Globe className="w-5 h-5" /> },
     { name: "Algorithmique", level: "Opérationnel", icon: <Code className="w-5 h-5" /> },
     { name: "Travail d'équipe", level: "Avancé", icon: <Code className="w-5 h-5" /> },
   ]

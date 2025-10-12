@@ -20,7 +20,7 @@ const timelineData = [
     period: "2025-2026 (S3-S4)",
     title: "BUT Informatique - 2ème année",
     institution: "IUT de Lens + Alternance",
-    status: "À venir",
+    status: "En cours",
     competences: ["Développement avancé", "Architecture logicielle", "Gestion de projet", "DevOps", "etc"],
     projets: ["Projets en entreprise", "Applications métier", "Infrastructure cloud", "et autres projets a découvrir"],
     icon: <Server className="w-5 h-5" />,

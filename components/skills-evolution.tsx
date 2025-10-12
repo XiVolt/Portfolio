@@ -9,33 +9,34 @@ const skillsData = [
   {
     category: "Développement Web",
     skills: [
-      { name: "HTML/CSS", level: 90, evolution: "+70% cette année" },
-      { name: "JavaScript", level: 75, evolution: "+90% cette année" },
-      { name: "React/Next.js", level: 50, evolution: "Nouveau cette année" },
+      { name: "HTML/CSS", level: 90, evolution: "+10% cette année" },
+      { name: "JavaScript", level: 75, evolution: "+10% cette année" },
+      { name: "React/Next.js", level: 60, evolution: "+10% cette année" },
+      { name: "PHP/Laravel", level: 50, evolution: "Nouveau cette année" },
     ],
   },
   {
     category: "Programmation",
     skills: [
-      { name: "Java", level: 70, evolution: "Nouveau cette année" },
-      { name: "Python", level: 55, evolution: "+80% cette année" },
-      { name: "Algorithmique", level:  60, evolution: "+70% cette année" },
+      { name: "Java", level: 70, evolution: "+10% cette année" },
+      { name: "Python", level: 65, evolution: "+10% cette année" },
+      { name: "Algorithmique", level:  60, evolution: "+10% cette année" },
     ],
   },
   {
     category: "Bases de données",
     skills: [
-      { name: "SQL", level: 50, evolution: "Nouveau cette année" },
-      { name: "PostgreSQL", level: 45, evolution: "Nouveau cette année" },
-      { name: "Modélisation", level: 50, evolution: "Nouveau cette année" },
+      { name: "SQL", level: 60, evolution: "+10% cette année" },
+      { name: "PostgreSQL", level: 55, evolution: "+10% cette année" },
+      { name: "Modélisation", level: 60, evolution: "+10% cette année" },
     ],
   },
   {
     category: "Système & Réseau",
     skills: [
-      { name: "Linux", level: 70, evolution: "Nouveau cette année" },
-      { name: "Administration", level: 65, evolution: "Nouveau cette année" },
-      { name: "DNS/Apache", level: 75, evolution: "Nouveau cette année" },
+      { name: "Linux", level: 70, evolution: "+10% cette année" },
+      { name: "Administration", level: 65, evolution: "+10% cette année" },
+      { name: "DNS/Apache", level: 75, evolution: "+10% cette année" },
     ],
   },
 ]
