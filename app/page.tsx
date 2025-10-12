@@ -221,24 +221,24 @@ export default function Portfolio() {
   const skillsData = [
     // Langages
     { name: "HTML/CSS/JavaScript", level: 90, category: "Langages" },
-    { name: "TypeScript", level: 85, category: "Langages" },
-    { name: "Java", level: 80, category: "Langages" },
-    { name: "Python", level: 75, category: "Langages" },
-    { name: "PHP", level: 85, category: "Langages" },
+    { name: "TypeScript", level: 75, category: "Langages" },
+    { name: "Java", level: 70, category: "Langages" },
+    { name: "Python", level: 65, category: "Langages" },
+    { name: "PHP", level: 55, category: "Langages" },
     { name: "SQL", level: 80, category: "Langages" },
     
     // Frameworks & Bibliothèques
-    { name: "React / Next.js", level: 90, category: "Frameworks" },
-    { name: "Node.js / Express", level: 85, category: "Frameworks" },
-    { name: "Laravel", level: 80, category: "Frameworks" },
-    { name: "Tailwind CSS", level: 95, category: "Frameworks" },
-    { name: "Framer Motion", level: 85, category: "Frameworks" },
+    { name: "React / Next.js", level: 70, category: "Frameworks" },
+    { name: "Node.js / Express", level: 65, category: "Frameworks" },
+    { name: "Laravel", level: 40, category: "Frameworks" },
+    { name: "Tailwind CSS", level: 65, category: "Frameworks" },
+    { name: "Framer Motion", level: 35, category: "Frameworks" },
     
     // Outils & Technologies
-    { name: "Git / GitHub", level: 90, category: "Outils" },
-    { name: "Docker", level: 70, category: "Outils" },
-    { name: "Linux Administration", level: 75, category: "Outils" },
-    { name: "PostgreSQL / MySQL", level: 80, category: "Outils" },
+    { name: "Git / GitHub", level: 80, category: "Outils" },
+    { name: "Docker", level: 10, category: "Outils" },
+    { name: "Linux Administration", level: 65, category: "Outils" },
+    { name: "PostgreSQL / MySQL", level: 70, category: "Outils" },
     { name: "Vercel / Netlify", level: 85, category: "Outils" },
     
     // Soft Skills
