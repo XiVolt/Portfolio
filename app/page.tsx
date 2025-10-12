@@ -15,14 +15,18 @@ import { FormationTimeline } from "@/components/formation-timeline"
 import { SkillsEvolution } from "@/components/skills-evolution"
 import { CVDownload } from "@/components/cv-download"
 import { ParticlesBackground } from "@/components/particles-background"
+import { VolturaCodeSection } from "@/components/volturacode-section"
+import { SkillsChart } from "@/components/skills-chart"
+import { ProjectFilter } from "@/components/project-filter"
 import { Analytics } from "@vercel/analytics/next"
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("hero")
   const [formStatus, setFormStatus] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [projectFilter, setProjectFilter] = useState("Tous")
 
-  console.log("Portfolio loaded - Version 2.0 with all new components")
+  console.log("Portfolio loaded - Version 3.0 with VolturaCode")
 
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, {
@@ -33,7 +37,7 @@ export default function Portfolio() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", "alternance", "about", "projects", "skills", "contact"]
+      const sections = ["hero", "volturacode", "alternance", "about", "projects", "skills", "contact"]
       const scrollPosition = window.scrollY + 100
 
       for (const section of sections) {
@@ -105,6 +109,7 @@ export default function Portfolio() {
         "Création d'un site web complet pour une entreprise d'événements écoresponsables avec navigation multilingue, carousel d'images et design responsive.",
       technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
       category: "Web Development",
+      projectType: "Projets étudiants",
       semester: "S1 - 2024",
       image: "/biosymphonie.png",
       features: ["Navigation multilingue", "Design responsive", "Carousel interactif", "Conformité RGPD"],
@@ -116,6 +121,7 @@ export default function Portfolio() {
         "Application web de jeu d'échecs en ligne avec interface graphique complète, gestion des tours et système de promotion des pions.",
       technologies: ["Java", "JavaFX", "Interface Web", "Logique de jeu"],
       category: "Game Development",
+      projectType: "Projets étudiants",
       semester: "S1 - 2024",
       image: "/echecs.png",
       features: ["Interface graphique", "Gestion des tours", "Promotion des pions", "Validation des mouvements"],
@@ -127,6 +133,7 @@ export default function Portfolio() {
         "Développement d'un jeu Bomberman complet avec architecture MVC, animations fluides et gestion des explosions.",
       technologies: ["JavaFX", "MVC Pattern", "Animation", "Observer Pattern"],
       category: "Game Development",
+      projectType: "Projets étudiants",
       semester: "S2 - 2025",
       image: "/bomberman.png",
       features: ["Architecture MVC", "Animations Timeline", "Gestion des explosions", "Interface responsive"],
@@ -138,6 +145,7 @@ export default function Portfolio() {
         "Configuration complète d'une infrastructure réseau avec services DNS/Web, sécurisation et haute disponibilité.",
       technologies: ["Linux", "DNS (BIND)", "Apache", "IPv4/IPv6", "Sécurité"],
       category: "System Administration",
+      projectType: "Projets étudiants",
       semester: "S2 - 2025",
       image: "/setup.png",
       features: [
@@ -154,6 +162,7 @@ export default function Portfolio() {
         "Projet d'analyse comparative de performance entre différents algorithmes de tri (Tri Fusion, Tri Rapide, Tri à Bulles) avec mesures de complexité temporelle et optimisations.",
       technologies: ["Java", "Algorithmique", "Analyse de Performance", "Tests Unitaires"],
       category: "Algorithm Analysis",
+      projectType: "Projets étudiants",
       semester: "S1 - 2024",
       image: "/tri.png",
       features: [
@@ -170,6 +179,7 @@ export default function Portfolio() {
         "Conception et exploitation d'une base de données relationnelle complexe avec modélisation hiérarchique et requêtes optimisées.",
       technologies: ["SQL", "PostgreSQL", "Modélisation", "Optimisation"],
       category: "Database",
+      projectType: "Projets étudiants",
       semester: "S2 - 2025",
       image: "/bd.png",
       features: ["Modélisation hiérarchique", "Jointures optimisées", "Requêtes sécurisées", "Protection des données"],
@@ -182,6 +192,7 @@ export default function Portfolio() {
         "Développement de ce portfolio avec Next.js, animations Framer Motion, mode sombre/clair et optimisations performance.",
       technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
       category: "Web Development",
+      projectType: "Projets personnels",
       semester: "Projet Personnel",
       image: "/portfolio.png",
       features: ["Mode sombre/clair", "Animations fluides", "Performance optimisée", "SEO avancé"],
@@ -193,6 +204,7 @@ export default function Portfolio() {
         "Site web communautaire sur le football : partage de photos, profils utilisateurs, commentaires, likes et base de données PostgreSQL.",
       technologies: ["React", "Node.js", "Express", "PostgreSQL", "SQL", "Cloudinary"],
       category: "Web Development",
+      projectType: "Projets personnels",
       semester: "Projet Personnel",
       image: "/onlyfoot.png",
       features: [
@@ -204,6 +216,36 @@ export default function Portfolio() {
         "Gestion des images avec Cloudinary"
       ],
     },
+  ]
+
+  const skillsData = [
+    // Langages
+    { name: "HTML/CSS/JavaScript", level: 90, category: "Langages" },
+    { name: "TypeScript", level: 85, category: "Langages" },
+    { name: "Java", level: 80, category: "Langages" },
+    { name: "Python", level: 75, category: "Langages" },
+    { name: "PHP", level: 85, category: "Langages" },
+    { name: "SQL", level: 80, category: "Langages" },
+    
+    // Frameworks & Bibliothèques
+    { name: "React / Next.js", level: 90, category: "Frameworks" },
+    { name: "Node.js / Express", level: 85, category: "Frameworks" },
+    { name: "Laravel", level: 80, category: "Frameworks" },
+    { name: "Tailwind CSS", level: 95, category: "Frameworks" },
+    { name: "Framer Motion", level: 85, category: "Frameworks" },
+    
+    // Outils & Technologies
+    { name: "Git / GitHub", level: 90, category: "Outils" },
+    { name: "Docker", level: 70, category: "Outils" },
+    { name: "Linux Administration", level: 75, category: "Outils" },
+    { name: "PostgreSQL / MySQL", level: 80, category: "Outils" },
+    { name: "Vercel / Netlify", level: 85, category: "Outils" },
+    
+    // Soft Skills
+    { name: "Travail d'équipe", level: 95, category: "Soft Skills" },
+    { name: "Communication", level: 90, category: "Soft Skills" },
+    { name: "Résolution de problèmes", level: 90, category: "Soft Skills" },
+    { name: "Autonomie", level: 95, category: "Soft Skills" },
   ]
 
   const skills = [
@@ -218,8 +260,16 @@ export default function Portfolio() {
     { name: "Travail d'équipe", level: "Avancé", icon: <Code className="w-5 h-5" /> },
   ]
 
+  // Get unique project types for filtering
+  const projectTypes = Array.from(new Set(projects.map(p => p.projectType)))
+  
+  // Filter projects based on selected filter
+  const filteredProjects = projectFilter === "Tous" 
+    ? projects 
+    : projects.filter(p => p.projectType === projectFilter)
+
   // Group projects by semester
-  const projectsBySemester = projects.reduce(
+  const projectsBySemester = filteredProjects.reduce(
     (acc, project) => {
       const semester = project.semester
       if (!acc[semester]) {
@@ -250,7 +300,7 @@ export default function Portfolio() {
               Tristan Bras
             </motion.div>
             <div className="hidden md:flex space-x-8 items-center">
-              {["hero", "alternance", "about", "projects", "skills", "contact"].map((section) => (
+              {["hero", "volturacode", "alternance", "about", "projects", "skills", "contact"].map((section) => (
                 <motion.button
                   key={section}
                   onClick={() => scrollToSection(section)}
@@ -264,15 +314,17 @@ export default function Portfolio() {
                 >
                   {section === "hero"
                     ? "Accueil"
-                    : section === "alternance"
-                      ? "Alternance"
-                      : section === "about"
-                        ? "À propos"
-                        : section === "projects"
-                          ? "Projets"
-                          : section === "skills"
-                            ? "Compétences"
-                            : "Contact"}
+                    : section === "volturacode"
+                      ? "VolturaCode"
+                      : section === "alternance"
+                        ? "Alternance"
+                        : section === "about"
+                          ? "À propos"
+                          : section === "projects"
+                            ? "Projets"
+                            : section === "skills"
+                              ? "Compétences"
+                              : "Contact"}
                 </motion.button>
               ))}
               <ThemeToggle />
@@ -311,7 +363,8 @@ export default function Portfolio() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              Étudiant en BUT Informatique
+              Étudiant en BUT Informatique & fondateur de{" "}
+              <span className="text-emerald-600 dark:text-emerald-400 font-semibold">VolturaCode</span>
             </motion.p>
 
             <motion.p
@@ -403,6 +456,9 @@ export default function Portfolio() {
         </div>
       </section>
 
+      {/* VolturaCode Section - MON ENTREPRISE */}
+      <VolturaCodeSection />
+
       {/* Alternance Section - NOUVELLE SECTION */}
       <section id="alternance" className="py-20 relative z-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -492,6 +548,13 @@ export default function Portfolio() {
             </p>
           </motion.div>
 
+          {/* Project Filter */}
+          <ProjectFilter 
+            categories={projectTypes}
+            activeFilter={projectFilter}
+            onFilterChange={setProjectFilter}
+          />
+
           {/* Projects organized by semester */}
           {Object.entries(projectsBySemester).map(([semester, semesterProjects], semesterIndex) => (
       <motion.div
@@ -518,16 +581,18 @@ export default function Portfolio() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            whileHover={{ y: -5 }}
+            whileHover={{ y: -10, scale: 1.02 }}
           >
-            <Card className="group hover:shadow-xl transition-all duration-300 border-0 bg-card h-full flex flex-col">
+            <Card className="group hover:shadow-2xl hover:border-emerald-500 transition-all duration-300 border-2 bg-card h-full flex flex-col overflow-hidden">
               <CardContent className="p-6 flex flex-col h-full">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-40 object-cover rounded-lg mb-4"
-                />
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                <div className="overflow-hidden rounded-lg mb-4">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-40 object-cover rounded-lg transform group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <h3 className="text-xl font-semibold mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">{project.title}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
                 {/* Fonctionnalités clés */}
                 <ul className="mb-4 list-disc list-inside text-xs text-foreground/80">
@@ -578,7 +643,10 @@ export default function Portfolio() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          {/* Skills Chart with categories */}
+          <SkillsChart skills={skillsData} />
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 mt-16">
             {skills.map((skill, index) => (
               <motion.div
                 key={index}
