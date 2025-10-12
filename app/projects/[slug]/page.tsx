@@ -4,6 +4,8 @@ import { Badge } from "@/components/ui/badge"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useParams } from "next/navigation"
+import { ParticlesBackground } from "@/components/particles-background"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 type Project = {
   title: string
@@ -429,23 +431,26 @@ export default function ProjectDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-300 relative">
+      <ParticlesBackground id="tsparticles-project-detail" />
+      
       {/* Header */}
-      <nav className="bg-white/90 backdrop-blur-sm border-b border-slate-200">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Link href="/" className="inline-flex items-center text-slate-600 hover:text-slate-900">
+      <nav className="fixed top-0 w-full bg-background/90 backdrop-blur-sm border-b border-border z-40">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+          <Link href="/" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Retour au portfolio
           </Link>
+          <ThemeToggle />
         </div>
       </nav>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-24 relative z-10">
         {/* Hero Section */}
         <div className="mb-12">
           <Badge className="bg-emerald-600 text-white mb-4">{project.category}</Badge>
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">{project.title}</h1>
-          <p className="text-xl text-slate-600 mb-8">{project.description}</p>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">{project.title}</h1>
+          <p className="text-xl text-muted-foreground mb-8">{project.description}</p>
 
           <div className="flex flex-wrap gap-2 mb-8">
             {project.technologies?.map((tech: string, idx: number) => (
@@ -477,20 +482,20 @@ export default function ProjectDetail() {
           <div className="lg:col-span-2 space-y-12">
             {/* Description */}
             <Card className="p-8">
-              <h2 className="text-2xl font-semibold text-slate-900 mb-4">Description du projet</h2>
-              <p className="text-slate-600 leading-relaxed whitespace-pre-line">{project.longDescription}</p>
+              <h2 className="text-2xl font-semibold mb-4">Description du projet</h2>
+              <p className="text-muted-foreground leading-relaxed whitespace-pre-line">{project.longDescription}</p>
             </Card>
 
             {/* Code Examples */}
             {project.codeExamples?.length && project.codeExamples.length > 0 && (
               <Card className="p-8">
-                <h2 className="text-2xl font-semibold text-slate-900 mb-6">Extraits de code</h2>
+                <h2 className="text-2xl font-semibold mb-6">Extraits de code</h2>
                 <div className="space-y-6">
                   {project.codeExamples.map(
                     (example: { title: string; code: string }, idx: number) => (
                       <div key={idx}>
-                        <h3 className="text-lg font-medium text-slate-900 mb-3">{example.title}</h3>
-                        <pre className="bg-slate-900 text-slate-100 p-4 rounded-lg overflow-x-auto text-sm">
+                        <h3 className="text-lg font-medium mb-3">{example.title}</h3>
+                        <pre className="bg-slate-900 text-slate-100 dark:bg-slate-950 dark:text-slate-50 p-4 rounded-lg overflow-x-auto text-sm">
                           <code>{example.code}</code>
                         </pre>
                       </div>
@@ -504,24 +509,24 @@ export default function ProjectDetail() {
             {(project.challenges?.length || 0) > 0 || (project.results?.length || 0) > 0 ? (
               <div className="grid md:grid-cols-2 gap-6">
                 <Card className="p-6">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">Défis techniques</h3>
+                  <h3 className="text-xl font-semibold mb-4">Défis techniques</h3>
                   <ul className="space-y-2">
                     {project.challenges?.map((challenge: string, idx: number) => (
                       <li key={idx} className="flex items-start">
                         <div className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                        <span className="text-slate-600 text-sm">{challenge}</span>
+                        <span className="text-muted-foreground text-sm">{challenge}</span>
                       </li>
                     ))}
                   </ul>
                 </Card>
 
                 <Card className="p-6">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">Résultats obtenus</h3>
+                  <h3 className="text-xl font-semibold mb-4">Résultats obtenus</h3>
                   <ul className="space-y-2">
                     {project.results?.map((result: string, idx: number) => (
                       <li key={idx} className="flex items-start">
                         <div className="w-2 h-2 bg-emerald-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                        <span className="text-slate-600 text-sm">{result}</span>
+                        <span className="text-muted-foreground text-sm">{result}</span>
                       </li>
                     ))}
                   </ul>
@@ -533,19 +538,19 @@ export default function ProjectDetail() {
           {/* Sidebar */}
           <div className="space-y-6">
             <Card className="p-6">
-              <h3 className="text-xl font-semibold text-slate-900 mb-4">Fonctionnalités</h3>
+              <h3 className="text-xl font-semibold mb-4">Fonctionnalités</h3>
               <ul className="space-y-2">
                 {project.features?.map((feature: string, idx: number) => (
                   <li key={idx} className="flex items-start">
                     <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                    <span className="text-slate-600 text-sm">{feature}</span>
+                    <span className="text-muted-foreground text-sm">{feature}</span>
                   </li>
                 ))}
               </ul>
             </Card>
 
             <Card className="p-6">
-              <h3 className="text-xl font-semibold text-slate-900 mb-4">Technologies</h3>
+              <h3 className="text-xl font-semibold mb-4">Technologies</h3>
               <div className="flex flex-wrap gap-2">
                 {project.technologies?.map((tech: string, idx: number) => (
                   <Badge key={idx} variant="outline" className="text-xs">
