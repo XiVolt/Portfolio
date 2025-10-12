@@ -33,12 +33,12 @@ export function ParticlesBackground() {
   return (
     <div 
       style={{
-        position: 'fixed',
+        position: 'absolute',
         top: 0,
         left: 0,
         width: '100%',
-        height: '100vh',
-        minHeight: '100%',
+        height: '100%',
+        minHeight: '100vh',
         zIndex: 1,
         pointerEvents: 'none'
       }}
