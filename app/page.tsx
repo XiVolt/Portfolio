@@ -456,9 +456,6 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* VolturaCode Section - MON ENTREPRISE */}
-      <VolturaCodeSection />
-
       {/* Alternance Section - NOUVELLE SECTION */}
       <section id="alternance" className="py-20 relative z-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -532,6 +529,9 @@ export default function Portfolio() {
           <SkillsEvolution />
         </div>
       </section>
+
+      {/* VolturaCode Section - MON ENTREPRISE */}
+      <VolturaCodeSection />
 
       {/* Projects Section */}
       <section id="projects" className="py-20 relative z-10">

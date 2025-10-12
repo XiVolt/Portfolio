@@ -52,18 +52,19 @@ export function VolturaCodeSection() {
         >
           {/* Logo/Badge */}
           <motion.div
-            className="inline-flex items-center gap-2 mb-6 px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full shadow-lg"
+            className="mb-8"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
-            <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-              <span className="text-emerald-600 font-bold text-xl">VC</span>
-            </div>
-            <span className="text-white font-bold text-2xl">VolturaCode</span>
+            <img 
+              src="/Voltura.png" 
+              alt="VolturaCode Logo" 
+              className="h-24 mx-auto"
+            />
           </motion.div>
 
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Mon entreprise de création de sites web
+            VolturaCode – Mon entreprise de création de sites web
           </h2>
           <div className="max-w-3xl mx-auto space-y-4 text-lg text-muted-foreground">
             <p>
@@ -79,27 +80,16 @@ export function VolturaCodeSection() {
             </p>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
+          {/* CTA Button */}
+          <div className="flex justify-center items-center mt-8">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
                 asChild
-                className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-8 py-6 text-lg shadow-lg"
+                className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-10 py-7 text-xl shadow-xl"
               >
-                <a href="mailto:tristanbras34@gmail.com?subject=Demande de devis VolturaCode">
-                  <Rocket className="w-5 h-5 mr-2" />
-                  Demander un devis
-                </a>
-              </Button>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                asChild
-                variant="outline"
-                className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950 px-8 py-6 text-lg"
-              >
-                <a href="mailto:tristanbras34@gmail.com">
-                  Me contacter
+                <a href="https://voltura-code-site-u1zs.vercel.app" target="_blank" rel="noopener noreferrer">
+                  <Rocket className="w-6 h-6 mr-2" />
+                  Découvrir VolturaCode
                 </a>
               </Button>
             </motion.div>
