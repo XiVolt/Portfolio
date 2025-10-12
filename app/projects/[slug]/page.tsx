@@ -29,7 +29,7 @@ const projectsData: Record<string, Project> = {
 Le site devait répondre aux besoins spécifiques du client avec une approche moderne et respectueuse de l'environnement. J'ai travaillé sur tous les aspects du développement, de la conception à la mise en ligne.`,
     technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "RGPD"],
     category: "Web Development",
-    images: ["/biosymphonie.png", "/biosymphonie-mobile.png"],
+    images: ["/biosymphonie.png"],
     features: [
       "Navigation multilingue (Français/Anglais)",
       "Design responsive adaptatif",
