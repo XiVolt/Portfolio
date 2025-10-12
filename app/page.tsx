@@ -232,7 +232,10 @@ export default function Portfolio() {
   )
 
   return (
-    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-300 relative">
+      {/* Particles Background - Single instance covering entire page */}
+      <ParticlesBackground id="tsparticles-main" />
+      
       {/* Progress bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-500 transform-origin-0 z-50"
@@ -279,9 +282,8 @@ export default function Portfolio() {
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="pt-16 min-h-screen flex items-center relative overflow-hidden">
-        <ParticlesBackground id="particles-hero" />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+      <section id="hero" className="pt-16 min-h-screen flex items-center relative z-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center">
             <motion.div
               className="mb-8"
@@ -402,17 +404,15 @@ export default function Portfolio() {
       </section>
 
       {/* Alternance Section - NOUVELLE SECTION */}
-      <section id="alternance" className="py-20 relative overflow-hidden">
-        <ParticlesBackground id="particles-alternance" />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <section id="alternance" className="py-20 relative z-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <AlternanceBanner />
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 relative overflow-hidden">
-        <ParticlesBackground id="particles-about" />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <section id="about" className="py-20 relative z-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
@@ -478,9 +478,8 @@ export default function Portfolio() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 relative overflow-hidden">
-        <ParticlesBackground id="particles-projects" />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <section id="projects" className="py-20 relative z-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
@@ -565,9 +564,8 @@ export default function Portfolio() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 relative overflow-hidden">
-        <ParticlesBackground id="particles-skills" />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <section id="skills" className="py-20 relative z-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
@@ -628,9 +626,8 @@ export default function Portfolio() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 relative overflow-hidden">
-        <ParticlesBackground id="particles-contact" />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <section id="contact" className="py-20 relative z-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}>
             <h2 className="text-4xl font-bold mb-4">Contactez-moi</h2>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
