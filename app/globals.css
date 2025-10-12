@@ -56,11 +56,6 @@
   body {
     @apply bg-background text-foreground;
   }
-  /* Assure que le contenu principal est au-dessus des particules */
-  body > * {
-    position: relative;
-    z-index: 1;
-  }
 }
 
 /* Custom animations */
