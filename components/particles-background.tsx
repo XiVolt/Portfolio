@@ -7,9 +7,34 @@ import { useTheme } from "next-themes"
 export function ParticlesBackground() {
   const { theme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const [containerHeight, setContainerHeight] = useState('100vh')
 
   useEffect(() => {
     setMounted(true)
+    
+    // Calcule la hauteur réelle du document
+    const updateHeight = () => {
+      const body = document.body
+      const html = document.documentElement
+      const height = Math.max(
+        body.scrollHeight,
+        body.offsetHeight,
+        html.clientHeight,
+        html.scrollHeight,
+        html.offsetHeight
+      )
+      setContainerHeight(`${height}px`)
+    }
+
+    updateHeight()
+    
+    // Recalcule quand la fenêtre change de taille
+    window.addEventListener('resize', updateHeight)
+    
+    // Recalcule après un court délai pour être sûr que tout est chargé
+    setTimeout(updateHeight, 1000)
+    
+    return () => window.removeEventListener('resize', updateHeight)
   }, [])
 
   const particlesInit = useCallback(async (engine: Engine) => {
@@ -37,7 +62,7 @@ export function ParticlesBackground() {
         top: 0,
         left: 0,
         width: '100%',
-        height: '500vh',
+        height: containerHeight,
         zIndex: 1,
         pointerEvents: 'none'
       }}
