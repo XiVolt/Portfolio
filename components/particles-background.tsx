@@ -1,28 +1,41 @@
 "use client"
 
 import { useCallback, useState, useEffect } from "react"
-import Particles from "react-tsparticles"
-import { loadSlim } from "tsparticles-slim"
-import type { Engine } from "tsparticles-engine"
 import { useTheme } from "next-themes"
 
+// Importation dynamique pour éviter les problèmes SSR
+let Particles: any = null
+let loadSlim: any = null
+
 export function ParticlesBackground() {
-  const { theme } = useTheme()
+  const { theme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const [particlesLoaded, setParticlesLoaded] = useState(false)
 
   useEffect(() => {
     setMounted(true)
+    // Chargement dynamique des modules particles
+    Promise.all([
+      import("react-tsparticles"),
+      import("tsparticles-slim")
+    ]).then(([particlesModule, slimModule]) => {
+      Particles = particlesModule.default
+      loadSlim = slimModule.loadSlim
+      setParticlesLoaded(true)
+    })
   }, [])
 
-  const particlesInit = useCallback(async (engine: Engine) => {
-    await loadSlim(engine)
+  const particlesInit = useCallback(async (engine: any) => {
+    if (loadSlim) {
+      await loadSlim(engine)
+    }
   }, [])
 
-  if (!mounted) {
+  if (!mounted || !particlesLoaded || !Particles) {
     return null
   }
 
-  const isDark = theme === "dark"
+  const isDark = theme === "dark" || resolvedTheme === "dark"
 
   return (
     <Particles
