@@ -7,7 +7,7 @@ import { motion, useScroll, useSpring } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ChevronDown, Code, Database, Globe, Server, Linkedin, Mail, Phone, MapPin, ExternalLink } from "lucide-react"
+import { ChevronDown, Code, Database, Globe, Server, Linkedin, Mail, Phone, MapPin, ExternalLink, Github } from "lucide-react"
 import Link from "next/link"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { AlternanceBanner } from "@/components/alternance-banner"
@@ -369,6 +369,16 @@ export default function Portfolio() {
                   className="text-muted-foreground hover:text-emerald-600 transition-colors"
                 >
                   <Mail className="w-6 h-6" />
+                </Link>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.2, rotate: -8 }}>
+                <Link
+                  href="https://github.com/XiVolt"
+                  target="_blank"
+                  className="text-muted-foreground hover:text-emerald-600 transition-colors"
+                  aria-label="GitHub"
+                >
+                  <Github className="w-6 h-6" />
                 </Link>
               </motion.div>
             </motion.div>
