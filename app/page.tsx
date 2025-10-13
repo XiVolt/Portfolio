@@ -646,33 +646,8 @@ export default function Portfolio() {
           {/* Skills Chart with categories */}
           <SkillsChart skills={skillsData} />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 mt-16">
-            {skills.map((skill, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.02 }}
-              >
-                <Card className="p-6 hover:shadow-lg transition-shadow border-0 bg-muted/30">
-                  <div className="flex items-center space-x-4">
-                    <div className="p-3 bg-emerald-100 dark:bg-emerald-900 rounded-lg text-emerald-600">
-                      {skill.icon}
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold">{skill.name}</h3>
-                      <p className="text-sm text-muted-foreground">{skill.level}</p>
-                    </div>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-
           <motion.div
-            className="text-center"
+            className="text-center mt-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
