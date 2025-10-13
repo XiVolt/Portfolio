@@ -11,11 +11,11 @@ export function SuccessConfetti({ show }: SuccessConfettiProps) {
   if (!show) return null
 
   const confettiColors = [
-    "#10b981", // emerald-600
-    "#14b8a6", // teal-600
     "#06b6d4", // cyan-600
-    "#8b5cf6", // violet-600
-    "#f59e0b", // amber-600
+    "#0891b2", // cyan-700
+    "#3b82f6", // blue-600
+    "#00d4ff", // neon-blue
+    "#00fff2", // neon-cyan
   ]
 
   const confettiCount = 50

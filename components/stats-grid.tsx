@@ -49,10 +49,10 @@ function StatCard({ value, label, suffix = "", icon, duration = 2 }: StatCardPro
       whileHover={{ scale: 1.05, y: -5 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
-      <div className="relative bg-gradient-to-br from-card to-card/50 backdrop-blur-lg rounded-2xl p-6 border-2 border-border group-hover:border-emerald-500 transition-all shadow-lg group-hover:shadow-emerald-500/20">
+      <div className="relative bg-gradient-to-br from-card to-card/50 backdrop-blur-lg rounded-2xl p-6 border-2 border-border group-hover:border-cyan-500 transition-all shadow-lg group-hover:shadow-cyan-500/20">
         {/* Icon */}
         <motion.div
-          className="mb-4 text-emerald-600 dark:text-emerald-400"
+          className="mb-4 text-cyan-600 dark:text-cyan-400"
           whileHover={{ rotate: 360, scale: 1.2 }}
           transition={{ duration: 0.6 }}
         >
@@ -61,7 +61,7 @@ function StatCard({ value, label, suffix = "", icon, duration = 2 }: StatCardPro
 
         {/* Count */}
         <motion.div
-          className="text-4xl font-bold font-poppins mb-2 bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent"
+          className="text-4xl font-bold font-poppins mb-2 bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent"
           animate={isInView ? { scale: [1, 1.1, 1] } : {}}
           transition={{ duration: 0.5, delay: duration }}
         >
@@ -73,7 +73,7 @@ function StatCard({ value, label, suffix = "", icon, duration = 2 }: StatCardPro
         <div className="text-sm text-muted-foreground font-medium">{label}</div>
 
         {/* Glow effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/0 to-teal-500/0 group-hover:from-emerald-500/10 group-hover:to-teal-500/10 rounded-2xl transition-all duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/10 group-hover:to-blue-500/10 rounded-2xl transition-all duration-300" />
       </div>
     </motion.div>
   )

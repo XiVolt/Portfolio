@@ -25,6 +25,8 @@ import { SuccessConfetti } from "@/components/success-confetti"
 import { MobileMenu } from "@/components/mobile-menu"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import { StatsGrid } from "@/components/stats-grid"
+import { MatrixRain } from "@/components/matrix-rain"
+import { CyberGrid } from "@/components/cyber-grid"
 import { Analytics } from "@vercel/analytics/next"
 
 export default function Portfolio() {
@@ -296,6 +298,10 @@ export default function Portfolio() {
       {/* Page Loader */}
       <PageLoader />
       
+      {/* Cyber Effects */}
+      <MatrixRain />
+      <CyberGrid />
+      
       {/* Particles Background - Single instance covering entire page */}
       <ParticlesBackground id="tsparticles-main" />
       
@@ -310,7 +316,7 @@ export default function Portfolio() {
       
       {/* Progress bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-500 transform-origin-0 z-50"
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 transform-origin-0 z-50"
         style={{ scaleX }}
       />
 
@@ -336,7 +342,7 @@ export default function Portfolio() {
                     onClick={() => scrollToSection(section)}
                     className={`capitalize transition-colors ${
                       activeSection === section
-                        ? "text-emerald-600 font-medium"
+                        ? "text-cyan-600 font-medium"
                         : "text-muted-foreground hover:text-foreground"
                     }`}
                     whileHover={{ scale: 1.05 }}
@@ -376,7 +382,7 @@ export default function Portfolio() {
         {/* Animated Background Gradient */}
         <div className="absolute inset-0 z-0">
           <motion.div
-            className="absolute top-1/4 -left-1/4 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl"
+            className="absolute top-1/4 -left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl"
             animate={{
               x: [0, 100, 0],
               y: [0, -50, 0],
@@ -389,7 +395,7 @@ export default function Portfolio() {
             }}
           />
           <motion.div
-            className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl"
+            className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"
             animate={{
               x: [0, -100, 0],
               y: [0, 50, 0],
@@ -420,7 +426,7 @@ export default function Portfolio() {
             </motion.div>
 
             <motion.h1
-              className="text-6xl md:text-7xl font-poppins font-bold mb-6 bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-600 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient"
+              className="text-6xl md:text-7xl font-poppins font-bold mb-6 bg-gradient-to-r from-cyan-600 via-blue-500 to-cyan-600 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -442,10 +448,11 @@ export default function Portfolio() {
               <span className="text-muted-foreground">Je suis</span>
               <Typewriter 
                 words={[
-                  "Développeur Web",
+                  "Expert Cybersécurité",
+                  "Administrateur Réseaux",
                   "Étudiant en BUT Informatique",
                   "Fondateur de VolturaCode",
-                  "Passionné de Code",
+                  "Pentester en devenir",
                 ]}
                 typingSpeed={80}
                 deletingSpeed={40}
@@ -459,7 +466,7 @@ export default function Portfolio() {
               transition={{ delay: 0.4 }}
             >
               Étudiant en BUT Informatique & fondateur de{" "}
-              <span className="text-emerald-600 dark:text-emerald-400 font-semibold">VolturaCode</span>
+              <span className="text-cyan-600 dark:text-cyan-400 font-semibold">VolturaCode</span>
             </motion.p>
 
             <motion.p
@@ -468,8 +475,7 @@ export default function Portfolio() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              Développeur passionné recherchant une alternance de 18 mois. Spécialisé en développement web, applications
-              Java et administration système.
+              Futur expert en cybersécurité et réseaux recherchant une alternance de 18 mois. Spécialisé en sécurité informatique, administration système et infrastructure réseau.
             </motion.p>
 
             <motion.div
@@ -485,7 +491,7 @@ export default function Portfolio() {
               >
                 <Button
                   onClick={() => scrollToSection("projects")}
-                  className="relative overflow-hidden bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-8 py-3 text-lg group"
+                  className="relative overflow-hidden bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-8 py-3 text-lg group"
                 >
                   <span className="relative z-10">Voir mes projets</span>
                   <motion.div
@@ -505,7 +511,7 @@ export default function Portfolio() {
               >
                 <Button
                   variant="outline"
-                  className="border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white px-8 py-3 text-lg transition-all duration-300"
+                  className="border-2 border-cyan-600 text-cyan-600 hover:bg-cyan-600 hover:text-white px-8 py-3 text-lg transition-all duration-300"
                   onClick={() => scrollToSection("contact")}
                 >
                   Me contacter
@@ -575,7 +581,7 @@ export default function Portfolio() {
                 whileTap={{ scale: 0.9 }}
               >
                 <motion.div
-                  className="absolute inset-0 bg-emerald-500/20 rounded-full blur-xl"
+                  className="absolute inset-0 bg-cyan-500/20 rounded-full blur-xl"
                   animate={{
                     scale: [1, 1.5, 1],
                     opacity: [0.5, 0.8, 0.5],
@@ -585,7 +591,7 @@ export default function Portfolio() {
                     repeat: Infinity,
                   }}
                 />
-                <ChevronDown className="w-10 h-10 text-emerald-600 relative z-10 group-hover:text-emerald-500 transition-colors" />
+                <ChevronDown className="w-10 h-10 text-cyan-600 relative z-10 group-hover:text-cyan-500 transition-colors" />
               </motion.button>
             </motion.div>
           </div>
@@ -603,7 +609,7 @@ export default function Portfolio() {
       <section id="about" className="py-20 relative z-10 overflow-hidden">
         {/* Decorative background elements */}
         <motion.div
-          className="absolute top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl"
+          className="absolute top-20 right-10 w-72 h-72 bg-cyan-500/5 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             rotate: [0, 90, 0],
@@ -666,15 +672,15 @@ export default function Portfolio() {
               <h3 className="text-2xl font-semibold mb-6">Informations</h3>
               <div className="space-y-4 mb-8">
                 <motion.div className="flex items-center space-x-3" whileHover={{ x: 5 }}>
-                  <MapPin className="w-5 h-5 text-emerald-600" />
+                  <MapPin className="w-5 h-5 text-cyan-600" />
                   <span>62110, Hénin-Beaumont</span>
                 </motion.div>
                 <motion.div className="flex items-center space-x-3" whileHover={{ x: 5 }}>
-                  <Phone className="w-5 h-5 text-emerald-600" />
+                  <Phone className="w-5 h-5 text-cyan-600" />
                   <span>07 85 40 82 49</span>
                 </motion.div>
                 <motion.div className="flex items-center space-x-3" whileHover={{ x: 5 }}>
-                  <Mail className="w-5 h-5 text-emerald-600" />
+                  <Mail className="w-5 h-5 text-cyan-600" />
                   <span>tristanbras34@gmail.com</span>
                 </motion.div>
               </div>
@@ -714,7 +720,7 @@ export default function Portfolio() {
       <section id="projects" className="py-20 relative z-10 overflow-hidden">
         {/* Decorative elements */}
         <motion.div
-          className="absolute bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl"
+          className="absolute bottom-20 left-10 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"
           animate={{
             x: [0, 50, 0],
             y: [0, -30, 0],
@@ -773,7 +779,7 @@ export default function Portfolio() {
             transition={{ delay: index * 0.1 }}
             whileHover={{ y: -10, scale: 1.02 }}
           >
-            <Card className="group hover:shadow-2xl hover:shadow-emerald-500/20 hover:border-emerald-500 transition-all duration-300 border-2 bg-card h-full flex flex-col overflow-hidden">
+            <Card className="group hover:shadow-2xl hover:shadow-cyan-500/20 hover:border-cyan-500 transition-all duration-300 border-2 bg-card h-full flex flex-col overflow-hidden">
               <CardContent className="p-6 flex flex-col h-full">
                 <div className="relative overflow-hidden rounded-lg mb-4 group/image">
                   <img
@@ -783,7 +789,7 @@ export default function Portfolio() {
                     className="w-full h-40 object-cover rounded-lg transform group-hover:scale-125 transition-transform duration-500"
                   />
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-t from-emerald-600/90 to-transparent flex items-end justify-center pb-4 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300"
+                    className="absolute inset-0 bg-gradient-to-t from-cyan-600/90 to-transparent flex items-end justify-center pb-4 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300"
                     initial={{ opacity: 0 }}
                     whileHover={{ opacity: 1 }}
                   >
@@ -793,7 +799,7 @@ export default function Portfolio() {
                     </span>
                   </motion.div>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">{project.title}</h3>
+                <h3 className="text-xl font-semibold mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">{project.title}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
                 {/* Fonctionnalités clés */}
                 <ul className="mb-4 list-disc list-inside text-xs text-foreground/80">
@@ -827,7 +833,7 @@ export default function Portfolio() {
                   >
                     <Link
                       href={`/projects/${project.slug}`}
-                      className="inline-flex items-center gap-2 mt-2 px-4 py-2 rounded bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-xs font-semibold hover:from-emerald-700 hover:to-teal-700 transition-all shadow-lg hover:shadow-emerald-500/50"
+                      className="inline-flex items-center gap-2 mt-2 px-4 py-2 rounded bg-gradient-to-r from-cyan-600 to-blue-600 text-white text-xs font-semibold hover:from-cyan-700 hover:to-blue-700 transition-all shadow-lg hover:shadow-cyan-500/50"
                     >
                       Détails
                       <ExternalLink className="w-3 h-3" />
@@ -848,7 +854,7 @@ export default function Portfolio() {
       <section id="skills" className="py-20 relative z-10 overflow-hidden">
         {/* Animated background */}
         <motion.div
-          className="absolute top-1/2 left-1/2 w-[500px] h-[500px] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-full blur-3xl"
+          className="absolute top-1/2 left-1/2 w-[500px] h-[500px] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.3, 1],
             rotate: [0, 180, 360],
@@ -890,7 +896,7 @@ export default function Portfolio() {
                 }}
                 transition={{ duration: 0.5 }}
               >
-                <Badge className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-3 text-base shadow-lg cursor-pointer">
+                <Badge className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-6 py-3 text-base shadow-lg cursor-pointer">
                   🏥 PSC1
                 </Badge>
               </motion.div>
@@ -941,7 +947,7 @@ export default function Portfolio() {
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <motion.div 
-                    className="p-3 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg shadow-lg"
+                    className="p-3 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg shadow-lg"
                     animate={{ 
                       boxShadow: [
                         "0 0 20px rgba(16, 185, 129, 0.3)",
@@ -955,7 +961,7 @@ export default function Portfolio() {
                   </motion.div>
                   <div>
                     <p className="font-medium">Email</p>
-                    <p className="text-muted-foreground group-hover:text-emerald-600 transition-colors">tristanbras34@gmail.com</p>
+                    <p className="text-muted-foreground group-hover:text-cyan-600 transition-colors">tristanbras34@gmail.com</p>
                   </div>
                 </motion.div>
                 <motion.div 
@@ -974,7 +980,7 @@ export default function Portfolio() {
                   </motion.div>
                   <div>
                     <p className="font-medium">Téléphone</p>
-                    <p className="text-muted-foreground group-hover:text-emerald-600 transition-colors">07 85 40 82 49</p>
+                    <p className="text-muted-foreground group-hover:text-cyan-600 transition-colors">07 85 40 82 49</p>
                   </div>
                 </motion.div>
                 <motion.div 
@@ -993,7 +999,7 @@ export default function Portfolio() {
                   </motion.div>
                   <div>
                     <p className="font-medium">Localisation</p>
-                    <p className="text-muted-foreground group-hover:text-emerald-600 transition-colors">62110, Hénin-Beaumont</p>
+                    <p className="text-muted-foreground group-hover:text-cyan-600 transition-colors">62110, Hénin-Beaumont</p>
                   </div>
                 </motion.div>
                 <motion.div 
@@ -1013,7 +1019,7 @@ export default function Portfolio() {
                     <Link
                       href="https://www.linkedin.com/in/tristan-bras-3434a82a6/"
                       target="_blank"
-                      className="text-emerald-600 hover:text-emerald-500 transition-colors font-medium"
+                      className="text-cyan-600 hover:text-cyan-500 transition-colors font-medium"
                     >
                       Voir mon profil →
                     </Link>
@@ -1032,7 +1038,7 @@ export default function Portfolio() {
                     name="name"
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white disabled:opacity-50 transition-all"
+                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-white disabled:opacity-50 transition-all"
                     placeholder="Votre nom"
                     whileFocus={{ scale: 1.02 }}
                   />
@@ -1044,7 +1050,7 @@ export default function Portfolio() {
                     name="email"
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white disabled:opacity-50 transition-all"
+                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-white disabled:opacity-50 transition-all"
                     placeholder="votre@email.com"
                     whileFocus={{ scale: 1.02 }}
                   />
@@ -1055,7 +1061,7 @@ export default function Portfolio() {
                     type="text"
                     name="subject"
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white disabled:opacity-50 transition-all"
+                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-white disabled:opacity-50 transition-all"
                     placeholder="Opportunité d'alternance"
                     whileFocus={{ scale: 1.02 }}
                   />
@@ -1067,7 +1073,7 @@ export default function Portfolio() {
                     rows={5}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white resize-none disabled:opacity-50 transition-all"
+                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-white resize-none disabled:opacity-50 transition-all"
                     placeholder="Votre message..."
                     whileFocus={{ scale: 1.02 }}
                   ></motion.textarea>
@@ -1076,7 +1082,7 @@ export default function Portfolio() {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 disabled:opacity-50"
+                    className="w-full bg-cyan-600 hover:bg-cyan-700 text-white py-3 disabled:opacity-50"
                   >
                     {isSubmitting ? "Envoi en cours..." : "Envoyer le message"}
                   </Button>
@@ -1115,3 +1121,4 @@ export default function Portfolio() {
     </div>
   )
 }
+

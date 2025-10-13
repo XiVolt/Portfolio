@@ -74,7 +74,7 @@ export function MobileMenu({ sections, activeSection, onSectionClick }: MobileMe
                       onClick={() => handleSectionClick(section)}
                       className={`w-full text-left px-4 py-3 rounded-lg transition-all ${
                         activeSection === section
-                          ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold shadow-lg"
+                          ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold shadow-lg"
                           : "text-muted-foreground hover:bg-accent hover:text-foreground"
                       }`}
                       initial={{ opacity: 0, x: 20 }}
@@ -89,7 +89,7 @@ export function MobileMenu({ sections, activeSection, onSectionClick }: MobileMe
 
                 {/* Decorative Element */}
                 <motion.div
-                  className="absolute bottom-6 left-6 right-6 h-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500 rounded-full"
+                  className="absolute bottom-6 left-6 right-6 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 rounded-full"
                   animate={{
                     backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                   }}

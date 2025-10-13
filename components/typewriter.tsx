@@ -48,11 +48,11 @@ export function Typewriter({
 
   return (
     <div className="inline-flex items-center gap-1">
-      <span className="text-emerald-600 dark:text-emerald-400 font-bold">
+      <span className="text-cyan-500 dark:text-cyan-400 font-bold">
         {currentText}
       </span>
       <motion.span
-        className="inline-block w-1 h-8 bg-emerald-600 dark:bg-emerald-400"
+        className="inline-block w-1 h-8 bg-cyan-500 dark:bg-cyan-400"
         animate={{ opacity: [1, 0, 1] }}
         transition={{ duration: 0.8, repeat: Infinity }}
       />

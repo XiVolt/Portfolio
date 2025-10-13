@@ -32,7 +32,7 @@ export function ScrollToTop() {
       {isVisible && (
         <motion.button
           onClick={scrollToTop}
-          className="fixed bottom-24 right-6 z-40 p-3 bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-full shadow-2xl hover:shadow-emerald-500/50 transition-all group"
+          className="fixed bottom-24 right-6 z-40 p-3 bg-gradient-to-br from-cyan-500 to-blue-600 text-white rounded-full shadow-2xl hover:shadow-cyan-500/50 transition-all group"
           initial={{ opacity: 0, scale: 0, rotate: -180 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
           exit={{ opacity: 0, scale: 0, rotate: 180 }}
@@ -57,7 +57,7 @@ export function ScrollToTop() {
           
           {/* Pulse ring */}
           <motion.div
-            className="absolute inset-0 rounded-full border-2 border-emerald-400"
+            className="absolute inset-0 rounded-full border-2 border-cyan-400"
             animate={{
               scale: [1, 1.5, 1],
               opacity: [1, 0, 1],

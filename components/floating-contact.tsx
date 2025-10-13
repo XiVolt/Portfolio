@@ -18,14 +18,14 @@ export function FloatingContactButton() {
     <div className="fixed bottom-8 right-8 z-50">
       <motion.button
         onClick={scrollToContact}
-        className="group relative w-16 h-16 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-full shadow-2xl flex items-center justify-center"
+        className="group relative w-16 h-16 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white rounded-full shadow-2xl flex items-center justify-center"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         animate={{
           boxShadow: [
-            "0 10px 30px rgba(16, 185, 129, 0.3)",
-            "0 10px 40px rgba(16, 185, 129, 0.5)",
-            "0 10px 30px rgba(16, 185, 129, 0.3)",
+            "0 10px 30px rgba(6, 182, 212, 0.3)",
+            "0 10px 40px rgba(6, 182, 212, 0.5)",
+            "0 10px 30px rgba(6, 182, 212, 0.3)",
           ],
         }}
         transition={{
@@ -47,7 +47,7 @@ export function FloatingContactButton() {
 
         {/* Ping effect */}
         <motion.span
-          className="absolute inset-0 rounded-full bg-emerald-500"
+          className="absolute inset-0 rounded-full bg-cyan-500"
           animate={{
             scale: [1, 1.5, 1],
             opacity: [0.5, 0, 0.5],
