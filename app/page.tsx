@@ -22,6 +22,9 @@ import { Typewriter } from "@/components/typewriter"
 import { FloatingContactButton } from "@/components/floating-contact"
 import { PageLoader } from "@/components/page-loader"
 import { SuccessConfetti } from "@/components/success-confetti"
+import { MobileMenu } from "@/components/mobile-menu"
+import { ScrollToTop } from "@/components/scroll-to-top"
+import { StatsGrid } from "@/components/stats-grid"
 import { Analytics } from "@vercel/analytics/next"
 
 export default function Portfolio() {
@@ -299,6 +302,9 @@ export default function Portfolio() {
       {/* Floating Contact Button */}
       <FloatingContactButton />
       
+      {/* Scroll To Top Button */}
+      <ScrollToTop />
+      
       {/* Success Confetti */}
       <SuccessConfetti show={showConfetti} />
       
@@ -321,35 +327,45 @@ export default function Portfolio() {
                 Tristan Bras
               </motion.span>
             </Link>
-            <div className="hidden md:flex space-x-8 items-center">
-              {["hero", "volturacode", "alternance", "about", "projects", "skills", "contact"].map((section) => (
-                <motion.button
-                  key={section}
-                  onClick={() => scrollToSection(section)}
-                  className={`capitalize transition-colors ${
-                    activeSection === section
-                      ? "text-emerald-600 font-medium"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {section === "hero"
-                    ? "Accueil"
-                    : section === "volturacode"
-                      ? "VolturaCode"
-                      : section === "alternance"
-                        ? "Alternance"
-                        : section === "about"
-                          ? "À propos"
-                          : section === "projects"
-                            ? "Projets"
-                            : section === "skills"
-                              ? "Compétences"
-                              : "Contact"}
-                </motion.button>
-              ))}
-              <ThemeToggle />
+            <div className="flex items-center gap-4">
+              {/* Desktop Navigation */}
+              <div className="hidden md:flex space-x-8 items-center">
+                {["hero", "volturacode", "alternance", "about", "projects", "skills", "contact"].map((section) => (
+                  <motion.button
+                    key={section}
+                    onClick={() => scrollToSection(section)}
+                    className={`capitalize transition-colors ${
+                      activeSection === section
+                        ? "text-emerald-600 font-medium"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {section === "hero"
+                      ? "Accueil"
+                      : section === "volturacode"
+                        ? "VolturaCode"
+                        : section === "alternance"
+                          ? "Alternance"
+                          : section === "about"
+                            ? "À propos"
+                            : section === "projects"
+                              ? "Projets"
+                              : section === "skills"
+                                ? "Compétences"
+                                : "Contact"}
+                  </motion.button>
+                ))}
+                <ThemeToggle />
+              </div>
+
+              {/* Mobile Menu */}
+              <MobileMenu
+                sections={["hero", "volturacode", "alternance", "about", "projects", "skills", "contact"]}
+                activeSection={activeSection}
+                onSectionClick={scrollToSection}
+              />
             </div>
           </div>
         </div>
@@ -389,14 +405,18 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
           <div className="text-center">
             <motion.div
-              className="mb-10"
+              className="mb-10 flex justify-center"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, type: "spring" }}
             >
-              <div className="w-40 h-40 mx-auto mb-8 rounded-3xl bg-gradient-to-br from-emerald-400 via-teal-500 to-emerald-600 flex items-center justify-center text-white text-5xl font-poppins font-bold shadow-2xl transform hover:rotate-3 transition-transform">
-                TB
-              </div>
+              <motion.div
+                className="transform scale-[3.5]"
+                whileHover={{ scale: 3.7, rotate: 360 }}
+                transition={{ duration: 0.8, type: "spring" }}
+              >
+                <Logo />
+              </motion.div>
             </motion.div>
 
             <motion.h1
@@ -537,15 +557,34 @@ export default function Portfolio() {
 
             <motion.div
               className="mt-16"
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+              animate={{ 
+                y: [0, 15, 0],
+              }}
+              transition={{ 
+                duration: 1.5, 
+                repeat: Number.POSITIVE_INFINITY,
+                ease: "easeInOut"
+              }}
             >
-              <button
+              <motion.button
                 onClick={() => scrollToSection("alternance")}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="relative group"
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
               >
-                <ChevronDown className="w-8 h-8" />
-              </button>
+                <motion.div
+                  className="absolute inset-0 bg-emerald-500/20 rounded-full blur-xl"
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.5, 0.8, 0.5],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                  }}
+                />
+                <ChevronDown className="w-10 h-10 text-emerald-600 relative z-10 group-hover:text-emerald-500 transition-colors" />
+              </motion.button>
             </motion.div>
           </div>
         </div>
@@ -559,8 +598,21 @@ export default function Portfolio() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 relative z-10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="about" className="py-20 relative z-10 overflow-hidden">
+        {/* Decorative background elements */}
+        <motion.div
+          className="absolute top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            rotate: [0, 90, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
@@ -572,6 +624,36 @@ export default function Portfolio() {
               Étudiant dynamique avec un excellent sens du contact, j'aime collaborer avec des interlocuteurs variés.
             </p>
           </motion.div>
+
+          {/* Stats Grid */}
+          <StatsGrid
+            stats={[
+              {
+                value: 3,
+                label: "Années d'études",
+                suffix: "",
+                icon: <Code className="w-8 h-8" />,
+              },
+              {
+                value: 15,
+                label: "Projets réalisés",
+                suffix: "+",
+                icon: <Database className="w-8 h-8" />,
+              },
+              {
+                value: 10,
+                label: "Technologies maîtrisées",
+                suffix: "+",
+                icon: <Server className="w-8 h-8" />,
+              },
+              {
+                value: 1,
+                label: "Entreprise fondée",
+                suffix: "",
+                icon: <Globe className="w-8 h-8" />,
+              },
+            ]}
+          />
 
           <div className="grid lg:grid-cols-2 gap-16 mb-16">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
@@ -627,8 +709,21 @@ export default function Portfolio() {
       <VolturaCodeSection />
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 relative z-10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="projects" className="py-20 relative z-10 overflow-hidden">
+        {/* Decorative elements */}
+        <motion.div
+          className="absolute bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl"
+          animate={{
+            x: [0, 50, 0],
+            y: [0, -30, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
@@ -682,6 +777,7 @@ export default function Portfolio() {
                   <img
                     src={project.image}
                     alt={project.title}
+                    loading="lazy"
                     className="w-full h-40 object-cover rounded-lg transform group-hover:scale-125 transition-transform duration-500"
                   />
                   <motion.div
@@ -747,8 +843,21 @@ export default function Portfolio() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 relative z-10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="skills" className="py-20 relative z-10 overflow-hidden">
+        {/* Animated background */}
+        <motion.div
+          className="absolute top-1/2 left-1/2 w-[500px] h-[500px] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.3, 1],
+            rotate: [0, 180, 360],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
