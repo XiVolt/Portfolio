@@ -235,30 +235,30 @@ export default function Portfolio() {
 
   const skillsData = [
     // Cybersécurité
-    { name: "Analyse de vulnérabilités", level: 75, category: "Cybersécurité" },
-    { name: "Tests d'intrusion (Pentest)", level: 70, category: "Cybersécurité" },
-    { name: "Cryptographie", level: 65, category: "Cybersécurité" },
-    { name: "Sécurité des réseaux", level: 80, category: "Cybersécurité" },
-    { name: "SIEM & Monitoring", level: 60, category: "Cybersécurité" },
+    { name: "Analyse de vulnérabilités", level: 5, category: "Cybersécurité" },
+    { name: "Tests d'intrusion (Pentest)", level: 0, category: "Cybersécurité" },
+    { name: "Cryptographie", level: 25, category: "Cybersécurité" },
+    { name: "Sécurité des réseaux", level: 10, category: "Cybersécurité" },
+    { name: "SIEM & Monitoring", level: 0, category: "Cybersécurité" },
     
     // Réseaux & Infrastructure
-    { name: "TCP/IP, DNS, DHCP", level: 85, category: "Réseaux" },
-    { name: "Configuration Routeurs/Switch", level: 75, category: "Réseaux" },
-    { name: "Firewall & IDS/IPS", level: 70, category: "Réseaux" },
-    { name: "VPN & VLANs", level: 65, category: "Réseaux" },
-    { name: "Analyse réseau (Wireshark)", level: 80, category: "Réseaux" },
+    { name: "TCP/IP, DNS, DHCP", level: 55, category: "Réseaux" },
+    { name: "Configuration Routeurs/Switch", level: 65, category: "Réseaux" },
+    { name: "Firewall & IDS/IPS", level: 10, category: "Réseaux" },
+    { name: "VPN & VLANs", level: 15, category: "Réseaux" },
+    { name: "Analyse réseau (Wireshark)", level: 20, category: "Réseaux" },
     
     // Outils Cyber & Langages
     { name: "Python (Scripts Sécu)", level: 75, category: "Outils" },
     { name: "Bash/PowerShell", level: 80, category: "Outils" },
     { name: "Nmap, Metasploit, Burp Suite", level: 70, category: "Outils" },
     { name: "Linux Administration", level: 85, category: "Outils" },
-    { name: "Docker & Virtualisation", level: 65, category: "Outils" },
+    { name: "Docker & Virtualisation", level: 10, category: "Outils" },
     { name: "Git / GitHub", level: 80, category: "Outils" },
     
     // Soft Skills
-    { name: "Analyse & Résolution", level: 95, category: "Soft Skills" },
-    { name: "Veille technologique", level: 90, category: "Soft Skills" },
+    { name: "Analyse & Résolution", level: 75, category: "Soft Skills" },
+    { name: "Veille technologique", level: 80, category: "Soft Skills" },
     { name: "Rigueur & Méthode", level: 90, category: "Soft Skills" },
     { name: "Travail d'équipe", level: 95, category: "Soft Skills" },
   ]
