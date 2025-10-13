@@ -18,7 +18,7 @@ const connections = [
 
 export function NetworkAnimation() {
   return (
-    <div className="relative w-full h-96 my-12 rounded-2xl bg-gradient-to-br from-black/40 to-cyan-900/20 backdrop-blur-sm border border-cyan-500/20 overflow-hidden">
+    <div className="relative w-full h-[500px] my-16 rounded-2xl bg-gradient-to-br from-black/40 to-cyan-900/20 backdrop-blur-sm border border-cyan-500/20 overflow-hidden shadow-2xl shadow-cyan-500/10">
       <svg className="absolute inset-0 w-full h-full">
         {connections.map(([start, end], index) => {
           const startNode = nodes.find(n => n.id === start)

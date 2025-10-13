@@ -27,7 +27,7 @@ import { ScrollToTop } from "@/components/scroll-to-top"
 import { StatsGrid } from "@/components/stats-grid"
 import { MatrixRain } from "@/components/matrix-rain"
 import { CyberGrid } from "@/components/cyber-grid"
-import { CyberTerminal } from "@/components/cyber-terminal"
+import { FirewallDefenseGame } from "@/components/firewall-game"
 import { NetworkAnimation } from "@/components/network-animation"
 import { CyberToolsShowcase } from "@/components/cyber-tools"
 import { Analytics } from "@vercel/analytics/next"
@@ -451,7 +451,7 @@ export default function Portfolio() {
               <span className="text-muted-foreground">Je suis</span>
               <Typewriter 
                 words={[
-                  "Expert Cybersécurité",
+                  "Passioné par la Cybersécurité",
                   "Administrateur Réseaux",
                   "Étudiant en BUT Informatique",
                   "Fondateur de VolturaCode",
@@ -566,8 +566,8 @@ export default function Portfolio() {
               </motion.div>
             </motion.div>
 
-            {/* Cyber Terminal */}
-            <CyberTerminal />
+            {/* Firewall Defense Game */}
+            <FirewallDefenseGame />
 
             <motion.div
               className="mt-16"
