@@ -12,7 +12,6 @@ import Link from "next/link"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { AlternanceBanner } from "@/components/alternance-banner"
 import { FormationTimeline } from "@/components/formation-timeline"
-import { SkillsEvolution } from "@/components/skills-evolution"
 import { CVDownload } from "@/components/cv-download"
 import { ParticlesBackground } from "@/components/particles-background"
 import { VolturaCodeSection } from "@/components/volturacode-section"
@@ -525,8 +524,6 @@ export default function Portfolio() {
               </div>
             </motion.div>
           </div>
-
-          <SkillsEvolution />
         </div>
       </section>
 
