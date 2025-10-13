@@ -27,6 +27,9 @@ import { ScrollToTop } from "@/components/scroll-to-top"
 import { StatsGrid } from "@/components/stats-grid"
 import { MatrixRain } from "@/components/matrix-rain"
 import { CyberGrid } from "@/components/cyber-grid"
+import { CyberTerminal } from "@/components/cyber-terminal"
+import { NetworkAnimation } from "@/components/network-animation"
+import { CyberToolsShowcase } from "@/components/cyber-tools"
 import { Analytics } from "@vercel/analytics/next"
 
 export default function Portfolio() {
@@ -231,33 +234,33 @@ export default function Portfolio() {
   ]
 
   const skillsData = [
-    // Langages
-    { name: "HTML/CSS/JavaScript", level: 90, category: "Langages" },
-    { name: "TypeScript", level: 75, category: "Langages" },
-    { name: "Java", level: 70, category: "Langages" },
-    { name: "Python", level: 65, category: "Langages" },
-    { name: "PHP", level: 55, category: "Langages" },
-    { name: "SQL", level: 80, category: "Langages" },
+    // Cybersécurité
+    { name: "Analyse de vulnérabilités", level: 75, category: "Cybersécurité" },
+    { name: "Tests d'intrusion (Pentest)", level: 70, category: "Cybersécurité" },
+    { name: "Cryptographie", level: 65, category: "Cybersécurité" },
+    { name: "Sécurité des réseaux", level: 80, category: "Cybersécurité" },
+    { name: "SIEM & Monitoring", level: 60, category: "Cybersécurité" },
     
-    // Frameworks & Bibliothèques
-    { name: "React / Next.js", level: 70, category: "Frameworks" },
-    { name: "Node.js / Express", level: 65, category: "Frameworks" },
-    { name: "Laravel", level: 40, category: "Frameworks" },
-    { name: "Tailwind CSS", level: 65, category: "Frameworks" },
-    { name: "Framer Motion", level: 35, category: "Frameworks" },
+    // Réseaux & Infrastructure
+    { name: "TCP/IP, DNS, DHCP", level: 85, category: "Réseaux" },
+    { name: "Configuration Routeurs/Switch", level: 75, category: "Réseaux" },
+    { name: "Firewall & IDS/IPS", level: 70, category: "Réseaux" },
+    { name: "VPN & VLANs", level: 65, category: "Réseaux" },
+    { name: "Analyse réseau (Wireshark)", level: 80, category: "Réseaux" },
     
-    // Outils & Technologies
+    // Outils Cyber & Langages
+    { name: "Python (Scripts Sécu)", level: 75, category: "Outils" },
+    { name: "Bash/PowerShell", level: 80, category: "Outils" },
+    { name: "Nmap, Metasploit, Burp Suite", level: 70, category: "Outils" },
+    { name: "Linux Administration", level: 85, category: "Outils" },
+    { name: "Docker & Virtualisation", level: 65, category: "Outils" },
     { name: "Git / GitHub", level: 80, category: "Outils" },
-    { name: "Docker", level: 10, category: "Outils" },
-    { name: "Linux Administration", level: 65, category: "Outils" },
-    { name: "PostgreSQL / MySQL", level: 70, category: "Outils" },
-    { name: "Vercel / Netlify", level: 85, category: "Outils" },
     
     // Soft Skills
+    { name: "Analyse & Résolution", level: 95, category: "Soft Skills" },
+    { name: "Veille technologique", level: 90, category: "Soft Skills" },
+    { name: "Rigueur & Méthode", level: 90, category: "Soft Skills" },
     { name: "Travail d'équipe", level: 95, category: "Soft Skills" },
-    { name: "Communication", level: 90, category: "Soft Skills" },
-    { name: "Résolution de problèmes", level: 90, category: "Soft Skills" },
-    { name: "Autonomie", level: 95, category: "Soft Skills" },
   ]
 
   const skills = [
@@ -563,6 +566,9 @@ export default function Portfolio() {
               </motion.div>
             </motion.div>
 
+            {/* Cyber Terminal */}
+            <CyberTerminal />
+
             <motion.div
               className="mt-16"
               animate={{ 
@@ -662,6 +668,9 @@ export default function Portfolio() {
               },
             ]}
           />
+
+          {/* Network Visualization */}
+          <NetworkAnimation />
 
           <div className="grid lg:grid-cols-2 gap-16 mb-16">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
@@ -926,6 +935,9 @@ export default function Portfolio() {
           </motion.div>
         </div>
       </section>
+
+      {/* Cyber Tools Section */}
+      <CyberToolsShowcase />
 
       {/* Contact Section */}
       <section id="contact" className="py-20 relative z-10">
