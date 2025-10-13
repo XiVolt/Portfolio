@@ -381,10 +381,10 @@ export default function Portfolio() {
               <span className="text-muted-foreground">Je suis </span>
               <Typewriter 
                 words={[
-                  "Développeur Web",
-                  "Étudiant en BUT Informatique",
-                  "Fondateur de VolturaCode",
-                  "Passionné de Code",
+                  " Développeur Web",
+                  " Étudiant en BUT Informatique",
+                  " Fondateur de VolturaCode",
+                  " Passionné de Code",
                 ]}
               />
             </motion.div>
