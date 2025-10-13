@@ -405,14 +405,14 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
           <div className="text-center">
             <motion.div
-              className="mb-10 flex justify-center"
+              className="mb-8 flex justify-center"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, type: "spring" }}
             >
               <motion.div
-                className="transform scale-[3.5]"
-                whileHover={{ scale: 3.7, rotate: 360 }}
+                className="transform scale-[2.5]"
+                whileHover={{ scale: 2.7, rotate: 360 }}
                 transition={{ duration: 0.8, type: "spring" }}
               >
                 <Logo />
@@ -434,19 +434,21 @@ export default function Portfolio() {
             </motion.h1>
 
             <motion.div
-              className="text-2xl md:text-3xl mb-6 h-20 flex items-center justify-center"
+              className="text-xl md:text-2xl mb-6 min-h-[80px] flex items-center justify-center flex-wrap gap-2"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              <span className="text-muted-foreground">Je suis </span>
+              <span className="text-muted-foreground">Je suis</span>
               <Typewriter 
                 words={[
-                  " Développeur Web",
-                  " Étudiant en BUT Informatique",
-                  " Fondateur de VolturaCode",
-                  " Passionné de Code",
+                  "Développeur Web",
+                  "Étudiant en BUT Informatique",
+                  "Fondateur de VolturaCode",
+                  "Passionné de Code",
                 ]}
+                typingSpeed={80}
+                deletingSpeed={40}
               />
             </motion.div>
 
