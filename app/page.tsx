@@ -21,6 +21,7 @@ import { Logo } from "@/components/logo"
 import { Typewriter } from "@/components/typewriter"
 import { FloatingContactButton } from "@/components/floating-contact"
 import { PageLoader } from "@/components/page-loader"
+import { SuccessConfetti } from "@/components/success-confetti"
 import { Analytics } from "@vercel/analytics/next"
 
 export default function Portfolio() {
@@ -28,6 +29,7 @@ export default function Portfolio() {
   const [formStatus, setFormStatus] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [projectFilter, setProjectFilter] = useState("Tous")
+  const [showConfetti, setShowConfetti] = useState(false)
 
   console.log("Portfolio loaded - Version 3.0 with VolturaCode")
 
@@ -90,6 +92,8 @@ export default function Portfolio() {
 
       if (response.ok) {
         setFormStatus("✅ Message envoyé avec succès ! Je vous répondrai rapidement.")
+        setShowConfetti(true)
+        setTimeout(() => setShowConfetti(false), 3000)
         form.reset()
       } else {
         const data = await response.json()
@@ -295,6 +299,9 @@ export default function Portfolio() {
       {/* Floating Contact Button */}
       <FloatingContactButton />
       
+      {/* Success Confetti */}
+      <SuccessConfetti show={showConfetti} />
+      
       {/* Progress bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-500 transform-origin-0 z-50"
@@ -349,8 +356,37 @@ export default function Portfolio() {
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="pt-16 min-h-screen flex items-center relative z-10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <section id="hero" className="pt-16 min-h-screen flex items-center relative z-10 overflow-hidden">
+        {/* Animated Background Gradient */}
+        <div className="absolute inset-0 z-0">
+          <motion.div
+            className="absolute top-1/4 -left-1/4 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl"
+            animate={{
+              x: [0, 100, 0],
+              y: [0, -50, 0],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl"
+            animate={{
+              x: [0, -100, 0],
+              y: [0, 50, 0],
+              scale: [1, 1.3, 1],
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          />
+        </div>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
           <div className="text-center">
             <motion.div
               className="mb-10"
@@ -364,10 +400,15 @@ export default function Portfolio() {
             </motion.div>
 
             <motion.h1
-              className="text-6xl md:text-7xl font-poppins font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text"
+              className="text-6xl md:text-7xl font-poppins font-bold mb-6 bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-600 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
+              style={{
+                backgroundImage: 'linear-gradient(90deg, #10b981, #14b8a6, #06b6d4, #14b8a6, #10b981)',
+                backgroundSize: '200% auto',
+                animation: 'gradient 4s linear infinite',
+              }}
             >
               Tristan Bras
             </motion.h1>
@@ -415,21 +456,34 @@ export default function Portfolio() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.div 
+                whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(16, 185, 129, 0.5)" }} 
+                whileTap={{ scale: 0.95 }}
+                className="relative"
+              >
                 <Button
                   onClick={() => scrollToSection("projects")}
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 text-lg"
+                  className="relative overflow-hidden bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-8 py-3 text-lg group"
                 >
-                  Voir mes projets
+                  <span className="relative z-10">Voir mes projets</span>
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "100%" }}
+                    transition={{ duration: 0.6 }}
+                  />
                 </Button>
               </motion.div>
 
               <CVDownload />
 
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.div 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }}
+              >
                 <Button
                   variant="outline"
-                  className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950 px-8 py-3 text-lg"
+                  className="border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white px-8 py-3 text-lg transition-all duration-300"
                   onClick={() => scrollToSection("contact")}
                 >
                   Me contacter
@@ -443,28 +497,37 @@ export default function Portfolio() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
             >
-              <motion.div whileHover={{ scale: 1.2, rotate: 5 }}>
+              <motion.div 
+                whileHover={{ scale: 1.3, rotate: 360, y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <Link
                   href="https://www.linkedin.com/in/tristan-bras-3434a82a6/"
                   target="_blank"
-                  className="text-muted-foreground hover:text-emerald-600 transition-colors"
+                  className="block p-3 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 text-white shadow-lg hover:shadow-blue-500/50 transition-all"
                 >
                   <Linkedin className="w-6 h-6" />
                 </Link>
               </motion.div>
-              <motion.div whileHover={{ scale: 1.2, rotate: -5 }}>
+              <motion.div 
+                whileHover={{ scale: 1.3, rotate: 360, y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <Link
                   href="mailto:tristanbras34@gmail.com"
-                  className="text-muted-foreground hover:text-emerald-600 transition-colors"
+                  className="block p-3 rounded-full bg-gradient-to-br from-red-500 to-pink-600 text-white shadow-lg hover:shadow-red-500/50 transition-all"
                 >
                   <Mail className="w-6 h-6" />
                 </Link>
               </motion.div>
-              <motion.div whileHover={{ scale: 1.2, rotate: -8 }}>
+              <motion.div 
+                whileHover={{ scale: 1.3, rotate: 360, y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <Link
                   href="https://github.com/XiVolt"
                   target="_blank"
-                  className="text-muted-foreground hover:text-emerald-600 transition-colors"
+                  className="block p-3 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 text-white shadow-lg hover:shadow-gray-700/50 transition-all"
                   aria-label="GitHub"
                 >
                   <Github className="w-6 h-6" />
@@ -613,14 +676,24 @@ export default function Portfolio() {
             transition={{ delay: index * 0.1 }}
             whileHover={{ y: -10, scale: 1.02 }}
           >
-            <Card className="group hover:shadow-2xl hover:border-emerald-500 transition-all duration-300 border-2 bg-card h-full flex flex-col overflow-hidden">
+            <Card className="group hover:shadow-2xl hover:shadow-emerald-500/20 hover:border-emerald-500 transition-all duration-300 border-2 bg-card h-full flex flex-col overflow-hidden">
               <CardContent className="p-6 flex flex-col h-full">
-                <div className="overflow-hidden rounded-lg mb-4">
+                <div className="relative overflow-hidden rounded-lg mb-4 group/image">
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-40 object-cover rounded-lg transform group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-40 object-cover rounded-lg transform group-hover:scale-125 transition-transform duration-500"
                   />
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-t from-emerald-600/90 to-transparent flex items-end justify-center pb-4 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                  >
+                    <span className="text-white font-bold text-lg flex items-center gap-2">
+                      <ExternalLink className="w-5 h-5" />
+                      Voir le projet
+                    </span>
+                  </motion.div>
                 </div>
                 <h3 className="text-xl font-semibold mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">{project.title}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
@@ -633,20 +706,35 @@ export default function Portfolio() {
                 {/* Technologies */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.technologies.map((tech, idx) => (
-                    <Badge key={idx} variant="outline" className="text-xs">
-                      {tech}
-                    </Badge>
+                    <motion.div
+                      key={idx}
+                      whileHover={{ 
+                        rotateY: 180,
+                        scale: 1.1,
+                      }}
+                      transition={{ duration: 0.3 }}
+                      style={{ transformStyle: 'preserve-3d' }}
+                    >
+                      <Badge variant="outline" className="text-xs cursor-pointer">
+                        {tech}
+                      </Badge>
+                    </motion.div>
                   ))}
                 </div>
                 {/* Bouton Détails */}
                 <div className="mt-auto">
-                  <Link
-                    href={`/projects/${project.slug}`}
-
-                    className="inline-block mt-2 px-4 py-2 rounded bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition"
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    Détails
-                  </Link>
+                    <Link
+                      href={`/projects/${project.slug}`}
+                      className="inline-flex items-center gap-2 mt-2 px-4 py-2 rounded bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-xs font-semibold hover:from-emerald-700 hover:to-teal-700 transition-all shadow-lg hover:shadow-emerald-500/50"
+                    >
+                      Détails
+                      <ExternalLink className="w-3 h-3" />
+                    </Link>
+                  </motion.div>
                 </div>
               </CardContent>
             </Card>
@@ -684,14 +772,38 @@ export default function Portfolio() {
           >
             <h3 className="text-2xl font-semibold mb-8">Certifications</h3>
             <div className="flex justify-center space-x-8">
-              <motion.div whileHover={{ scale: 1.1 }}>
-                <Badge className="bg-emerald-600 text-white px-4 py-2 text-sm">PSC1</Badge>
+              <motion.div 
+                whileHover={{ 
+                  scale: 1.2,
+                  rotate: [0, -5, 5, -5, 0],
+                }}
+                transition={{ duration: 0.5 }}
+              >
+                <Badge className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-3 text-base shadow-lg cursor-pointer">
+                  🏥 PSC1
+                </Badge>
               </motion.div>
-              <motion.div whileHover={{ scale: 1.1 }}>
-                <Badge className="bg-emerald-600 text-white px-4 py-2 text-sm">PIX</Badge>
+              <motion.div 
+                whileHover={{ 
+                  scale: 1.2,
+                  rotate: [0, -5, 5, -5, 0],
+                }}
+                transition={{ duration: 0.5 }}
+              >
+                <Badge className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 text-base shadow-lg cursor-pointer">
+                  💻 PIX
+                </Badge>
               </motion.div>
-              <motion.div whileHover={{ scale: 1.1 }}>
-                <Badge className="bg-emerald-600 text-white px-4 py-2 text-sm">Permis B</Badge>
+              <motion.div 
+                whileHover={{ 
+                  scale: 1.2,
+                  rotate: [0, -5, 5, -5, 0],
+                }}
+                transition={{ duration: 0.5 }}
+              >
+                <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 text-base shadow-lg cursor-pointer">
+                  🚗 Permis B
+                </Badge>
               </motion.div>
             </div>
           </motion.div>
@@ -712,45 +824,87 @@ export default function Portfolio() {
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <h3 className="text-2xl font-semibold mb-6">Informations de contact</h3>
               <div className="space-y-6">
-                <motion.div className="flex items-center space-x-4" whileHover={{ x: 5 }}>
-                  <div className="p-3 bg-emerald-600 rounded-lg">
+                <motion.div 
+                  className="flex items-center space-x-4 group cursor-pointer" 
+                  whileHover={{ x: 10, scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <motion.div 
+                    className="p-3 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg shadow-lg"
+                    animate={{ 
+                      boxShadow: [
+                        "0 0 20px rgba(16, 185, 129, 0.3)",
+                        "0 0 30px rgba(16, 185, 129, 0.5)",
+                        "0 0 20px rgba(16, 185, 129, 0.3)",
+                      ]
+                    }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
                     <Mail className="w-6 h-6" />
-                  </div>
+                  </motion.div>
                   <div>
                     <p className="font-medium">Email</p>
-                    <p className="text-slate-300">tristanbras34@gmail.com</p>
+                    <p className="text-muted-foreground group-hover:text-emerald-600 transition-colors">tristanbras34@gmail.com</p>
                   </div>
                 </motion.div>
-                <motion.div className="flex items-center space-x-4" whileHover={{ x: 5 }}>
-                  <div className="p-3 bg-emerald-600 rounded-lg">
+                <motion.div 
+                  className="flex items-center space-x-4 group cursor-pointer" 
+                  whileHover={{ x: 10, scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <motion.div 
+                    className="p-3 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg shadow-lg"
+                    animate={{ 
+                      rotate: [0, 5, -5, 0],
+                    }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                  >
                     <Phone className="w-6 h-6" />
-                  </div>
+                  </motion.div>
                   <div>
                     <p className="font-medium">Téléphone</p>
-                    <p className="text-slate-300">07 85 40 82 49</p>
+                    <p className="text-muted-foreground group-hover:text-emerald-600 transition-colors">07 85 40 82 49</p>
                   </div>
                 </motion.div>
-                <motion.div className="flex items-center space-x-4" whileHover={{ x: 5 }}>
-                  <div className="p-3 bg-emerald-600 rounded-lg">
+                <motion.div 
+                  className="flex items-center space-x-4 group cursor-pointer" 
+                  whileHover={{ x: 10, scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <motion.div 
+                    className="p-3 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg shadow-lg"
+                    animate={{ 
+                      y: [0, -5, 0],
+                    }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
                     <MapPin className="w-6 h-6" />
-                  </div>
+                  </motion.div>
                   <div>
                     <p className="font-medium">Localisation</p>
-                    <p className="text-slate-300">62110, Hénin-Beaumont</p>
+                    <p className="text-muted-foreground group-hover:text-emerald-600 transition-colors">62110, Hénin-Beaumont</p>
                   </div>
                 </motion.div>
-                <motion.div className="flex items-center space-x-4" whileHover={{ x: 5 }}>
-                  <div className="p-3 bg-emerald-600 rounded-lg">
+                <motion.div 
+                  className="flex items-center space-x-4 group cursor-pointer" 
+                  whileHover={{ x: 10, scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <motion.div 
+                    className="p-3 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg shadow-lg"
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.6 }}
+                  >
                     <Linkedin className="w-6 h-6" />
-                  </div>
+                  </motion.div>
                   <div>
                     <p className="font-medium">LinkedIn</p>
                     <Link
                       href="https://www.linkedin.com/in/tristan-bras-3434a82a6/"
                       target="_blank"
-                      className="text-emerald-400 hover:text-emerald-300 transition-colors"
+                      className="text-emerald-600 hover:text-emerald-500 transition-colors font-medium"
                     >
-                      Voir mon profil
+                      Voir mon profil →
                     </Link>
                   </div>
                 </motion.div>
