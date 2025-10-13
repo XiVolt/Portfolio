@@ -17,6 +17,10 @@ import { ParticlesBackground } from "@/components/particles-background"
 import { VolturaCodeSection } from "@/components/volturacode-section"
 import { SkillsChart } from "@/components/skills-chart"
 import { ProjectFilter } from "@/components/project-filter"
+import { Logo } from "@/components/logo"
+import { Typewriter } from "@/components/typewriter"
+import { FloatingContactButton } from "@/components/floating-contact"
+import { PageLoader } from "@/components/page-loader"
 import { Analytics } from "@vercel/analytics/next"
 
 export default function Portfolio() {
@@ -282,8 +286,14 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-300 relative">
+      {/* Page Loader */}
+      <PageLoader />
+      
       {/* Particles Background - Single instance covering entire page */}
       <ParticlesBackground id="tsparticles-main" />
+      
+      {/* Floating Contact Button */}
+      <FloatingContactButton />
       
       {/* Progress bar */}
       <motion.div
@@ -292,12 +302,18 @@ export default function Portfolio() {
       />
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-background/90 backdrop-blur-sm border-b border-border z-40">
+      <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-md border-b border-border/50 z-40 shadow-sm">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <motion.div className="font-bold text-xl" whileHover={{ scale: 1.05 }}>
-              Tristan Bras
-            </motion.div>
+            <Link href="/" className="flex items-center gap-3">
+              <Logo />
+              <motion.span 
+                className="font-poppins font-bold text-xl hidden sm:block"
+                whileHover={{ scale: 1.05 }}
+              >
+                Tristan Bras
+              </motion.span>
+            </Link>
             <div className="hidden md:flex space-x-8 items-center">
               {["hero", "volturacode", "alternance", "about", "projects", "skills", "contact"].map((section) => (
                 <motion.button
@@ -337,18 +353,18 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center">
             <motion.div
-              className="mb-8"
+              className="mb-10"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.6, type: "spring" }}
             >
-              <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-white text-4xl font-bold shadow-2xl">
+              <div className="w-40 h-40 mx-auto mb-8 rounded-3xl bg-gradient-to-br from-emerald-400 via-teal-500 to-emerald-600 flex items-center justify-center text-white text-5xl font-poppins font-bold shadow-2xl transform hover:rotate-3 transition-transform">
                 TB
               </div>
             </motion.div>
 
             <motion.h1
-              className="text-5xl md:text-6xl font-bold mb-6"
+              className="text-6xl md:text-7xl font-poppins font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -356,11 +372,28 @@ export default function Portfolio() {
               Tristan Bras
             </motion.h1>
 
-            <motion.p
-              className="text-xl md:text-2xl text-muted-foreground mb-4"
+            <motion.div
+              className="text-2xl md:text-3xl mb-6 h-20 flex items-center justify-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
+            >
+              <span className="text-muted-foreground">Je suis </span>
+              <Typewriter 
+                words={[
+                  "Développeur Web",
+                  "Étudiant en BUT Informatique",
+                  "Fondateur de VolturaCode",
+                  "Passionné de Code",
+                ]}
+              />
+            </motion.div>
+
+            <motion.p
+              className="text-xl text-muted-foreground mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
             >
               Étudiant en BUT Informatique & fondateur de{" "}
               <span className="text-emerald-600 dark:text-emerald-400 font-semibold">VolturaCode</span>
