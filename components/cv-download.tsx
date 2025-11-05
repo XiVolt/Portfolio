@@ -11,7 +11,7 @@ export function CVDownload() {
     }
 
     const link = document.createElement("a")
-    link.href = "/Tristan_Bras_CV.pdf" 
+    link.href = "/Tristan_Bras_CV_Alternance.pdf" 
     link.download = "CV-Tristan-Bras-BUT-Informatique.pdf"
     document.body.appendChild(link)
     link.click()
