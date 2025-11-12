@@ -55,6 +55,27 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Amélioration du scroll sur mobile */
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+  }
+
+  /* Optimisation des performances sur mobile */
+  @media (max-width: 768px) {
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Réduction des animations sur mobile */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   }
 }
 

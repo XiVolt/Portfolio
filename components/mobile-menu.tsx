@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
@@ -24,16 +24,28 @@ export function MobileMenu({ sections, activeSection, onSectionClick }: MobileMe
     contact: "Contact",
   }
 
+  // Empêcher le scroll quand le menu est ouvert
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
+
   const handleSectionClick = (section: string) => {
     onSectionClick(section)
     setIsOpen(false)
   }
 
   return (
-    <div className="md:hidden">
+    <div className="md:hidden relative z-50">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 text-foreground hover:text-emerald-600 transition-colors"
+        className="p-2 text-foreground hover:text-cyan-600 transition-colors relative z-[60]"
         aria-label="Toggle menu"
       >
         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -44,7 +56,7 @@ export function MobileMenu({ sections, activeSection, onSectionClick }: MobileMe
           <>
             {/* Backdrop */}
             <motion.div
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+              className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[55]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -53,13 +65,13 @@ export function MobileMenu({ sections, activeSection, onSectionClick }: MobileMe
 
             {/* Menu Drawer */}
             <motion.div
-              className="fixed top-16 right-0 bottom-0 w-64 bg-background border-l border-border shadow-2xl z-50 overflow-y-auto"
+              className="fixed top-0 right-0 bottom-0 w-64 bg-background border-l border-border shadow-2xl z-[60] overflow-y-auto"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
             >
-              <div className="p-6 space-y-6">
+              <div className="p-6 pt-20 space-y-6">
                 {/* Theme Toggle */}
                 <div className="flex justify-between items-center pb-4 border-b border-border">
                   <span className="text-sm font-medium text-muted-foreground">Thème</span>

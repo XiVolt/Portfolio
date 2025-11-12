@@ -319,12 +319,12 @@ export default function Portfolio() {
       
       {/* Progress bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 transform-origin-0 z-50"
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 transform-origin-0 z-[70]"
         style={{ scaleX }}
       />
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-md border-b border-border/50 z-40 shadow-sm">
+      <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-md border-b border-border/50 z-[60] shadow-sm">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center gap-3">
@@ -420,7 +420,7 @@ export default function Portfolio() {
               transition={{ duration: 0.6, type: "spring" }}
             >
               <motion.div
-                className="transform scale-[2.5]"
+                className="transform scale-150 sm:scale-[2] md:scale-[2.5]"
                 whileHover={{ scale: 2.7, rotate: 360 }}
                 transition={{ duration: 0.8, type: "spring" }}
               >
@@ -429,7 +429,7 @@ export default function Portfolio() {
             </motion.div>
 
             <motion.h1
-              className="text-6xl md:text-7xl font-poppins font-bold mb-6 bg-gradient-to-r from-cyan-600 via-blue-500 to-cyan-600 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient"
+                        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-poppins font-bold mb-6 bg-gradient-to-r from-cyan-600 via-blue-500 to-cyan-600 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient px-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -443,7 +443,7 @@ export default function Portfolio() {
             </motion.h1>
 
             <motion.div
-              className="text-xl md:text-2xl mb-6 min-h-[80px] flex items-center justify-center flex-wrap gap-2"
+              className="text-lg sm:text-xl md:text-2xl mb-6 min-h-[60px] sm:min-h-[80px] flex items-center justify-center flex-wrap gap-2 px-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
@@ -463,7 +463,7 @@ export default function Portfolio() {
             </motion.div>
 
             <motion.p
-              className="text-xl text-muted-foreground mb-4"
+              className="text-base sm:text-lg md:text-xl text-muted-foreground mb-4 px-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
@@ -473,7 +473,7 @@ export default function Portfolio() {
             </motion.p>
 
             <motion.p
-              className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto"
+              className="text-sm sm:text-base md:text-lg text-muted-foreground mb-8 max-w-2xl mx-auto px-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
@@ -482,7 +482,7 @@ export default function Portfolio() {
             </motion.p>
 
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center mb-12 px-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
@@ -490,11 +490,11 @@ export default function Portfolio() {
               <motion.div 
                 whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(16, 185, 129, 0.5)" }} 
                 whileTap={{ scale: 0.95 }}
-                className="relative"
+                className="relative w-full sm:w-auto"
               >
                 <Button
                   onClick={() => scrollToSection("projects")}
-                  className="relative overflow-hidden bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-8 py-3 text-lg group"
+                  className="relative overflow-hidden bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-6 sm:px-8 py-3 text-base sm:text-lg group w-full"
                 >
                   <span className="relative z-10">Voir mes projets</span>
                   <motion.div
@@ -511,10 +511,11 @@ export default function Portfolio() {
               <motion.div 
                 whileHover={{ scale: 1.05 }} 
                 whileTap={{ scale: 0.95 }}
+                className="w-full sm:w-auto"
               >
                 <Button
                   variant="outline"
-                  className="border-2 border-cyan-600 text-cyan-600 hover:bg-cyan-600 hover:text-white px-8 py-3 text-lg transition-all duration-300"
+                  className="border-2 border-cyan-600 text-cyan-600 hover:bg-cyan-600 hover:text-white px-6 sm:px-8 py-3 text-base sm:text-lg transition-all duration-300 w-full"
                   onClick={() => scrollToSection("contact")}
                 >
                   Me contacter

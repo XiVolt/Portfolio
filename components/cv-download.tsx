@@ -19,11 +19,11 @@ export function CVDownload() {
   } 
 
   return (
-    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
       <Button
         onClick={handleDownload}
         size="lg"
-        className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white shadow-lg"
+        className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white shadow-lg w-full sm:w-auto"
       >
         <motion.div
           animate={{ rotate: [0, 10, -10, 0] }}
@@ -31,7 +31,8 @@ export function CVDownload() {
         >
           <Download className="w-5 h-5 mr-2" />
         </motion.div>
-        Télécharger mon CV
+        <span className="hidden sm:inline">Télécharger mon CV</span>
+        <span className="inline sm:hidden">Mon CV</span>
         <FileText className="w-4 h-4 ml-2" />
       </Button>
     </motion.div>

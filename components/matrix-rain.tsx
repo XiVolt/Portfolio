@@ -1,9 +1,20 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export function MatrixRain() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    // Détection mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -24,7 +35,8 @@ export function MatrixRain() {
     const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン"
     const charArray = chars.split("")
 
-    const fontSize = 14
+    // Réduction du fontSize sur mobile pour moins de charge
+    const fontSize = isMobile ? 20 : 14
     const columns = canvas.width / fontSize
     const drops: number[] = []
 
@@ -33,7 +45,7 @@ export function MatrixRain() {
       drops[i] = Math.random() * -100
     }
 
-    // Animation
+    // Animation - intervalles plus lents sur mobile
     const draw = () => {
       // Fade effect
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)"
@@ -60,18 +72,19 @@ export function MatrixRain() {
       }
     }
 
-    const interval = setInterval(draw, 35)
+    // Intervalle plus lent sur mobile pour économiser la batterie
+    const interval = setInterval(draw, isMobile ? 70 : 35)
 
     return () => {
       clearInterval(interval)
       window.removeEventListener("resize", setCanvasSize)
     }
-  }, [])
+  }, [isMobile])
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-0 opacity-10 dark:opacity-20 pointer-events-none"
+      className="fixed inset-0 z-0 opacity-5 md:opacity-10 dark:md:opacity-20 dark:opacity-10 pointer-events-none"
       style={{ background: "transparent" }}
     />
   )

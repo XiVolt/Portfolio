@@ -11,9 +11,17 @@ interface ParticlesBackgroundProps {
 export function ParticlesBackground({ id = "tsparticles" }: ParticlesBackgroundProps) {
   const { theme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     setMounted(true)
+    // Détection mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
   const particlesInit = useCallback(async (engine: Engine) => {
@@ -25,7 +33,8 @@ export function ParticlesBackground({ id = "tsparticles" }: ParticlesBackgroundP
     console.log("Particles loaded successfully!", container)
   }, [])
 
-  if (!mounted) {
+  // Ne pas afficher les particules sur mobile
+  if (!mounted || isMobile) {
     return null
   }
 

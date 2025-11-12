@@ -6,7 +6,7 @@ export function CyberGrid() {
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
       {/* Horizontal lines */}
-      <svg className="absolute inset-0 w-full h-full opacity-20 dark:opacity-30">
+      <svg className="absolute inset-0 w-full h-full opacity-10 md:opacity-20 dark:md:opacity-30 dark:opacity-15">
         <defs>
           <pattern
             id="grid"
@@ -32,9 +32,9 @@ export function CyberGrid() {
         <rect width="100%" height="100%" fill="url(#grid)" />
       </svg>
 
-      {/* Animated scan lines */}
+      {/* Animated scan lines - désactivé sur mobile */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent h-32"
+        className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent h-32 hidden md:block"
         animate={{
           y: ["-10%", "110%"],
         }}
@@ -45,18 +45,18 @@ export function CyberGrid() {
         }}
       />
 
-      {/* Corner brackets - top left */}
-      <div className="absolute top-8 left-8 w-16 h-16 border-t-2 border-l-2 border-cyan-500/50" />
+      {/* Corner brackets - top left - plus petits sur mobile */}
+      <div className="absolute top-4 left-4 md:top-8 md:left-8 w-8 h-8 md:w-16 md:h-16 border-t-2 border-l-2 border-cyan-500/50" />
       {/* Corner brackets - top right */}
-      <div className="absolute top-8 right-8 w-16 h-16 border-t-2 border-r-2 border-cyan-500/50" />
+      <div className="absolute top-4 right-4 md:top-8 md:right-8 w-8 h-8 md:w-16 md:h-16 border-t-2 border-r-2 border-cyan-500/50" />
       {/* Corner brackets - bottom left */}
-      <div className="absolute bottom-8 left-8 w-16 h-16 border-b-2 border-l-2 border-cyan-500/50" />
+      <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 w-8 h-8 md:w-16 md:h-16 border-b-2 border-l-2 border-cyan-500/50" />
       {/* Corner brackets - bottom right */}
-      <div className="absolute bottom-8 right-8 w-16 h-16 border-b-2 border-r-2 border-cyan-500/50" />
+      <div className="absolute bottom-4 right-4 md:bottom-8 md:right-8 w-8 h-8 md:w-16 md:h-16 border-b-2 border-r-2 border-cyan-500/50" />
 
-      {/* Floating hexagons */}
+      {/* Floating hexagons - masqués sur mobile */}
       <motion.div
-        className="absolute top-1/4 left-1/4 w-24 h-24"
+        className="absolute top-1/4 left-1/4 w-24 h-24 hidden md:block"
         animate={{
           rotate: 360,
           scale: [1, 1.2, 1],
@@ -79,7 +79,7 @@ export function CyberGrid() {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-1/3 right-1/3 w-32 h-32"
+        className="absolute bottom-1/3 right-1/3 w-32 h-32 hidden md:block"
         animate={{
           rotate: -360,
           scale: [1, 1.1, 1],
