@@ -65,26 +65,26 @@ export function MobileMenu({ sections, activeSection, onSectionClick }: MobileMe
 
             {/* Menu Drawer */}
             <motion.div
-              className="fixed top-0 right-0 bottom-0 w-64 bg-background border-l border-border shadow-2xl z-[60] overflow-y-auto"
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
+              className="fixed top-16 right-0 w-64 bg-background border-l border-b border-border shadow-2xl z-[60] rounded-bl-lg"
+              initial={{ x: "100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: "100%", opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
             >
-              <div className="p-6 pt-20 space-y-6">
+              <div className="p-4 flex flex-col">
                 {/* Theme Toggle */}
-                <div className="flex justify-between items-center pb-4 border-b border-border">
+                <div className="flex justify-between items-center pb-3 mb-3 border-b border-border">
                   <span className="text-sm font-medium text-muted-foreground">Thème</span>
                   <ThemeToggle />
                 </div>
 
                 {/* Navigation Links */}
-                <nav className="space-y-2">
+                <nav className="space-y-1.5">
                   {sections.map((section, index) => (
                     <motion.button
                       key={section}
                       onClick={() => handleSectionClick(section)}
-                      className={`w-full text-left px-4 py-3 rounded-lg transition-all ${
+                      className={`w-full text-left px-3 py-2 rounded-lg transition-all text-sm ${
                         activeSection === section
                           ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold shadow-lg"
                           : "text-muted-foreground hover:bg-accent hover:text-foreground"
@@ -101,7 +101,7 @@ export function MobileMenu({ sections, activeSection, onSectionClick }: MobileMe
 
                 {/* Decorative Element */}
                 <motion.div
-                  className="absolute bottom-6 left-6 right-6 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 rounded-full"
+                  className="mt-3 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 rounded-full"
                   animate={{
                     backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                   }}
