@@ -37,6 +37,7 @@ export default function Portfolio() {
   const [formStatus, setFormStatus] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [projectFilter, setProjectFilter] = useState("Tous")
+  const [projectSearch, setProjectSearch] = useState("")
   const [showConfetti, setShowConfetti] = useState(false)
 
   console.log("Portfolio loaded - Version 3.0 with VolturaCode")
@@ -344,25 +345,24 @@ export default function Portfolio() {
     { name: "Travail d'équipe", level: 95, category: "Soft Skills" },
   ]
 
-  const skills = [
-    { name: "HTML5/CSS3/JavaScript", level: "Avancé", icon: <Globe className="w-5 h-5" /> },
-    { name: "Java/Python", level: "Opérationnel", icon: <Code className="w-5 h-5" /> },
-    { name: "Bases de données SQL", level: "Opérationnel", icon: <Database className="w-5 h-5" /> },
-    { name: "Administration Système", level: "Opérationnel", icon: <Server className="w-5 h-5" /> },
-    { name: "Git/GitHub", level: "Opérationnel", icon: <Code className="w-5 h-5" /> },
-    { name: "UI/UX Design", level: "Opérationnel", icon: <Globe className="w-5 h-5" /> },
-    { name: "PHP/Laravel", level: "Avancé", icon: <Globe className="w-5 h-5" /> },
-    { name: "Algorithmique", level: "Opérationnel", icon: <Code className="w-5 h-5" /> },
-    { name: "Travail d'équipe", level: "Avancé", icon: <Code className="w-5 h-5" /> },
-  ]
-
   // Get unique project types for filtering
   const projectTypes = Array.from(new Set(projects.map(p => p.projectType)))
   
-  // Filter projects based on selected filter
-  const filteredProjects = projectFilter === "Tous" 
-    ? projects 
-    : projects.filter(p => p.projectType === projectFilter)
+  // Filter projects based on selected filter AND search query
+  const filteredProjects = projects.filter(p => {
+    // Filtre par type
+    const matchesType = projectFilter === "Tous" || p.projectType === projectFilter
+
+    // Filtre par recherche (titre, description, technologies)
+    const searchLower = projectSearch.toLowerCase().trim()
+    const matchesSearch = !searchLower ||
+      p.title.toLowerCase().includes(searchLower) ||
+      p.description.toLowerCase().includes(searchLower) ||
+      p.technologies.some(tech => tech.toLowerCase().includes(searchLower)) ||
+      p.category.toLowerCase().includes(searchLower)
+
+    return matchesType && matchesSearch
+  })
 
   // Group projects by semester
   const projectsBySemester = filteredProjects.reduce(
@@ -389,7 +389,7 @@ export default function Portfolio() {
   })
 
   return (
-    <div className="min-h-screen bg-background text-foreground transition-colors duration-300 relative">
+    <div id="main-content" className="min-h-screen bg-background text-foreground transition-colors duration-300 relative" role="main">
       {/* Page Loader */}
       <PageLoader />
       
@@ -840,18 +840,42 @@ export default function Portfolio() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold mb-4">Mes Projets</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+              Mes Projets
+            </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Découvrez mes réalisations organisées par semestre et compétences développées.
             </p>
           </motion.div>
 
-          {/* Project Filter */}
-          <ProjectFilter 
+          {/* Project Filter with Search */}
+          <ProjectFilter
             categories={projectTypes}
             activeFilter={projectFilter}
             onFilterChange={setProjectFilter}
+            searchQuery={projectSearch}
+            onSearchChange={setProjectSearch}
           />
+
+          {/* Message si aucun résultat */}
+          {sortedSemesters.length === 0 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-16"
+            >
+              <p className="text-xl text-muted-foreground mb-4">
+                Aucun projet trouvé pour cette recherche.
+              </p>
+              <Button
+                variant="outline"
+                onClick={() => { setProjectSearch(""); setProjectFilter("Tous"); }}
+                className="mt-4"
+              >
+                Réinitialiser les filtres
+              </Button>
+            </motion.div>
+          )}
 
           {/* Projects organized by semester */}
           {sortedSemesters.map((semester, semesterIndex) => (
@@ -862,10 +886,12 @@ export default function Portfolio() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: semesterIndex * 0.1 }}
+      role="region"
+      aria-label={`Projets du ${semester}`}
       >
       <div className="flex items-center mb-8">
-        <div className="flex-1 h-px bg-gradient-to-r from-transparent to-border"></div>
-        <Badge variant="outline" className="mx-4 px-4 py-2 text-sm font-semibold">
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-border"></div>
+        <Badge variant="outline" className="mx-4 px-6 py-2.5 text-sm font-bold border-2 border-cyan-500/50 bg-cyan-500/10">
           {semester}
         </Badge>
         <div className="flex-1 h-px bg-gradient-to-l from-transparent to-border"></div>
@@ -873,94 +899,109 @@ export default function Portfolio() {
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projectsBySemester[semester].map((project, index) => (
-          <motion.div
+          <motion.article
             key={index}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            whileHover={{ y: -10, scale: 1.02 }}
+            whileHover={{ y: -8 }}
+            className="h-full"
           >
-            <Card className="group hover:shadow-2xl hover:shadow-cyan-500/20 hover:border-cyan-500 transition-all duration-300 border-2 bg-card h-full flex flex-col overflow-hidden">
+            <Card className="group hover:shadow-2xl hover:shadow-cyan-500/20 hover:border-cyan-500 transition-all duration-300 border-2 bg-card h-full flex flex-col overflow-hidden focus-within:ring-2 focus-within:ring-cyan-500">
               <CardContent className="p-6 flex flex-col h-full">
-                <div className="relative overflow-hidden rounded-lg mb-4 group/image">
+                {/* Image avec overlay */}
+                <div className="relative overflow-hidden rounded-xl mb-4 group/image">
                   <img
                     src={project.image}
-                    alt={project.title}
+                    alt={`Capture d'écran du projet ${project.title}`}
                     loading="lazy"
-                    className="w-full h-40 object-cover rounded-lg transform group-hover:scale-125 transition-transform duration-500"
+                    className="w-full h-44 object-cover rounded-xl transform group-hover:scale-110 transition-transform duration-500"
                   />
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-t from-cyan-600/90 to-transparent flex items-end justify-center pb-4 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300"
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
+                  {/* Badge catégorie */}
+                  <Badge
+                    className="absolute top-3 left-3 bg-black/70 text-white text-xs backdrop-blur-sm"
+                    aria-label={`Catégorie: ${project.category}`}
+                  >
+                    {project.category}
+                  </Badge>
+                  {/* Overlay au hover */}
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-4 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300"
+                    aria-hidden="true"
                   >
                     <span className="text-white font-bold text-lg flex items-center gap-2">
-                      <ExternalLink className="w-5 h-5" />
+                      <ExternalLink className="w-5 h-5" aria-hidden="true" />
                       Voir le projet
                     </span>
-                  </motion.div>
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">{project.title}</h3>
-                <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
-                {/* Fonctionnalités clés */}
-                <ul className="mb-4 list-disc list-inside text-xs text-foreground/80">
-                  {project.features?.slice(0, 4).map((feature, idx) => (
-                    <li key={idx}>{feature}</li>
+
+                {/* Titre avec style amélioré */}
+                <h3 className="text-xl font-bold mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors line-clamp-2">
+                  {project.title}
+                </h3>
+
+                {/* Description courte */}
+                <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
+                  {project.description}
+                </p>
+
+                {/* Technologies - style amélioré */}
+                <div className="flex flex-wrap gap-1.5 mb-4" role="list" aria-label="Technologies utilisées">
+                  {project.technologies.slice(0, 4).map((tech, idx) => (
+                    <Badge
+                      key={idx}
+                      variant="secondary"
+                      className="text-xs px-2 py-1 bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20"
+                      role="listitem"
+                    >
+                      {tech}
+                    </Badge>
+                  ))}
+                  {project.technologies.length > 4 && (
+                    <Badge variant="secondary" className="text-xs px-2 py-1">
+                      +{project.technologies.length - 4}
+                    </Badge>
+                  )}
+                </div>
+
+                {/* Fonctionnalités clés - version compacte */}
+                <ul className="mb-4 space-y-1 text-xs text-muted-foreground" aria-label="Fonctionnalités clés">
+                  {project.features?.slice(0, 3).map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <span className="text-cyan-500 mt-0.5" aria-hidden="true">✓</span>
+                      <span>{feature}</span>
+                    </li>
                   ))}
                 </ul>
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, idx) => (
-                    <motion.div
-                      key={idx}
-                      whileHover={{ 
-                        rotateY: 180,
-                        scale: 1.1,
-                      }}
-                      transition={{ duration: 0.3 }}
-                      style={{ transformStyle: 'preserve-3d' }}
-                    >
-                      <Badge variant="outline" className="text-xs cursor-pointer">
-                        {tech}
-                      </Badge>
-                    </motion.div>
-                  ))}
-                </div>
-                {/* Bouton Détails et GitHub */}
-                <div className="mt-auto flex flex-wrap gap-2">
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+
+                {/* Boutons CTA - style amélioré */}
+                <div className="mt-auto pt-4 flex flex-wrap gap-3 border-t border-border/50">
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 text-white text-sm font-semibold hover:from-cyan-700 hover:to-blue-700 transition-all shadow-lg hover:shadow-cyan-500/30 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                    aria-label={`Voir les détails du projet ${project.title}`}
                   >
-                    <Link
-                      href={`/projects/${project.slug}`}
-                      className="inline-flex items-center gap-2 mt-2 px-4 py-2 rounded bg-gradient-to-r from-cyan-600 to-blue-600 text-white text-xs font-semibold hover:from-cyan-700 hover:to-blue-700 transition-all shadow-lg hover:shadow-cyan-500/50"
-                    >
-                      Détails
-                      <ExternalLink className="w-3 h-3" />
-                    </Link>
-                  </motion.div>
+                    Voir détails
+                    <ExternalLink className="w-4 h-4" aria-hidden="true" />
+                  </Link>
                   {project.github && (
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
+                    <Link
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border-2 border-gray-300 dark:border-gray-600 text-sm font-semibold hover:bg-gray-100 dark:hover:bg-gray-800 transition-all focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                      aria-label={`Voir le code source sur GitHub pour ${project.title}`}
                     >
-                      <Link
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 mt-2 px-4 py-2 rounded bg-gradient-to-r from-gray-700 to-gray-900 text-white text-xs font-semibold hover:from-gray-800 hover:to-black transition-all shadow-lg hover:shadow-gray-700/50"
-                      >
-                        <Github className="w-3 h-3" />
-                        GitHub
-                      </Link>
-                    </motion.div>
+                      <Github className="w-4 h-4" aria-hidden="true" />
+                      <span className="sr-only sm:not-sr-only">Code</span>
+                    </Link>
                   )}
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
+          </motion.article>
         ))}
       </div>
       </motion.div>
@@ -1232,7 +1273,7 @@ export default function Portfolio() {
       <footer className="bg-slate-950 text-slate-400 py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <p>&copy; 2024 Tristan Bras. Tous droits réservés.</p>
+            <p>&copy; 2026 Tristan Bras. Tous droits réservés.</p>
             <p className="mt-2 text-sm">Étudiant en BUT Informatique - Recherche alternance 18 mois</p>
           </div>
         </div>

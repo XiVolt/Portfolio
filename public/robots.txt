@@ -1,0 +1,12 @@
+# https://www.robotstxt.org/robotstxt.html
+Disallow: /test-form/
+Disallow: /_next/
+Disallow: /api/
+# Disallow admin/private paths
+
+Sitemap: https://tristan-bras.dev/sitemap.xml
+# Sitemap
+
+Allow: /
+User-agent: *
+
