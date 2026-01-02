@@ -152,6 +152,7 @@ export default function Portfolio() {
       semester: "S2 - 2025",
       image: "/bomberman.png",
       features: ["Architecture MVC", "Animations Timeline", "Gestion des explosions", "Interface responsive"],
+    github: "https://github.com/XiVolt/Bomberman",
     },
     {
       title: "Infrastructure Réseau Procyon",
@@ -211,6 +212,33 @@ export default function Portfolio() {
       semester: "Projet Personnel",
       image: "/portfolio.png",
       features: ["Mode sombre/clair", "Animations fluides", "Performance optimisée", "SEO avancé"],
+      github: "https://github.com/XiVolt/Portfolio",
+    },
+    {
+      title: "VolturaCode - Site d'entreprise",
+      slug: "volturacode-website",
+      description:
+        "Développement du site vitrine de mon entreprise VolturaCode, spécialisée dans le développement web et la cybersécurité.",
+      technologies: ["Next.js", "TypeScript", "Tailwind CSS", "React"],
+      category: "Web Development",
+      projectType: "Projets personnels",
+      semester: "Projet Personnel",
+      image: "/Voltura.png",
+      features: ["Design moderne", "Site vitrine responsive", "Présentation des services", "Portfolio client"],
+      github: "https://github.com/XiVolt/voltura-code-site",
+    },
+    {
+      title: "Jeu en C - Développement bas niveau",
+      slug: "jeu-c",
+      description:
+        "Développement d'un jeu en langage C avec gestion de la mémoire, programmation bas niveau et interface console.",
+      technologies: ["C", "Gestion mémoire", "Algorithmique"],
+      category: "Game Development",
+      projectType: "Projets personnels",
+      semester: "Projet Personnel",
+      image: "/placeholder.png",
+      features: ["Programmation bas niveau", "Gestion de la mémoire", "Interface console", "Logique de jeu"],
+      github: "https://github.com/XiVolt/Fracture-UP",
     },
     {
       title: "OnlyFoot - Réseau social football",
@@ -230,6 +258,59 @@ export default function Portfolio() {
         "API Node.js sécurisée",
         "Gestion des images avec Cloudinary"
       ],
+    },
+    {
+      title: "LenSymphony - Synthétiseur Musical Java",
+      slug: "lensymphony-java",
+      description:
+        "Développement d'un synthétiseur musical fonctionnel en Java avec lecture de partitions XML et génération de sons en temps réel.",
+      technologies: ["Java", "XML", "Algorithmique musicale"],
+      category: "Software Development",
+      projectType: "Projets étudiants",
+      semester: "S3 - 2025",
+      image: "/Lensymphony2.png",
+      features: [
+        "Synthétiseur musical complet",
+        "Lecture de partitions XML",
+        "Génération de sons en temps réel",
+        "Interface utilisateur Java",
+      ],github: "https://gitlab.univ-artois.fr/leo_regniez1/lensymphony-groupe-b-4-regniez-leo-bras-tristan-plouvin-nathan-strobbe-theo",
+    },
+    {
+      title: "LenSymphony - Site Web PHP",
+      slug: "lensymphony-php",
+      description:
+        "Développement d'un site web en PHP pour présenter et jouer les musiques créées avec le synthétiseur LenSymphony.",
+      technologies: ["PHP", "Sqlite", "CSS3", "JavaScript"],
+      category: "Web Development",
+      projectType: "Projets étudiants",
+      semester: "S3 - 2025",
+      image: "/Lensymphony.png",
+      features: [
+        "Galerie de musiques",
+        "Lecteur audio intégré",
+        "Interface de présentation",
+        "Base de données MySQL",
+      ],
+        github: "https://gitlab.univ-artois.fr/nathan_plouvin/leo-tristan-theo-nathan-lensymphony-web",
+    },
+    {
+      title: "Marathon du Web - Blog Musical Blues",
+      slug: "marathon-web-blues",
+      description:
+        "Développement d'un site blog dédié au blues lors d'un marathon du web, avec articles, playlists et découverte d'artistes.",
+      technologies: ["PHP", "Sqlite", "CSS3", "JavaScript", "Responsive Design"],
+      category: "Web Development",
+      projectType: "Projets étudiants",
+      semester: "S3 - 2025",
+      image: "/Marathon.png",
+      features: [
+        "Blog musical thématique",
+        "Articles sur le blues",
+        "Playlists et découvertes",
+        "Design responsive",
+      ],
+        github: "https://gitlab.univ-artois.fr/nathan_plouvin/code-marathon-2025-groupe-10",
     },
   ]
 
@@ -295,6 +376,17 @@ export default function Portfolio() {
     },
     {} as Record<string, typeof projects>,
   )
+
+  // Ordre des semestres : S1, S2, S3, puis Projets Personnels à la fin
+  const semesterOrder = ["S1 - 2024", "S2 - 2025", "S3 - 2025", "Projet Personnel"]
+  const sortedSemesters = Object.keys(projectsBySemester).sort((a, b) => {
+    const indexA = semesterOrder.indexOf(a)
+    const indexB = semesterOrder.indexOf(b)
+    // Si pas dans la liste, mettre à la fin
+    const orderA = indexA === -1 ? semesterOrder.length : indexA
+    const orderB = indexB === -1 ? semesterOrder.length : indexB
+    return orderA - orderB
+  })
 
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-300 relative">
@@ -762,7 +854,7 @@ export default function Portfolio() {
           />
 
           {/* Projects organized by semester */}
-          {Object.entries(projectsBySemester).map(([semester, semesterProjects], semesterIndex) => (
+          {sortedSemesters.map((semester, semesterIndex) => (
       <motion.div
       key={semester}
       className="mb-16"
@@ -780,7 +872,7 @@ export default function Portfolio() {
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {semesterProjects.map((project, index) => (
+        {projectsBySemester[semester].map((project, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 20 }}
@@ -835,8 +927,8 @@ export default function Portfolio() {
                     </motion.div>
                   ))}
                 </div>
-                {/* Bouton Détails */}
-                <div className="mt-auto">
+                {/* Bouton Détails et GitHub */}
+                <div className="mt-auto flex flex-wrap gap-2">
                   <motion.div
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -849,6 +941,22 @@ export default function Portfolio() {
                       <ExternalLink className="w-3 h-3" />
                     </Link>
                   </motion.div>
+                  {project.github && (
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Link
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 mt-2 px-4 py-2 rounded bg-gradient-to-r from-gray-700 to-gray-900 text-white text-xs font-semibold hover:from-gray-800 hover:to-black transition-all shadow-lg hover:shadow-gray-700/50"
+                      >
+                        <Github className="w-3 h-3" />
+                        GitHub
+                      </Link>
+                    </motion.div>
+                  )}
                 </div>
               </CardContent>
             </Card>

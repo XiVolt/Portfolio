@@ -419,6 +419,222 @@ WHERE annee BETWEEN 2010 AND 2024;`,
       },
     ],
   },
+  "volturacode-website": {
+    title: "VolturaCode - Site d'entreprise",
+    description:
+      "Développement du site vitrine de mon entreprise VolturaCode, spécialisée dans le développement web et la cybersécurité.",
+    longDescription: `VolturaCode est mon entreprise spécialisée dans le développement web et la cybersécurité. J'ai développé le site vitrine pour présenter les services proposés, le portfolio des projets clients et les informations de contact.
+
+Le site a été réalisé avec Next.js et TypeScript pour garantir des performances optimales et une excellente expérience utilisateur. Le design moderne et responsive s'adapte à tous les appareils.`,
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "React"],
+    category: "Web Development",
+    images: ["/Voltura.png"],
+    features: [
+      "Design moderne et professionnel",
+      "Site vitrine responsive",
+      "Présentation des services",
+      "Portfolio client",
+      "Formulaire de contact",
+      "Optimisation SEO",
+    ],
+    challenges: [
+      "Création d'une identité visuelle forte",
+      "Optimisation des performances",
+      "Design responsive multi-appareils",
+      "Intégration du formulaire de contact",
+    ],
+    results: [
+      "Site professionnel opérationnel",
+      "Visibilité en ligne améliorée",
+      "Acquisition de nouveaux clients",
+    ],
+  },
+  "jeu-c": {
+    title: "Jeu en C - Développement bas niveau",
+    description:
+      "Développement d'un jeu en langage C avec gestion de la mémoire, programmation bas niveau et interface console.",
+    longDescription: `Ce projet personnel m'a permis d'approfondir mes connaissances en programmation bas niveau avec le langage C. Le jeu inclut une gestion manuelle de la mémoire, des structures de données optimisées et une interface console interactive.
+
+J'ai travaillé sur l'algorithmique, la gestion des pointeurs, et l'optimisation des performances pour créer un jeu fluide malgré les contraintes du langage C.`,
+    technologies: ["C", "Gestion mémoire", "Algorithmique"],
+    category: "Game Development",
+    images: ["/placeholder.png"],
+    features: [
+      "Programmation bas niveau en C",
+      "Gestion manuelle de la mémoire",
+      "Interface console interactive",
+      "Logique de jeu optimisée",
+      "Structures de données personnalisées",
+      "Makefile pour la compilation",
+    ],
+    challenges: [
+      "Gestion des fuites de mémoire",
+      "Optimisation des performances",
+      "Débogage bas niveau",
+      "Interface console attrayante",
+    ],
+    results: [
+      "Jeu fonctionnel et stable",
+      "Maîtrise partiel du C",
+      "Compréhension de la gestion mémoire",
+    ],
+    codeExamples: [
+      {
+        title: "Exemple de gestion de la mémoire",
+        code: `// Allocation dynamique sécurisée
+Player* create_player(const char* name) {
+    Player* player = (Player*)malloc(sizeof(Player));
+    if (player == NULL) {
+        fprintf(stderr, "Erreur d'allocation mémoire\\n");
+        exit(EXIT_FAILURE);
+    }
+    strncpy(player->name, name, MAX_NAME_LENGTH);
+    player->score = 0;
+    return player;
+}
+
+// Libération de la mémoire
+void free_player(Player* player) {
+    if (player != NULL) {
+        free(player);
+    }
+}`,
+      },
+    ],
+  },
+  "lensymphony-java": {
+    title: "LenSymphony - Synthétiseur Musical Java",
+    description:
+      "Développement d'un synthétiseur musical fonctionnel en Java avec lecture de partitions XML et génération de sons en temps réel.",
+    longDescription: `LenSymphony est un projet de synthétiseur musical développé en Java dans le cadre du semestre 3. Le programme permet de lire des partitions musicales au format XML et de générer les sons correspondants en temps réel.
+
+Le projet utilise l'API JavaSound pour la génération audio et implémente des algorithmes de synthèse sonore pour reproduire différents instruments. L'interface utilisateur permet de charger des partitions, contrôler la lecture et ajuster les paramètres du synthétiseur.`,
+    technologies: ["Java", "XML", "Algorithmique musicale"],
+    category: "Software Development",
+    images: ["/Lensymphony2.png"],
+    features: [
+      "Synthétiseur musical complet",
+      "Lecture de partitions XML",
+      "Génération de sons en temps réel",
+      "Interface utilisateur Java Swing",
+      "Support de plusieurs instruments",
+      "Contrôles de tempo et volume",
+    ],
+    challenges: [
+      "Implémentation des algorithmes de synthèse audio",
+      "Parsing des fichiers XML musicaux",
+      "Synchronisation temps réel de la lecture",
+      "Gestion des ressources audio",
+    ],
+    results: [
+      "Synthétiseur fonctionnel",
+      "Lecture précise des partitions",
+      "Interface utilisateur intuitive",
+    ],
+    codeExamples: [
+      {
+        title: "Lecture de partition XML",
+        code: `// Parsing d'une partition XML
+public Partition parseXML(String filepath) {
+    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    DocumentBuilder builder = factory.newDocumentBuilder();
+    Document doc = builder.parse(new File(filepath));
+    
+    NodeList notes = doc.getElementsByTagName("note");
+    for (int i = 0; i < notes.getLength(); i++) {
+        Element note = (Element) notes.item(i);
+        String pitch = note.getElementsByTagName("pitch").item(0).getTextContent();
+        int duration = Integer.parseInt(note.getElementsByTagName("duration").item(0).getTextContent());
+        partition.addNote(new Note(pitch, duration));
+    }
+    return partition;
+}`,
+      },
+    ],
+  },
+  "lensymphony-php": {
+    title: "LenSymphony - Site Web PHP",
+    description:
+      "Développement d'un site web en PHP pour présenter et jouer les musiques créées avec le synthétiseur LenSymphony.",
+    longDescription: `Ce projet est la deuxième partie de LenSymphony, un site web développé en PHP qui permet de présenter et écouter les musiques créées avec le synthétiseur Java.
+
+Le site propose une galerie de musiques, un lecteur audio intégré, et une interface de présentation des compositions. La base de données MySQL stocke les informations des musiques et des utilisateurs.`,
+    technologies: ["PHP", "Sqlite", "CSS3", "JavaScript"],
+    category: "Web Development",
+    images: ["/Lensymphony.png"],
+    features: [
+      "Galerie de musiques",
+      "Lecteur audio intégré",
+      "Interface de présentation",
+      "Base de données MySQL",
+      "Gestion des utilisateurs",
+      "Upload de fichiers audio",
+    ],
+    challenges: [
+      "Intégration du lecteur audio",
+      "Gestion des fichiers multimédias",
+      "Sécurisation des uploads",
+      "Design responsive",
+    ],
+    results: [
+      "Site web fonctionnel",
+      "Galerie musicale complète",
+      "Expérience utilisateur fluide",
+    ],
+    codeExamples: [
+      {
+        title: "Récupération des musiques depuis MySQL",
+        code: `<?php
+// Récupération des musiques depuis la base de données
+function getMusiques($pdo) {
+    $stmt = $pdo->prepare("SELECT * FROM musiques ORDER BY date_creation DESC");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// Affichage des musiques
+$musiques = getMusiques($pdo);
+foreach ($musiques as $musique) {
+    echo "<div class='musique-card'>";
+    echo "<h3>" . htmlspecialchars($musique['titre']) . "</h3>";
+    echo "<audio controls src='" . htmlspecialchars($musique['fichier']) . "'></audio>";
+    echo "</div>";
+}
+?>`,
+      },
+    ],
+  },
+  "marathon-web-blues": {
+    title: "Marathon du Web - Blog Musical Blues",
+    description:
+      "Développement d'un site blog dédié au blues lors d'un marathon du web, avec articles, playlists et découverte d'artistes.",
+    longDescription: `Ce projet a été réalisé lors d'un marathon du web, un événement intensif de développement web. L'objectif était de créer un blog musical dédié au blues en un temps limité.
+
+Le site propose des articles sur l'histoire du blues, des playlists thématiques, et des fiches sur les artistes légendaires du genre. Le design responsive s'adapte à tous les appareils.`,
+    technologies: ["PHP", "Sqlite", "CSS3", "JavaScript", "Responsive Design"],
+    category: "Web Development",
+    images: ["/Marathon.png"],
+    features: [
+      "Blog musical thématique",
+      "Articles sur le blues",
+      "Design responsive",
+      "Comptes utilisateurs",
+      "Système de commentaires",
+      "Suggestion d'utilisateurs'",
+      "Navigation intuitive",
+    ],
+    challenges: [
+      "Développement en temps limité",
+      "Création du frontend",
+      "Design attractif et cohérent",
+      "Optimisation backend",
+    ],
+    results: [
+      "Blog fonctionnel livré dans les temps",
+      "Contenu riche sur le blues",
+      "Design moderne et responsive",
+    ],
+  },
 }
 
 export default function ProjectDetail() {
