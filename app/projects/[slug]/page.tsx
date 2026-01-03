@@ -6,644 +6,28 @@ import Link from "next/link"
 import { useParams } from "next/navigation"
 import { ParticlesBackground } from "@/components/particles-background"
 import { ThemeToggle } from "@/components/theme-toggle"
-
-type Project = {
-  title: string
-  description: string
-  longDescription: string
-  technologies: string[]
-  category: string
-  images: string[]
-  features: string[]
-  challenges?: string[]
-  results?: string[]
-  codeExamples?: { title: string; code: string }[]
-}
-const projectsData: Record<string, Project> = {
-  biosymphonie: {
-    title: "BioSymphonie - Site Web Écoresponsable",
-    description:
-      "Création complète d'un site web pour une entreprise d'événements écoresponsables dans le cadre de la SAE 1.5. Le projet incluait la conception, le développement et l'intégration de fonctionnalités avancées.",
-    longDescription: `Ce projet consistait à créer un site web complet pour BioSymphonie, une entreprise fictive spécialisée dans l'organisation d'événements écoresponsables. 
-
-Le site devait répondre aux besoins spécifiques du client avec une approche moderne et respectueuse de l'environnement. J'ai travaillé sur tous les aspects du développement, de la conception à la mise en ligne.`,
-    technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "RGPD"],
-    category: "Web Development",
-    images: ["/biosymphonie.png"],
-    features: [
-      "Navigation multilingue (Français/Anglais)",
-      "Design responsive adaptatif",
-      "Carousel d'images interactif",
-      "Formulaire de contact fonctionnel",
-      "Conformité RGPD avec banner cookies",
-      "Optimisation SEO",
-      "Animations CSS fluides",
-      "Structure HTML5 sémantique",
-    ],
-    challenges: [
-      "Implémentation de la navigation multilingue",
-      "Optimisation des performances sur mobile",
-      "Respect des normes d'accessibilité WCAG",
-      "Intégration des contraintes RGPD",
-    ],
-    results: [
-      "Site 100% responsive sur tous appareils",
-      "Temps de chargement optimisé < 2s",
-      "Navigation fluide et intuitive",
-      "Conformité légale complète",
-    ],
-    codeExamples: [
-      {
-        title: "Navigation Multilingue",
-        code: `<!-- Système de navigation multilingue -->
-<div class="langue">
-  <a href="corrigé.html" title="Français">
-    <img src="Images/france.png" alt="Français" class="flag">
-  </a>
-  <a href="anglais.html" title="English">
-    <img src="Images/uk.png" alt="English" class="flag">
-  </a>
-</div>`,
-      },
-      {
-        title: "Navigation Responsive",
-        code: `// Navigation qui s'adapte au scroll
-let lastScrollY = window.scrollY;
-
-window.addEventListener("scroll", () => {
-  const header = document.querySelector("header");
-  const currentScrollY = window.scrollY;
-  
-  if (currentScrollY > lastScrollY) {
-    header.classList.add("hidden");
-  } else {
-    header.classList.remove("hidden");
-  }
-  lastScrollY = currentScrollY;
-});`,
-      },
-    ],
-  },
-  echecs: {
-    title: "Jeu d'Échecs Interactif",
-    description:
-      "Application web de jeu d'échecs développée lors de la SAE 1.01 avec interface graphique complète et logique de jeu avancée.",
-    longDescription: `Développement d'une application complète de jeu d'échecs avec interface web interactive. Le projet incluait la programmation de toute la logique de jeu, la gestion des règles d'échecs et une interface utilisateur intuitive.`,
-    technologies: ["Java", "JavaFX", "Interface Web", "Logique de jeu"],
-    category: "Game Development",
-    images: ["/echecs.png"],
-    features: [
-      "Interface graphique complète",
-      "Gestion des tours de jeu",
-      "Système de promotion des pions",
-      "Validation des mouvements",
-      "Messages d'erreur appropriés",
-      "Gestion du temps de jeu",
-      "Interface web responsive",
-    ],
-    challenges: [
-      "Implémentation des règles complexes d'échecs",
-      "Gestion des cas spéciaux (roque, en passant)",
-      "Optimisation de l'interface utilisateur",
-      "Validation en temps réel des mouvements",
-    ],
-    results: [
-      "Jeu d'échecs entièrement fonctionnel",
-      "Interface intuitive et responsive",
-      "Respect complet des règles officielles",
-      "Performance optimisée",
-    ],
-  },
-  bomberman: {
-    title: "Bomberman - Jeu 2D JavaFX",
-    description:
-      "Développement d'un jeu Bomberman complet avec architecture MVC, animations fluides et système de jeu avancé.",
-    longDescription: `Création d'un jeu Bomberman en JavaFX avec une architecture MVC robuste. Le projet incluait la gestion des personnages, des explosions, des animations et une interface utilisateur complète.`,
-    technologies: ["JavaFX", "MVC Pattern", "Animation", "Observer Pattern"],
-    category: "Game Development",
-    images: ["/bomberman.png"],
-    features: [
-      "Architecture MVC complète",
-      "Animations Timeline fluides",
-      "Gestion des explosions",
-      "Interface responsive",
-      "Observer Pattern pour la réactivité",
-      "Binding JavaFX avancé",
-      "Thread-safety avec Platform.runLater",
-    ],
-    codeExamples: [
-      {
-        title: "Gestion des Explosions",
-        code: `@Override
-public void showExplosion(List<Tile> tiles) {
-  Platform.runLater(() -> {
-    for(Tile tile : tiles) {
-      StackPane container = getTileContainer(tile.getRow(), tile.getColumn());
-      if(container != null) {
-        ImageView explosion = new ImageView(loadImage("/explosion.png", 48, 48));
-        container.getChildren().add(explosion);
-        
-        // Animation avec timeline
-        new Timeline(
-          new KeyFrame(Duration.seconds(0.5),
-            e -> container.getChildren().remove(explosion))
-        ).play();
-      }
-    }
-  });
-}`,
-      },
-    ],
-  },
-  procyon: {
-    title: "Infrastructure Réseau Procyon",
-    description:
-      "Configuration complète d'une infrastructure réseau avec services DNS/Web, sécurisation et haute disponibilité dans le cadre de la SAE 2.03.",
-    longDescription: `Ce projet consistait à configurer une infrastructure réseau complète pour l'entreprise fictive Procyon. 
-
-L'objectif était de mettre en place une architecture réseau robuste avec des services DNS maître/esclave, des serveurs web Apache avec virtual hosts, et une sécurisation complète par zones.
-
-J'ai travaillé sur la configuration des serveurs Linux, l'implémentation des services réseau et la sécurisation de l'ensemble de l'infrastructure.`,
-    technologies: ["Linux", "DNS (BIND)", "Apache", "IPv4/IPv6", "Sécurité"],
-    category: "System Administration",
-    images: ["/setup.png"],
-    features: [
-      "Configuration DNS maître/esclave",
-      "Virtual hosts Apache multiples",
-      "Sécurisation par zones réseau",
-      "Haute disponibilité des services",
-      "Gestion des certificats SSL",
-      "Monitoring des services",
-      "Configuration IPv4/IPv6",
-      "Pare-feu et règles de sécurité",
-    ],
-    challenges: [
-      "Configuration complexe du DNS BIND",
-      "Synchronisation maître/esclave",
-      "Sécurisation des communications",
-      "Gestion des certificats SSL",
-    ],
-    results: [
-      "Infrastructure 100% opérationnelle",
-      "Haute disponibilité garantie",
-      "Sécurité renforcée",
-      "Performance optimisée",
-    ],
-    codeExamples: [
-      {
-        title: "Configuration DNS BIND",
-        code: `// Configuration zone DNS
-zone "procyon.local" {
-    type master;
-    file "/etc/bind/db.procyon.local";
-    allow-transfer { 192.168.1.11; };
-};
-
-// Fichier de zone
-$TTL    604800
-@       IN      SOA     ns1.procyon.local. admin.procyon.local. (
-                        2024010101      ; Serial
-                        604800          ; Refresh
-                        86400           ; Retry
-                        2419200         ; Expire
-                        604800 )        ; Negative Cache TTL
-
-@       IN      NS      ns1.procyon.local.
-@       IN      A       192.168.1.10
-www     IN      A       192.168.1.10`,
-      },
-    ],
-  },
-  "algorithmes-tri": {
-    title: "Analyse d'Algorithmes de Tri - Optimisation Performance",
-    description:
-      "Projet d'analyse comparative de performance entre différents algorithmes de tri avec mesures de complexité temporelle et optimisations.",
-    longDescription: `Ce projet consistait à implémenter et analyser les performances de différents algorithmes de tri : Tri Fusion, Tri Rapide, et Tri à Bulles.
-
-L'objectif était de mesurer et comparer les performances de ces algorithmes sur différentes tailles de données, d'analyser leur complexité temporelle et spatiale, et d'optimiser leur implémentation.
-
-J'ai développé un framework de test complet avec mesures de performance en temps réel et génération de rapports d'analyse.`,
-    technologies: ["Java", "Algorithmique", "Analyse de Performance", "Tests Unitaires"],
-    category: "Algorithm Analysis",
-    images: ["/tri.png"],
-    features: [
-      "Implémentation Tri Fusion O(n log n)",
-      "Tri Rapide avec pivot optimisé",
-      "Mesures de performance temps réel",
-      "Analyse comparative sur grandes données",
-      "Génération de graphiques de performance",
-      "Tests unitaires complets",
-      "Optimisations mémoire",
-      "Rapport d'analyse détaillé",
-    ],
-    challenges: [
-      "Optimisation du Tri Rapide",
-      "Gestion mémoire pour grandes données",
-      "Mesures précises de performance",
-      "Analyse statistique des résultats",
-    ],
-    results: [
-      "Tri Fusion 40% plus rapide que l'implémentation standard",
-      "Tri Rapide optimisé pour éviter le pire cas",
-      "Framework de test réutilisable",
-      "Documentation complète des performances",
-    ],
-    codeExamples: [
-      {
-        title: "Tri Fusion Optimisé",
-        code: `public static void mergeSort(int[] arr, int left, int right) {
-    if (left < right) {
-        int mid = left + (right - left) / 2;
-        
-        // Tri récursif des deux moitiés
-        mergeSort(arr, left, mid);
-        mergeSort(arr, mid + 1, right);
-        
-        // Fusion des deux moitiés triées
-        merge(arr, left, mid, right);
-    }
-}
-
-private static void merge(int[] arr, int left, int mid, int right) {
-    int[] temp = new int[right - left + 1];
-    int i = left, j = mid + 1, k = 0;
-    
-    while (i <= mid && j <= right) {
-        temp[k++] = (arr[i] <= arr[j]) ? arr[i++] : arr[j++];
-    }
-    
-    while (i <= mid) temp[k++] = arr[i++];
-    while (j <= right) temp[k++] = arr[j++];
-    
-    System.arraycopy(temp, 0, arr, left, temp.length);
-}`,
-      },
-    ],
-  },
-  "base-de-donnees": {
-    title: "Base de Données Démographique",
-    description:
-      "Conception et exploitation d'une base de données relationnelle complexe avec modélisation hiérarchique et requêtes optimisées.",
-    longDescription: `Ce projet consistait à concevoir et implémenter une base de données relationnelle complète pour gérer des données démographiques complexes.
-
-L'objectif était de créer un modèle de données hiérarchique avec des relations complexes, d'optimiser les requêtes pour de gros volumes de données, et d'assurer la sécurité et l'intégrité des données.
-
-J'ai travaillé sur la modélisation conceptuelle, l'implémentation physique, et l'optimisation des performances avec PostgreSQL.`,
-    technologies: ["SQL", "PostgreSQL", "Modélisation", "Optimisation"],
-    category: "Database",
-    images: ["/bd.png"],
-    features: [
-      "Modélisation hiérarchique complexe",
-      "Jointures optimisées multi-tables",
-      "Requêtes sécurisées avec paramètres",
-      "Protection des données sensibles",
-      "Index optimisés pour performance",
-      "Procédures stockées avancées",
-      "Triggers pour intégrité référentielle",
-      "Sauvegarde et restauration automatisées",
-    ],
-    challenges: [
-      "Modélisation de relations complexes",
-      "Optimisation des requêtes lourdes",
-      "Gestion de la sécurité des données",
-      "Performance sur gros volumes",
-    ],
-    results: [
-      "Base de données normalisée 3NF",
-      "Requêtes optimisées < 100ms",
-      "Sécurité renforcée des accès",
-      "Intégrité des données garantie",
-    ],
-    codeExamples: [
-      {
-        title: "Requête Optimisée avec Jointures",
-        code: `-- Requête optimisée pour récupérer les statistiques démographiques
-SELECT 
-    r.nom_region,
-    d.nom_departement,
-    c.nom_commune,
-    p.annee,
-    p.population_totale,
-    p.population_masculine,
-    p.population_feminine,
-    ROUND((p.population_feminine::decimal / p.population_totale) * 100, 2) as pourcentage_femmes
-FROM population p
-INNER JOIN communes c ON p.id_commune = c.id_commune
-INNER JOIN departements d ON c.id_departement = d.id_departement  
-INNER JOIN regions r ON d.id_region = r.id_region
-WHERE p.annee BETWEEN $1 AND $2
-    AND r.nom_region = $3
-ORDER BY p.population_totale DESC
-LIMIT 20;
-
--- Index pour optimiser cette requête
-CREATE INDEX idx_population_annee_region ON population(annee) 
-WHERE annee BETWEEN 2010 AND 2024;`,
-      },
-    ],
-  },
-  "portfolio-nextjs": {
-    title: "Portfolio Personnel - Next.js",
-    description:
-      "Développement de ce portfolio avec Next.js, animations Framer Motion, mode sombre/clair et optimisations performance.",
-    longDescription: `Ce projet est le site que vous consultez actuellement. Il a été réalisé avec Next.js, TypeScript, Tailwind CSS et Framer Motion pour les animations. Il inclut un mode sombre/clair, une gestion avancée de l'accessibilité, et des optimisations SEO et performance.`,
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    category: "Web Development",
-    images: ["/portfolio.png"],
-    features: [
-      "Mode sombre/clair",
-      "Animations fluides",
-      "Performance optimisée",
-      "SEO avancé",
-      "Responsive design",
-      "Accessibilité renforcée",
-    ],
-    challenges: [
-      "Mise en place du mode sombre/clair avec next-themes",
-      "Animations complexes avec Framer Motion",
-      "Optimisation Lighthouse",
-      "Déploiement sur Vercel",
-    ],
-    results: [
-      "Portfolio moderne et performant",
-      "Expérience utilisateur fluide",
-      "Bonne visibilité SEO",
-    ],
-    codeExamples: [
-      {
-        title: "Exemple d'animation Framer Motion",
-        code: `<motion.div
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6 }}
->
-  {/* Contenu animé */}
-</motion.div>`,
-      },
-    ],
-  },
-  onlyfoot: {
-    title: "Onlyfoot - Réseau social football",
-    description:
-      "Site web communautaire sur le football : partage de photos, profils utilisateurs, commentaires, likes et base de données PostgreSQL.",
-    longDescription: `Onlyfoot est un réseau social dédié aux passionnés de football. Les utilisateurs peuvent créer un profil, publier des photos, commenter et liker les publications des autres membres. Le backend est réalisé en Node.js avec Express et la base de données PostgreSQL. Les images sont stockées sur Cloudinary.`,
-    technologies: ["React", "Node.js", "Express", "PostgreSQL", "SQL", "Cloudinary"],
-    category: "Web Development",
-    images: ["/onlyfoot.png"],
-    features: [
-      "Création de profils utilisateurs",
-      "Publication de photos de football",
-      "Commentaires et likes sur les posts",
-      "Base de données relationnelle PostgreSQL",
-      "API Node.js sécurisée",
-      "Gestion des images avec Cloudinary",
-    ],
-    challenges: [
-      "Authentification sécurisée",
-      "Gestion des fichiers images",
-      "Relations complexes en SQL",
-      "Déploiement fullstack",
-    ],
-    results: [
-      "Communauté active",
-      "Expérience utilisateur moderne",
-      "Sécurité et performance",
-    ],
-    codeExamples: [
-      {
-        title: "Exemple de route Express pour poster une image",
-        code: `app.post("/api/posts", upload.single("image"), async (req, res) => {
-  // Sauvegarde de l'image sur Cloudinary et enregistrement en base
-  // ...
-});`,
-      },
-    ],
-  },
-  "volturacode-website": {
-    title: "VolturaCode - Site d'entreprise",
-    description:
-      "Développement du site vitrine de mon entreprise VolturaCode, spécialisée dans le développement web et la cybersécurité.",
-    longDescription: `VolturaCode est mon entreprise spécialisée dans le développement web et la cybersécurité. J'ai développé le site vitrine pour présenter les services proposés, le portfolio des projets clients et les informations de contact.
-
-Le site a été réalisé avec Next.js et TypeScript pour garantir des performances optimales et une excellente expérience utilisateur. Le design moderne et responsive s'adapte à tous les appareils.`,
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "React"],
-    category: "Web Development",
-    images: ["/Voltura.png"],
-    features: [
-      "Design moderne et professionnel",
-      "Site vitrine responsive",
-      "Présentation des services",
-      "Portfolio client",
-      "Formulaire de contact",
-      "Optimisation SEO",
-    ],
-    challenges: [
-      "Création d'une identité visuelle forte",
-      "Optimisation des performances",
-      "Design responsive multi-appareils",
-      "Intégration du formulaire de contact",
-    ],
-    results: [
-      "Site professionnel opérationnel",
-      "Visibilité en ligne améliorée",
-      "Acquisition de nouveaux clients",
-    ],
-  },
-  "jeu-c": {
-    title: "Jeu en C - Développement bas niveau",
-    description:
-      "Développement d'un jeu en langage C avec gestion de la mémoire, programmation bas niveau et interface console.",
-    longDescription: `Ce projet personnel m'a permis d'approfondir mes connaissances en programmation bas niveau avec le langage C. Le jeu inclut une gestion manuelle de la mémoire, des structures de données optimisées et une interface console interactive.
-
-J'ai travaillé sur l'algorithmique, la gestion des pointeurs, et l'optimisation des performances pour créer un jeu fluide malgré les contraintes du langage C.`,
-    technologies: ["C", "Gestion mémoire", "Algorithmique"],
-    category: "Game Development",
-    images: ["/placeholder.png"],
-    features: [
-      "Programmation bas niveau en C",
-      "Gestion manuelle de la mémoire",
-      "Interface console interactive",
-      "Logique de jeu optimisée",
-      "Structures de données personnalisées",
-      "Makefile pour la compilation",
-    ],
-    challenges: [
-      "Gestion des fuites de mémoire",
-      "Optimisation des performances",
-      "Débogage bas niveau",
-      "Interface console attrayante",
-    ],
-    results: [
-      "Jeu fonctionnel et stable",
-      "Maîtrise partiel du C",
-      "Compréhension de la gestion mémoire",
-    ],
-    codeExamples: [
-      {
-        title: "Exemple de gestion de la mémoire",
-        code: `// Allocation dynamique sécurisée
-Player* create_player(const char* name) {
-    Player* player = (Player*)malloc(sizeof(Player));
-    if (player == NULL) {
-        fprintf(stderr, "Erreur d'allocation mémoire\\n");
-        exit(EXIT_FAILURE);
-    }
-    strncpy(player->name, name, MAX_NAME_LENGTH);
-    player->score = 0;
-    return player;
-}
-
-// Libération de la mémoire
-void free_player(Player* player) {
-    if (player != NULL) {
-        free(player);
-    }
-}`,
-      },
-    ],
-  },
-  "lensymphony-java": {
-    title: "LenSymphony - Synthétiseur Musical Java",
-    description:
-      "Développement d'un synthétiseur musical fonctionnel en Java avec lecture de partitions XML et génération de sons en temps réel.",
-    longDescription: `LenSymphony est un projet de synthétiseur musical développé en Java dans le cadre du semestre 3. Le programme permet de lire des partitions musicales au format XML et de générer les sons correspondants en temps réel.
-
-Le projet utilise l'API JavaSound pour la génération audio et implémente des algorithmes de synthèse sonore pour reproduire différents instruments. L'interface utilisateur permet de charger des partitions, contrôler la lecture et ajuster les paramètres du synthétiseur.`,
-    technologies: ["Java", "XML", "Algorithmique musicale"],
-    category: "Software Development",
-    images: ["/Lensymphony2.png"],
-    features: [
-      "Synthétiseur musical complet",
-      "Lecture de partitions XML",
-      "Génération de sons en temps réel",
-      "Interface utilisateur Java Swing",
-      "Support de plusieurs instruments",
-      "Contrôles de tempo et volume",
-    ],
-    challenges: [
-      "Implémentation des algorithmes de synthèse audio",
-      "Parsing des fichiers XML musicaux",
-      "Synchronisation temps réel de la lecture",
-      "Gestion des ressources audio",
-    ],
-    results: [
-      "Synthétiseur fonctionnel",
-      "Lecture précise des partitions",
-      "Interface utilisateur intuitive",
-    ],
-    codeExamples: [
-      {
-        title: "Lecture de partition XML",
-        code: `// Parsing d'une partition XML
-public Partition parseXML(String filepath) {
-    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(new File(filepath));
-    
-    NodeList notes = doc.getElementsByTagName("note");
-    for (int i = 0; i < notes.getLength(); i++) {
-        Element note = (Element) notes.item(i);
-        String pitch = note.getElementsByTagName("pitch").item(0).getTextContent();
-        int duration = Integer.parseInt(note.getElementsByTagName("duration").item(0).getTextContent());
-        partition.addNote(new Note(pitch, duration));
-    }
-    return partition;
-}`,
-      },
-    ],
-  },
-  "lensymphony-php": {
-    title: "LenSymphony - Site Web PHP",
-    description:
-      "Développement d'un site web en PHP pour présenter et jouer les musiques créées avec le synthétiseur LenSymphony.",
-    longDescription: `Ce projet est la deuxième partie de LenSymphony, un site web développé en PHP qui permet de présenter et écouter les musiques créées avec le synthétiseur Java.
-
-Le site propose une galerie de musiques, un lecteur audio intégré, et une interface de présentation des compositions. La base de données MySQL stocke les informations des musiques et des utilisateurs.`,
-    technologies: ["PHP", "Sqlite", "CSS3", "JavaScript"],
-    category: "Web Development",
-    images: ["/Lensymphony.png"],
-    features: [
-      "Galerie de musiques",
-      "Lecteur audio intégré",
-      "Interface de présentation",
-      "Base de données MySQL",
-      "Gestion des utilisateurs",
-      "Upload de fichiers audio",
-    ],
-    challenges: [
-      "Intégration du lecteur audio",
-      "Gestion des fichiers multimédias",
-      "Sécurisation des uploads",
-      "Design responsive",
-    ],
-    results: [
-      "Site web fonctionnel",
-      "Galerie musicale complète",
-      "Expérience utilisateur fluide",
-    ],
-    codeExamples: [
-      {
-        title: "Récupération des musiques depuis MySQL",
-        code: `<?php
-// Récupération des musiques depuis la base de données
-function getMusiques($pdo) {
-    $stmt = $pdo->prepare("SELECT * FROM musiques ORDER BY date_creation DESC");
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-// Affichage des musiques
-$musiques = getMusiques($pdo);
-foreach ($musiques as $musique) {
-    echo "<div class='musique-card'>";
-    echo "<h3>" . htmlspecialchars($musique['titre']) . "</h3>";
-    echo "<audio controls src='" . htmlspecialchars($musique['fichier']) . "'></audio>";
-    echo "</div>";
-}
-?>`,
-      },
-    ],
-  },
-  "marathon-web-blues": {
-    title: "Marathon du Web - Blog Musical Blues",
-    description:
-      "Développement d'un site blog dédié au blues lors d'un marathon du web, avec articles, playlists et découverte d'artistes.",
-    longDescription: `Ce projet a été réalisé lors d'un marathon du web, un événement intensif de développement web. L'objectif était de créer un blog musical dédié au blues en un temps limité.
-
-Le site propose des articles sur l'histoire du blues, des playlists thématiques, et des fiches sur les artistes légendaires du genre. Le design responsive s'adapte à tous les appareils.`,
-    technologies: ["PHP", "Sqlite", "CSS3", "JavaScript", "Responsive Design"],
-    category: "Web Development",
-    images: ["/Marathon.png"],
-    features: [
-      "Blog musical thématique",
-      "Articles sur le blues",
-      "Design responsive",
-      "Comptes utilisateurs",
-      "Système de commentaires",
-      "Suggestion d'utilisateurs'",
-      "Navigation intuitive",
-    ],
-    challenges: [
-      "Développement en temps limité",
-      "Création du frontend",
-      "Design attractif et cohérent",
-      "Optimisation backend",
-    ],
-    results: [
-      "Blog fonctionnel livré dans les temps",
-      "Contenu riche sur le blues",
-      "Design moderne et responsive",
-    ],
-  },
-}
+import { LanguageSelector } from "@/components/language-selector"
+import { useLanguage } from "@/components/language-context"
+import { getProjectBySlug } from "@/lib/projects-data"
 
 export default function ProjectDetail() {
   const params = useParams()
   const slug = params.slug as string
-  const project = projectsData[slug]
+  const { t, locale } = useLanguage()
+  const project = getProjectBySlug(slug, locale)
 
   if (!project) {
-    return <div>Projet non trouvé</div>
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">{t.projectDetails.projectNotFound}</h1>
+          <p className="text-muted-foreground mb-4">{t.projectDetails.projectNotFoundDesc}</p>
+          <Link href="/#projects" className="text-cyan-600 hover:underline">
+            {t.projectDetails.viewAllProjects}
+          </Link>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -659,9 +43,12 @@ export default function ProjectDetail() {
             aria-label="Retour à la liste des projets"
           >
             <ArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" />
-            Retour au portfolio
+            {t.projectDetails.backToProjects}
           </Link>
-          <ThemeToggle />
+          <div className="flex items-center gap-3">
+            <LanguageSelector />
+            <ThemeToggle />
+          </div>
         </div>
       </nav>
 
@@ -720,7 +107,7 @@ export default function ProjectDetail() {
             <Card className="p-8 border-2 hover:border-cyan-500/50 transition-colors">
               <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
                 <span className="w-1 h-8 bg-gradient-to-b from-cyan-500 to-blue-500 rounded-full" aria-hidden="true"></span>
-                Description du projet
+                {t.projectDetails.projectDescription}
               </h2>
               <p className="text-muted-foreground leading-relaxed whitespace-pre-line text-lg">
                 {project.longDescription}
@@ -734,7 +121,7 @@ export default function ProjectDetail() {
                   <Card className="p-6 border-2 border-red-500/20 bg-red-500/5">
                     <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-red-600 dark:text-red-400">
                       <span className="w-3 h-3 bg-red-500 rounded-full" aria-hidden="true"></span>
-                      Défis techniques
+                      {t.projectDetails.technicalChallenges}
                     </h3>
                     <ul className="space-y-3" role="list">
                       {project.challenges?.map((challenge: string, idx: number) => (
@@ -751,7 +138,7 @@ export default function ProjectDetail() {
                   <Card className="p-6 border-2 border-emerald-500/20 bg-emerald-500/5">
                     <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
                       <span className="w-3 h-3 bg-emerald-500 rounded-full" aria-hidden="true"></span>
-                      Résultats obtenus
+                      {t.projectDetails.resultsObtained}
                     </h3>
                     <ul className="space-y-3" role="list">
                       {project.results?.map((result: string, idx: number) => (
@@ -771,7 +158,7 @@ export default function ProjectDetail() {
               <Card className="p-8 border-2">
                 <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
                   <span className="w-1 h-8 bg-gradient-to-b from-cyan-500 to-blue-500 rounded-full" aria-hidden="true"></span>
-                  Extraits de code
+                  {t.projectDetails.codeExamples}
                 </h2>
                 <div className="space-y-6">
                   {project.codeExamples.map(
@@ -797,7 +184,7 @@ export default function ProjectDetail() {
             <Card className="p-6 border-2 sticky top-24">
               <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                 <span className="w-2 h-2 bg-cyan-500 rounded-full" aria-hidden="true"></span>
-                Fonctionnalités
+                {t.projectDetails.features}
               </h3>
               <ul className="space-y-2" role="list">
                 {project.features?.map((feature: string, idx: number) => (
@@ -813,7 +200,7 @@ export default function ProjectDetail() {
             <Card className="p-6 border-2">
               <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                 <span className="w-2 h-2 bg-blue-500 rounded-full" aria-hidden="true"></span>
-                Stack technique
+                {t.projectDetails.techStack}
               </h3>
               <div className="flex flex-wrap gap-2">
                 {project.technologies?.map((tech: string, idx: number) => (
@@ -833,7 +220,7 @@ export default function ProjectDetail() {
               href="/#projects"
               className="block w-full text-center px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-semibold hover:from-cyan-700 hover:to-blue-700 transition-all shadow-lg hover:shadow-cyan-500/30 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
             >
-              ← Voir tous les projets
+              {t.projectDetails.viewAllProjects}
             </Link>
           </aside>
         </div>

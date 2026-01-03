@@ -4,6 +4,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Download, FileText, ChevronDown, Globe } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useLanguage } from "./language-context"
 
 type CVLanguage = "fr" | "en"
 
@@ -22,6 +23,7 @@ const cvFiles: Record<CVLanguage, { file: string; name: string; label: string }>
 
 export function CVDownload() {
   const [isOpen, setIsOpen] = useState(false)
+  const { t } = useLanguage()
 
   const handleDownload = (lang: CVLanguage) => {
     if (typeof window !== "undefined" && window.trackCVDownload) {
@@ -51,7 +53,7 @@ export function CVDownload() {
           className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white shadow-lg w-full sm:w-auto group"
           aria-expanded={isOpen}
           aria-haspopup="listbox"
-          aria-label="Télécharger mon CV"
+          aria-label={t.misc.downloadCV}
         >
           <motion.div
             animate={{ rotate: [0, 10, -10, 0] }}
@@ -59,8 +61,8 @@ export function CVDownload() {
           >
             <Download className="w-5 h-5 mr-2" aria-hidden="true" />
           </motion.div>
-          <span className="hidden sm:inline">Télécharger CV</span>
-          <span className="inline sm:hidden">CV</span>
+          <span className="hidden sm:inline">{t.misc.downloadCV}</span>
+          <span className="inline sm:hidden">{t.misc.cv}</span>
           <ChevronDown
             className={`w-4 h-4 ml-2 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
             aria-hidden="true"

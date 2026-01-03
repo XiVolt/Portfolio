@@ -5,39 +5,41 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Code, Sparkles, Rocket, Wrench, Smartphone, TrendingUp } from "lucide-react"
-import Link from "next/link"
+import { useLanguage } from "./language-context"
 
 export function VolturaCodeSection() {
+  const { t } = useLanguage()
+
   const services = [
     {
       icon: <Code className="w-6 h-6" />,
-      title: "Création de sites vitrines",
-      description: "Sites web modernes et professionnels pour présenter votre activité",
+      title: t.volturacode.services.showcase,
+      description: t.volturacode.services.showcaseDesc,
     },
     {
       icon: <Sparkles className="w-6 h-6" />,
-      title: "Refonte et modernisation",
-      description: "Donnez une nouvelle vie à votre site existant",
+      title: t.volturacode.services.redesign,
+      description: t.volturacode.services.redesignDesc,
     },
     {
       icon: <TrendingUp className="w-6 h-6" />,
-      title: "Optimisation SEO & performance",
-      description: "Améliorez votre visibilité et vitesse de chargement",
+      title: t.volturacode.services.seo,
+      description: t.volturacode.services.seoDesc,
     },
     {
       icon: <Wrench className="w-6 h-6" />,
-      title: "Maintenance et mises à jour",
-      description: "Gardez votre site à jour et sécurisé",
+      title: t.volturacode.services.maintenance,
+      description: t.volturacode.services.maintenanceDesc,
     },
     {
       icon: <Smartphone className="w-6 h-6" />,
-      title: "Intégration responsive mobile",
-      description: "Sites parfaitement adaptés à tous les écrans",
+      title: t.volturacode.services.responsive,
+      description: t.volturacode.services.responsiveDesc,
     },
     {
       icon: <Rocket className="w-6 h-6" />,
-      title: "Hébergement & déploiement",
-      description: "Mise en ligne rapide et professionnelle",
+      title: t.volturacode.services.hosting,
+      description: t.volturacode.services.hostingDesc,
     },
   ]
 
@@ -64,19 +66,17 @@ export function VolturaCodeSection() {
           </motion.div>
 
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            VolturaCode – Mon entreprise de création de sites web
+            {t.volturacode.title}
           </h2>
           <div className="max-w-3xl mx-auto space-y-4 text-lg text-muted-foreground">
             <p>
-              <strong className="text-foreground">VolturaCode</strong> est ma micro-entreprise de création de sites
-              web modernes, performants et adaptés à chaque besoin.
+              <strong className="text-foreground">VolturaCode</strong> {t.volturacode.description1}
             </p>
             <p>
-              J'accompagne les particuliers, indépendants et petites entreprises dans leur présence en ligne :
-              conception, design, développement, optimisation SEO et maintenance.
+              {t.volturacode.description2}
             </p>
             <p className="text-emerald-600 dark:text-emerald-400 font-medium">
-              Mon objectif : offrir des solutions sur mesure qui allient esthétique, performance et accessibilité.
+              {t.volturacode.objective}
             </p>
           </div>
 
@@ -89,7 +89,7 @@ export function VolturaCodeSection() {
               >
                 <a href="https://voltura-code-site-u1zs.vercel.app" target="_blank" rel="noopener noreferrer">
                   <Rocket className="w-6 h-6 mr-2" />
-                  Découvrir VolturaCode
+                  {t.volturacode.discover}
                 </a>
               </Button>
             </motion.div>
@@ -103,7 +103,7 @@ export function VolturaCodeSection() {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          <h3 className="text-2xl font-bold text-center mb-8">Mes services</h3>
+          <h3 className="text-2xl font-bold text-center mb-8">{t.volturacode.myServices}</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {services.map((service, idx) => (
               <motion.div
@@ -138,14 +138,14 @@ export function VolturaCodeSection() {
         >
           <Card className="p-8 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950 dark:to-teal-950 border-2 border-emerald-200 dark:border-emerald-800">
             <div className="text-center">
-              <h3 className="text-2xl font-bold mb-4">Mes réalisations VolturaCode</h3>
+              <h3 className="text-2xl font-bold mb-4">{t.volturacode.myAchievements}</h3>
               <div className="flex justify-center mb-4">
                 <Sparkles className="w-16 h-16 text-emerald-600" />
               </div>
               <p className="text-lg text-muted-foreground mb-4">
-                Projets clients en cours de développement
+                {t.volturacode.projectsInDevelopment}
               </p>
-              <Badge className="bg-emerald-600 text-white">Bientôt disponible</Badge>
+              <Badge className="bg-emerald-600 text-white">{t.volturacode.comingSoon}</Badge>
             </div>
           </Card>
         </motion.div>

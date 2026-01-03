@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next"
 import { Inter, Poppins } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
+import { LanguageProvider } from "@/components/language-context"
 import "./globals.css"
 
 const inter = Inter({ 
@@ -156,7 +157,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <LanguageProvider>
+            {children}
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

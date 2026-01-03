@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Shield, Zap, AlertTriangle, CheckCircle } from "lucide-react"
+import { useLanguage } from "./language-context"
 
 interface Attack {
   id: number
@@ -24,6 +25,7 @@ export function FirewallDefenseGame() {
   const [missed, setMissed] = useState(0)
   const [gameActive, setGameActive] = useState(false)
   const [lastBlock, setLastBlock] = useState<string | null>(null)
+  const { t } = useLanguage()
 
   useEffect(() => {
     if (!gameActive) return
@@ -97,7 +99,7 @@ export function FirewallDefenseGame() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Shield className="w-6 h-6 text-cyan-400" />
-            <h3 className="font-poppins font-bold text-lg text-cyan-400">🛡️ Firewall Defense</h3>
+            <h3 className="font-poppins font-bold text-lg text-cyan-400">{t.firewallGame.title}</h3>
           </div>
           
           {!gameActive ? (
@@ -107,7 +109,7 @@ export function FirewallDefenseGame() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              ▶ Démarrer
+              {t.firewallGame.start}
             </motion.button>
           ) : (
             <motion.button
@@ -116,7 +118,7 @@ export function FirewallDefenseGame() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              ⏸ Stop
+              {t.firewallGame.stop}
             </motion.button>
           )}
         </div>
@@ -125,15 +127,15 @@ export function FirewallDefenseGame() {
         <div className="grid grid-cols-3 gap-4 mt-4">
           <div className="bg-black/40 rounded-lg p-3 text-center">
             <div className="text-2xl font-bold text-cyan-400">{score}</div>
-            <div className="text-xs text-gray-400">Score</div>
+            <div className="text-xs text-gray-400">{t.firewallGame.score}</div>
           </div>
           <div className="bg-black/40 rounded-lg p-3 text-center">
             <div className="text-2xl font-bold text-green-400">{blocked}</div>
-            <div className="text-xs text-gray-400">Bloquées</div>
+            <div className="text-xs text-gray-400">{t.firewallGame.blocked}</div>
           </div>
           <div className="bg-black/40 rounded-lg p-3 text-center">
             <div className="text-2xl font-bold text-red-400">{missed}</div>
-            <div className="text-xs text-gray-400">Passées</div>
+            <div className="text-xs text-gray-400">{t.firewallGame.passed}</div>
           </div>
         </div>
       </div>
@@ -144,8 +146,8 @@ export function FirewallDefenseGame() {
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
               <Shield className="w-16 h-16 text-cyan-400 mx-auto mb-4" />
-              <p className="text-cyan-400 font-semibold text-lg mb-2">Protégez le réseau !</p>
-              <p className="text-gray-400 text-sm">Cliquez sur les attaques pour les bloquer</p>
+              <p className="text-cyan-400 font-semibold text-lg mb-2">{t.firewallGame.protectNetwork}</p>
+              <p className="text-gray-400 text-sm">{t.firewallGame.clickToBlock}</p>
             </div>
           </div>
         )}

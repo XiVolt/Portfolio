@@ -4,41 +4,44 @@ import { motion } from "framer-motion"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { GraduationCap, Code, Server } from "lucide-react"
-
-const timelineData = [
-  {
-    period: "2024-2025 (S1-S2)",
-    title: "BUT Informatique - 1ère année",
-    institution: "IUT de Lens",
-    status: "Fini",
-    competences: ["Algorithmique", "Programmation Java", "Web (HTML/CSS/JS)", "Bases de données"],
-    projets: ["BioSymphonie", "Jeu d'Échecs", "Base de données démographique"],
-    icon: <Code className="w-5 h-5" />,
-    color: "bg-emerald-500",
-  },
-  {
-    period: "2025-2026 (S3-S4)",
-    title: "BUT Informatique - 2ème année",
-    institution: "IUT de Lens + Alternance",
-    status: "En cours",
-    competences: ["Développement avancé", "Architecture logicielle", "Gestion de projet", "DevOps", "etc"],
-    projets: ["Projets en entreprise", "Applications métier", "Infrastructure cloud", "et autres projets a découvrir"],
-    icon: <Server className="w-5 h-5" />,
-    color: "bg-blue-500",
-  },
-  {
-    period: "2026-2027 (S5-S6)",
-    title: "BUT Informatique - 3ème année",
-    institution: "IUT de Lens + Alternance",
-    status: "À venir",
-    competences: ["A découvir"],
-    projets: ["Projet de fin d'études"],
-    icon: <GraduationCap className="w-5 h-5" />,
-    color: "bg-purple-500",
-  },
-]
+import { useLanguage } from "./language-context"
 
 export function FormationTimeline() {
+  const { t } = useLanguage()
+
+  const timelineData = [
+    {
+      period: "2024-2025 (S1-S2)",
+      title: "BUT Informatique - 1ère année",
+      institution: "IUT de Lens",
+      status: t.formation.finished,
+      competences: ["Algorithmique", "Programmation Java", "Web (HTML/CSS/JS)", "Bases de données"],
+      projets: ["BioSymphonie", "Jeu d'Échecs", "Base de données démographique"],
+      icon: <Code className="w-5 h-5" />,
+      color: "bg-emerald-500",
+    },
+    {
+      period: "2025-2026 (S3-S4)",
+      title: "BUT Informatique - 2ème année",
+      institution: "IUT de Lens + Alternance",
+      status: t.formation.inProgress,
+      competences: ["Développement avancé", "Architecture logicielle", "Gestion de projet", "DevOps", "etc"],
+      projets: ["Projets en entreprise", "Applications métier", "Infrastructure cloud", "et autres projets a découvrir"],
+      icon: <Server className="w-5 h-5" />,
+      color: "bg-blue-500",
+    },
+    {
+      period: "2026-2027 (S5-S6)",
+      title: "BUT Informatique - 3ème année",
+      institution: "IUT de Lens + Alternance",
+      status: t.formation.upcoming,
+      competences: [t.formation.toDiscover],
+      projets: [t.formation.finalProject],
+      icon: <GraduationCap className="w-5 h-5" />,
+      color: "bg-purple-500",
+    },
+  ]
+
   return (
     <div className="space-y-8">
       <motion.div
@@ -47,8 +50,8 @@ export function FormationTimeline() {
         viewport={{ once: true }}
         className="text-center"
       >
-        <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4">Parcours de formation</h3>
-        <p className="text-slate-600 dark:text-slate-300">Timeline interactive de mon cursus BUT Informatique</p>
+        <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4">{t.formation.title}</h3>
+        <p className="text-slate-600 dark:text-slate-300">{t.formation.subtitle}</p>
       </motion.div>
 
       <div className="relative">
@@ -79,14 +82,14 @@ export function FormationTimeline() {
                   <p className="text-slate-600 dark:text-slate-300">{item.institution}</p>
                 </div>
                 <div className="text-right">
-                  <Badge variant={item.status === "En cours" ? "default" : "secondary"}>{item.status}</Badge>
+                  <Badge variant={item.status === t.formation.inProgress ? "default" : "secondary"}>{item.status}</Badge>
                   <p className="text-sm text-slate-500 mt-1">{item.period}</p>
                 </div>
               </div>
 
               <div className="space-y-4">
                 <div>
-                  <h5 className="font-medium text-slate-900 dark:text-white mb-2">Compétences développées</h5>
+                  <h5 className="font-medium text-slate-900 dark:text-white mb-2">{t.formation.skillsDeveloped}</h5>
                   <div className="flex flex-wrap gap-2">
                     {item.competences.map((comp, idx) => (
                       <Badge key={idx} variant="outline" className="text-xs">
@@ -97,7 +100,7 @@ export function FormationTimeline() {
                 </div>
 
                 <div>
-                  <h5 className="font-medium text-slate-900 dark:text-white mb-2">Projets réalisés</h5>
+                  <h5 className="font-medium text-slate-900 dark:text-white mb-2">{t.formation.projectsCompleted}</h5>
                   <ul className="text-sm text-slate-600 dark:text-slate-300 space-y-1">
                     {item.projets.map((projet, idx) => (
                       <li key={idx} className="flex items-center">

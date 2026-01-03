@@ -31,6 +31,9 @@ import { FirewallDefenseGame } from "@/components/firewall-game"
 import { NetworkAnimation } from "@/components/network-animation"
 import { CyberToolsShowcase } from "@/components/cyber-tools"
 import { Analytics } from "@vercel/analytics/next"
+import { useLanguage } from "@/components/language-context"
+import { LanguageSelector } from "@/components/language-selector"
+import { getProjectsData } from "@/lib/projects-data"
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("hero")
@@ -39,6 +42,11 @@ export default function Portfolio() {
   const [projectFilter, setProjectFilter] = useState("Tous")
   const [projectSearch, setProjectSearch] = useState("")
   const [showConfetti, setShowConfetti] = useState(false)
+
+  const { t, locale } = useLanguage()
+
+  // Obtenir les projets traduits
+  const projects = getProjectsData(locale)
 
   console.log("Portfolio loaded - Version 3.0 with VolturaCode")
 
@@ -80,7 +88,7 @@ export default function Portfolio() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
-    setFormStatus("Envoi en cours...")
+    setFormStatus(t.contact.sending)
 
     // Track form submission
     if (typeof window !== "undefined" && window.trackContactSubmission) {
@@ -100,220 +108,22 @@ export default function Portfolio() {
       })
 
       if (response.ok) {
-        setFormStatus("✅ Message envoyé avec succès ! Je vous répondrai rapidement.")
+        setFormStatus(t.contact.successMessage)
         setShowConfetti(true)
         setTimeout(() => setShowConfetti(false), 3000)
         form.reset()
       } else {
         const data = await response.json()
-        setFormStatus("❌ Erreur lors de l'envoi. Veuillez réessayer.")
+        setFormStatus(t.contact.errorMessage)
         console.error("Erreur Formspree:", data)
       }
     } catch (error) {
-      setFormStatus("❌ Erreur réseau. Veuillez vérifier votre connexion.")
+      setFormStatus(t.contact.networkError)
       console.error("Erreur:", error)
     } finally {
       setIsSubmitting(false)
     }
   }
-
-  const projects = [
-    {
-      title: "BioSymphonie - Site Web Écoresponsable",
-      slug: "biosymphonie",
-      description:
-        "Création d'un site web complet pour une entreprise d'événements écoresponsables avec navigation multilingue, carousel d'images et design responsive.",
-      technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
-      category: "Web Development",
-      projectType: "Projets étudiants",
-      semester: "S1 - 2024",
-      image: "/biosymphonie.png",
-      features: ["Navigation multilingue", "Design responsive", "Carousel interactif", "Conformité RGPD"],
-    },
-    {
-      title: "Jeu d'Échecs Interactif",
-      slug: "echecs",
-      description:
-        "Application web de jeu d'échecs en ligne avec interface graphique complète, gestion des tours et système de promotion des pions.",
-      technologies: ["Java", "JavaFX", "Interface Web", "Logique de jeu"],
-      category: "Game Development",
-      projectType: "Projets étudiants",
-      semester: "S1 - 2024",
-      image: "/echecs.png",
-      features: ["Interface graphique", "Gestion des tours", "Promotion des pions", "Validation des mouvements"],
-    },
-    {
-      title: "Bomberman - Jeu 2D JavaFX",
-      slug: "bomberman",
-      description:
-        "Développement d'un jeu Bomberman complet avec architecture MVC, animations fluides et gestion des explosions.",
-      technologies: ["JavaFX", "MVC Pattern", "Animation", "Observer Pattern"],
-      category: "Game Development",
-      projectType: "Projets étudiants",
-      semester: "S2 - 2025",
-      image: "/bomberman.png",
-      features: ["Architecture MVC", "Animations Timeline", "Gestion des explosions", "Interface responsive"],
-    github: "https://github.com/XiVolt/Bomberman",
-    },
-    {
-      title: "Infrastructure Réseau Procyon",
-      slug: "procyon",
-      description:
-        "Configuration complète d'une infrastructure réseau avec services DNS/Web, sécurisation et haute disponibilité.",
-      technologies: ["Linux", "DNS (BIND)", "Apache", "IPv4/IPv6", "Sécurité"],
-      category: "System Administration",
-      projectType: "Projets étudiants",
-      semester: "S2 - 2025",
-      image: "/setup.png",
-      features: [
-        "Configuration DNS maître/esclave",
-        "Virtual hosts Apache",
-        "Sécurisation par zones",
-        "Haute disponibilité",
-      ],
-    },
-    {
-      title: "Analyse d'Algorithmes de Tri - Optimisation Performance",
-      slug: "algorithmes-tri",
-      description:
-        "Projet d'analyse comparative de performance entre différents algorithmes de tri (Tri Fusion, Tri Rapide, Tri à Bulles) avec mesures de complexité temporelle et optimisations.",
-      technologies: ["Java", "Algorithmique", "Analyse de Performance", "Tests Unitaires"],
-      category: "Algorithm Analysis",
-      projectType: "Projets étudiants",
-      semester: "S1 - 2024",
-      image: "/tri.png",
-      features: [
-        "Implémentation Tri Fusion O(n log n)",
-        "Tri Rapide avec pivot optimisé",
-        "Mesures de performance temps réel",
-        "Analyse comparative sur grandes données",
-      ],
-    },
-    {
-      title: "Base de Données Démographique",
-      slug: "base-de-donnees",
-      description:
-        "Conception et exploitation d'une base de données relationnelle complexe avec modélisation hiérarchique et requêtes optimisées.",
-      technologies: ["SQL", "PostgreSQL", "Modélisation", "Optimisation"],
-      category: "Database",
-      projectType: "Projets étudiants",
-      semester: "S2 - 2025",
-      image: "/bd.png",
-      features: ["Modélisation hiérarchique", "Jointures optimisées", "Requêtes sécurisées", "Protection des données"],
-    },
-    
-    {
-      title: "Portfolio Personnel - Next.js",
-      slug: "portfolio-nextjs",
-      description:
-        "Développement de ce portfolio avec Next.js, animations Framer Motion, mode sombre/clair et optimisations performance.",
-      technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-      category: "Web Development",
-      projectType: "Projets personnels",
-      semester: "Projet Personnel",
-      image: "/portfolio.png",
-      features: ["Mode sombre/clair", "Animations fluides", "Performance optimisée", "SEO avancé"],
-      github: "https://github.com/XiVolt/Portfolio",
-    },
-    {
-      title: "VolturaCode - Site d'entreprise",
-      slug: "volturacode-website",
-      description:
-        "Développement du site vitrine de mon entreprise VolturaCode, spécialisée dans le développement web et la cybersécurité.",
-      technologies: ["Next.js", "TypeScript", "Tailwind CSS", "React"],
-      category: "Web Development",
-      projectType: "Projets personnels",
-      semester: "Projet Personnel",
-      image: "/Voltura.png",
-      features: ["Design moderne", "Site vitrine responsive", "Présentation des services", "Portfolio client"],
-      github: "https://github.com/XiVolt/voltura-code-site",
-    },
-    {
-      title: "Jeu en C - Développement bas niveau",
-      slug: "jeu-c",
-      description:
-        "Développement d'un jeu en langage C avec gestion de la mémoire, programmation bas niveau et interface console.",
-      technologies: ["C", "Gestion mémoire", "Algorithmique"],
-      category: "Game Development",
-      projectType: "Projets personnels",
-      semester: "Projet Personnel",
-      image: "/placeholder.png",
-      features: ["Programmation bas niveau", "Gestion de la mémoire", "Interface console", "Logique de jeu"],
-      github: "https://github.com/XiVolt/Fracture-UP",
-    },
-    {
-      title: "OnlyFoot - Réseau social football",
-      slug: "onlyfoot",
-      description:
-        "Site web communautaire sur le football : partage de photos, profils utilisateurs, commentaires, likes et base de données PostgreSQL.",
-      technologies: ["React", "Node.js", "Express", "PostgreSQL", "SQL", "Cloudinary"],
-      category: "Web Development",
-      projectType: "Projets personnels",
-      semester: "Projet Personnel",
-      image: "/onlyfoot.png",
-      features: [
-        "Création de profils utilisateurs",
-        "Publication de photos de football",
-        "Commentaires et likes sur les posts",
-        "Base de données relationnelle PostgreSQL",
-        "API Node.js sécurisée",
-        "Gestion des images avec Cloudinary"
-      ],
-    },
-    {
-      title: "LenSymphony - Synthétiseur Musical Java",
-      slug: "lensymphony-java",
-      description:
-        "Développement d'un synthétiseur musical fonctionnel en Java avec lecture de partitions XML et génération de sons en temps réel.",
-      technologies: ["Java", "XML", "Algorithmique musicale"],
-      category: "Software Development",
-      projectType: "Projets étudiants",
-      semester: "S3 - 2025",
-      image: "/Lensymphony2.png",
-      features: [
-        "Synthétiseur musical complet",
-        "Lecture de partitions XML",
-        "Génération de sons en temps réel",
-        "Interface utilisateur Java",
-      ],github: "https://gitlab.univ-artois.fr/leo_regniez1/lensymphony-groupe-b-4-regniez-leo-bras-tristan-plouvin-nathan-strobbe-theo",
-    },
-    {
-      title: "LenSymphony - Site Web PHP",
-      slug: "lensymphony-php",
-      description:
-        "Développement d'un site web en PHP pour présenter et jouer les musiques créées avec le synthétiseur LenSymphony.",
-      technologies: ["PHP", "Sqlite", "CSS3", "JavaScript"],
-      category: "Web Development",
-      projectType: "Projets étudiants",
-      semester: "S3 - 2025",
-      image: "/Lensymphony.png",
-      features: [
-        "Galerie de musiques",
-        "Lecteur audio intégré",
-        "Interface de présentation",
-        "Base de données MySQL",
-      ],
-        github: "https://gitlab.univ-artois.fr/nathan_plouvin/leo-tristan-theo-nathan-lensymphony-web",
-    },
-    {
-      title: "Marathon du Web - Blog Musical Blues",
-      slug: "marathon-web-blues",
-      description:
-        "Développement d'un site blog dédié au blues lors d'un marathon du web, avec articles, playlists et découverte d'artistes.",
-      technologies: ["PHP", "Sqlite", "CSS3", "JavaScript", "Responsive Design"],
-      category: "Web Development",
-      projectType: "Projets étudiants",
-      semester: "S3 - 2025",
-      image: "/Marathon.png",
-      features: [
-        "Blog musical thématique",
-        "Articles sur le blues",
-        "Playlists et découvertes",
-        "Design responsive",
-      ],
-        github: "https://gitlab.univ-artois.fr/nathan_plouvin/code-marathon-2025-groupe-10",
-    },
-  ]
 
   const skillsData = [
     // Cybersécurité
@@ -370,8 +180,8 @@ export default function Portfolio() {
   
   // Filter projects based on selected filter AND search query
   const filteredProjects = projects.filter(p => {
-    // Filtre par type
-    const matchesType = projectFilter === "Tous" || p.projectType === projectFilter
+    // Filtre par type (check for translated "All" or default filter)
+    const matchesType = projectFilter === t.projects.all || projectFilter === "Tous" || p.projectType === projectFilter
 
     // Filtre par recherche (titre, description, technologies)
     const searchLower = projectSearch.toLowerCase().trim()
@@ -464,20 +274,21 @@ export default function Portfolio() {
                     whileTap={{ scale: 0.95 }}
                   >
                     {section === "hero"
-                      ? "Accueil"
+                      ? t.nav.home
                       : section === "volturacode"
-                        ? "VolturaCode"
+                        ? t.nav.volturacode
                         : section === "alternance"
-                          ? "Alternance"
+                          ? t.nav.alternance
                           : section === "about"
-                            ? "À propos"
+                            ? t.nav.about
                             : section === "projects"
-                              ? "Projets"
+                              ? t.nav.projects
                               : section === "skills"
-                                ? "Compétences"
-                                : "Contact"}
+                                ? t.nav.skills
+                                : t.nav.contact}
                   </motion.button>
                 ))}
+                <LanguageSelector />
                 <ThemeToggle />
               </div>
 
@@ -560,15 +371,9 @@ export default function Portfolio() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              <span className="text-muted-foreground">Je suis</span>
-              <Typewriter 
-                words={[
-                  "Passioné par la Cybersécurité",
-                  "Administrateur Réseaux",
-                  "Étudiant en BUT Informatique",
-                  "Fondateur de VolturaCode",
-                  "Pentester en devenir",
-                ]}
+              <span className="text-muted-foreground">{t.hero.iAm}</span>
+              <Typewriter
+                words={t.hero.typewriter}
                 typingSpeed={80}
                 deletingSpeed={40}
               />
@@ -580,7 +385,7 @@ export default function Portfolio() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              Étudiant en BUT Informatique & fondateur de{" "}
+              {t.hero.subtitle}{" "}
               <span className="text-cyan-600 dark:text-cyan-400 font-semibold">VolturaCode</span>
             </motion.p>
 
@@ -590,7 +395,7 @@ export default function Portfolio() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              Futur expert en cybersécurité et réseaux recherchant une alternance de 18 mois. Spécialisé en sécurité informatique, administration système et infrastructure réseau.
+              {t.hero.description}
             </motion.p>
 
             <motion.div
@@ -608,7 +413,7 @@ export default function Portfolio() {
                   onClick={() => scrollToSection("projects")}
                   className="relative overflow-hidden bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-6 sm:px-8 py-3 text-base sm:text-lg group w-full"
                 >
-                  <span className="relative z-10">Voir mes projets</span>
+                  <span className="relative z-10">{t.hero.viewProjects}</span>
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
                     initial={{ x: "-100%" }}
@@ -630,7 +435,7 @@ export default function Portfolio() {
                   className="border-2 border-cyan-600 text-cyan-600 hover:bg-cyan-600 hover:text-white px-6 sm:px-8 py-3 text-base sm:text-lg transition-all duration-300 w-full"
                   onClick={() => scrollToSection("contact")}
                 >
-                  Me contacter
+                  {t.hero.contactMe}
                 </Button>
               </motion.div>
             </motion.div>
@@ -746,9 +551,9 @@ export default function Portfolio() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold mb-4">À propos de moi</h2>
+            <h2 className="text-4xl font-bold mb-4">{t.about.title}</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Étudiant dynamique avec un excellent sens du contact, j'aime collaborer avec des interlocuteurs variés.
+              {t.about.subtitle}
             </p>
           </motion.div>
 
@@ -757,25 +562,25 @@ export default function Portfolio() {
             stats={[
               {
                 value: 3,
-                label: "Années d'études",
+                label: t.about.yearsStudy,
                 suffix: "",
                 icon: <Code className="w-8 h-8" />,
               },
               {
                 value: 15,
-                label: "Projets réalisés",
+                label: t.about.projectsCompleted,
                 suffix: "+",
                 icon: <Database className="w-8 h-8" />,
               },
               {
                 value: 10,
-                label: "Technologies maîtrisées",
+                label: t.about.techMastered,
                 suffix: "+",
                 icon: <Server className="w-8 h-8" />,
               },
               {
                 value: 1,
-                label: "Entreprise fondée",
+                label: t.about.companiesFounded,
                 suffix: "",
                 icon: <Globe className="w-8 h-8" />,
               },
@@ -791,7 +596,7 @@ export default function Portfolio() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <h3 className="text-2xl font-semibold mb-6">Informations</h3>
+              <h3 className="text-2xl font-semibold mb-6">{t.about.information}</h3>
               <div className="space-y-4 mb-8">
                 <motion.div className="flex items-center space-x-3" whileHover={{ x: 5 }}>
                   <MapPin className="w-5 h-5 text-cyan-600" />
@@ -808,26 +613,26 @@ export default function Portfolio() {
               </div>
 
               <div className="mb-8">
-                <h4 className="font-semibold mb-4">Langues</h4>
+                <h4 className="font-semibold mb-4">{t.about.languages}</h4>
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <span>Français</span>
-                    <span className="text-muted-foreground">Langue maternelle</span>
+                    <span>{t.about.french}</span>
+                    <span className="text-muted-foreground">{t.about.nativeLanguage}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Anglais</span>
-                    <span className="text-muted-foreground">Intermédiaire supérieur (B2)</span>
+                    <span>{t.about.english}</span>
+                    <span className="text-muted-foreground">{t.about.upperIntermediate}</span>
                   </div>
                 </div>
               </div>
 
               <div>
-                <h4 className="font-semibold mb-4">Centres d'intérêt</h4>
+                <h4 className="font-semibold mb-4">{t.about.interests}</h4>
                 <div className="flex flex-wrap gap-2">
-                  <Badge variant="secondary">Formule 1</Badge>
-                  <Badge variant="secondary">Tennis (5 ans)</Badge>
-                  <Badge variant="secondary">Natation (4 ans)</Badge>
-                  <Badge variant="secondary">Gymnastique (7 ans)</Badge>
+                  <Badge variant="secondary">{t.about.f1}</Badge>
+                  <Badge variant="secondary">{t.about.tennis}</Badge>
+                  <Badge variant="secondary">{t.about.swimming}</Badge>
+                  <Badge variant="secondary">{t.about.gymnastics}</Badge>
                 </div>
               </div>
             </motion.div>
@@ -861,10 +666,10 @@ export default function Portfolio() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
-              Mes Projets
+              {t.projects.title}
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Découvrez mes réalisations organisées par semestre et compétences développées.
+              {t.projects.subtitle}
             </p>
           </motion.div>
 
@@ -885,14 +690,14 @@ export default function Portfolio() {
               className="text-center py-16"
             >
               <p className="text-xl text-muted-foreground mb-4">
-                Aucun projet trouvé pour cette recherche.
+                {t.projects.noResults}
               </p>
               <Button
                 variant="outline"
                 onClick={() => { setProjectSearch(""); setProjectFilter("Tous"); }}
                 className="mt-4"
               >
-                Réinitialiser les filtres
+                {t.projects.resetFilters}
               </Button>
             </motion.div>
           )}
@@ -952,7 +757,7 @@ export default function Portfolio() {
                   >
                     <span className="text-white font-bold text-lg flex items-center gap-2">
                       <ExternalLink className="w-5 h-5" aria-hidden="true" />
-                      Voir le projet
+                      {t.projects.viewProject}
                     </span>
                   </div>
                 </div>
@@ -1003,7 +808,7 @@ export default function Portfolio() {
                     className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 text-white text-sm font-semibold hover:from-cyan-700 hover:to-blue-700 transition-all shadow-lg hover:shadow-cyan-500/30 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
                     aria-label={`Voir les détails du projet ${project.title}`}
                   >
-                    Voir détails
+                    {t.projects.viewDetails}
                     <ExternalLink className="w-4 h-4" aria-hidden="true" />
                   </Link>
                   {project.github && (
@@ -1051,9 +856,9 @@ export default function Portfolio() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold mb-4">Compétences</h2>
+            <h2 className="text-4xl font-bold mb-4">{t.skills.title}</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Un aperçu de mes compétences techniques et soft skills développées au cours de ma formation.
+              {t.skills.subtitle}
             </p>
           </motion.div>
 
@@ -1066,7 +871,7 @@ export default function Portfolio() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl font-semibold mb-8">Certifications</h3>
+            <h3 className="text-2xl font-semibold mb-8">{t.skills.certifications}</h3>
             <div className="flex justify-center space-x-8">
               <motion.div 
                 whileHover={{ 
@@ -1113,15 +918,15 @@ export default function Portfolio() {
       <section id="contact" className="py-20 relative z-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}>
-            <h2 className="text-4xl font-bold mb-4">Contactez-moi</h2>
+            <h2 className="text-4xl font-bold mb-4">{t.contact.title}</h2>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              Intéressé par mon profil ? N'hésitez pas à me contacter pour discuter d'opportunités d'alternance.
+              {t.contact.subtitle}
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-12">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <h3 className="text-2xl font-semibold mb-6">Informations de contact</h3>
+              <h3 className="text-2xl font-semibold mb-6">{t.contact.contactInfo}</h3>
               <div className="space-y-6">
                 <motion.div 
                   className="flex items-center space-x-4 group cursor-pointer" 
@@ -1142,7 +947,7 @@ export default function Portfolio() {
                     <Mail className="w-6 h-6" />
                   </motion.div>
                   <div>
-                    <p className="font-medium">Email</p>
+                    <p className="font-medium">{t.contact.email}</p>
                     <p className="text-muted-foreground group-hover:text-cyan-600 transition-colors">tristanbras34@gmail.com</p>
                   </div>
                 </motion.div>
@@ -1161,7 +966,7 @@ export default function Portfolio() {
                     <Phone className="w-6 h-6" />
                   </motion.div>
                   <div>
-                    <p className="font-medium">Téléphone</p>
+                    <p className="font-medium">{t.contact.phone}</p>
                     <p className="text-muted-foreground group-hover:text-cyan-600 transition-colors">07 85 40 82 49</p>
                   </div>
                 </motion.div>
@@ -1180,7 +985,7 @@ export default function Portfolio() {
                     <MapPin className="w-6 h-6" />
                   </motion.div>
                   <div>
-                    <p className="font-medium">Localisation</p>
+                    <p className="font-medium">{t.contact.location}</p>
                     <p className="text-muted-foreground group-hover:text-cyan-600 transition-colors">62110, Hénin-Beaumont</p>
                   </div>
                 </motion.div>
@@ -1197,13 +1002,13 @@ export default function Portfolio() {
                     <Linkedin className="w-6 h-6" />
                   </motion.div>
                   <div>
-                    <p className="font-medium">LinkedIn</p>
+                    <p className="font-medium">{t.contact.linkedin}</p>
                     <Link
                       href="https://www.linkedin.com/in/tristan-bras-3434a82a6/"
                       target="_blank"
                       className="text-cyan-600 hover:text-cyan-500 transition-colors font-medium"
                     >
-                      Voir mon profil →
+                      {t.contact.viewProfile}
                     </Link>
                   </div>
                 </motion.div>
@@ -1211,52 +1016,52 @@ export default function Portfolio() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <h3 className="text-2xl font-semibold mb-6">Envoyez-moi un message</h3>
+              <h3 className="text-2xl font-semibold mb-6">{t.contact.sendMessage}</h3>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Nom complet</label>
+                  <label className="block text-sm font-medium mb-2">{t.contact.fullName}</label>
                   <motion.input
                     type="text"
                     name="name"
                     required
                     disabled={isSubmitting}
                     className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-white disabled:opacity-50 transition-all"
-                    placeholder="Votre nom"
+                    placeholder={t.contact.yourName}
                     whileFocus={{ scale: 1.02 }}
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Email</label>
+                  <label className="block text-sm font-medium mb-2">{t.contact.email}</label>
                   <motion.input
                     type="email"
                     name="email"
                     required
                     disabled={isSubmitting}
                     className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-white disabled:opacity-50 transition-all"
-                    placeholder="votre@email.com"
+                    placeholder={t.contact.yourEmail}
                     whileFocus={{ scale: 1.02 }}
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Sujet</label>
+                  <label className="block text-sm font-medium mb-2">{t.contact.subject}</label>
                   <motion.input
                     type="text"
                     name="subject"
                     disabled={isSubmitting}
                     className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-white disabled:opacity-50 transition-all"
-                    placeholder="Opportunité d'alternance"
+                    placeholder={t.contact.subjectPlaceholder}
                     whileFocus={{ scale: 1.02 }}
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Message</label>
+                  <label className="block text-sm font-medium mb-2">{t.contact.message}</label>
                   <motion.textarea
                     name="message"
                     rows={5}
                     required
                     disabled={isSubmitting}
                     className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-white resize-none disabled:opacity-50 transition-all"
-                    placeholder="Votre message..."
+                    placeholder={t.contact.messagePlaceholder}
                     whileFocus={{ scale: 1.02 }}
                   ></motion.textarea>
                 </div>
@@ -1266,7 +1071,7 @@ export default function Portfolio() {
                     disabled={isSubmitting}
                     className="w-full bg-cyan-600 hover:bg-cyan-700 text-white py-3 disabled:opacity-50"
                   >
-                    {isSubmitting ? "Envoi en cours..." : "Envoyer le message"}
+                    {isSubmitting ? t.contact.sending : t.contact.send}
                   </Button>
                 </motion.div>
 
@@ -1293,8 +1098,8 @@ export default function Portfolio() {
       <footer className="bg-slate-950 text-slate-400 py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <p>&copy; 2026 Tristan Bras. Tous droits réservés.</p>
-            <p className="mt-2 text-sm">Étudiant en BUT Informatique - Recherche alternance 18 mois</p>
+            <p>&copy; 2026 Tristan Bras. {t.footer.rights}</p>
+            <p className="mt-2 text-sm">{t.footer.searchingAlternance}</p>
           </div>
         </div>
       </footer>

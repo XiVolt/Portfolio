@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Search, X } from "lucide-react"
+import { useLanguage } from "./language-context"
 
 interface ProjectFilterProps {
   categories: string[]
@@ -21,7 +22,8 @@ export function ProjectFilter({
   searchQuery = "",
   onSearchChange
 }: ProjectFilterProps) {
-  const allCategories = ["Tous", ...categories]
+  const { t } = useLanguage()
+  const allCategories = [t.projects.all, ...categories]
   const [localSearch, setLocalSearch] = useState(searchQuery)
 
   const handleSearchChange = (value: string) => {
@@ -51,11 +53,11 @@ export function ProjectFilter({
             />
             <Input
               type="search"
-              placeholder="Rechercher un projet..."
+              placeholder={t.misc.searchProject}
               value={localSearch}
               onChange={(e) => handleSearchChange(e.target.value)}
               className="pl-10 pr-10 py-3 bg-background border-2 border-border focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 rounded-xl transition-all"
-              aria-label="Rechercher un projet"
+              aria-label={t.misc.searchProject}
             />
             {localSearch && (
               <motion.button
@@ -64,7 +66,7 @@ export function ProjectFilter({
                 exit={{ opacity: 0, scale: 0.8 }}
                 onClick={clearSearch}
                 className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-muted transition-colors"
-                aria-label="Effacer la recherche"
+                aria-label={t.misc.clearSearch}
               >
                 <X className="w-4 h-4 text-muted-foreground" />
               </motion.button>
@@ -77,7 +79,7 @@ export function ProjectFilter({
       <div
         className="flex flex-wrap gap-3 justify-center"
         role="group"
-        aria-label="Filtrer les projets par catégorie"
+        aria-label={t.misc.filterByCategory}
       >
         {allCategories.map((category, index) => (
           <motion.button
@@ -90,7 +92,7 @@ export function ProjectFilter({
             whileTap={{ scale: 0.95 }}
             className="focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 rounded-full"
             aria-pressed={activeFilter === category}
-            aria-label={`Filtrer par ${category}`}
+            aria-label={`${t.misc.filterBy} ${category}`}
           >
             <Badge
               className={`px-6 py-2.5 text-sm font-medium cursor-pointer transition-all duration-300 ${
@@ -120,7 +122,7 @@ export function ProjectFilter({
           className="text-center text-sm text-muted-foreground"
           aria-live="polite"
         >
-          Recherche : &quot;{localSearch}&quot;
+          {t.misc.search} : &quot;{localSearch}&quot;
         </motion.p>
       )}
     </div>

@@ -4,6 +4,8 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
+import { LanguageSelector } from "./language-selector"
+import { useLanguage } from "./language-context"
 
 interface MobileMenuProps {
   sections: string[]
@@ -13,15 +15,19 @@ interface MobileMenuProps {
 
 export function MobileMenu({ sections, activeSection, onSectionClick }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const { t } = useLanguage()
 
-  const sectionNames: Record<string, string> = {
-    hero: "Accueil",
-    volturacode: "VolturaCode",
-    alternance: "Alternance",
-    about: "À propos",
-    projects: "Projets",
-    skills: "Compétences",
-    contact: "Contact",
+  const getSectionName = (section: string) => {
+    switch (section) {
+      case "hero": return t.nav.home
+      case "volturacode": return t.nav.volturacode
+      case "alternance": return t.nav.alternance
+      case "about": return t.nav.about
+      case "projects": return t.nav.projects
+      case "skills": return t.nav.skills
+      case "contact": return t.nav.contact
+      default: return section
+    }
   }
 
   // Empêcher le scroll quand le menu est ouvert
@@ -72,9 +78,9 @@ export function MobileMenu({ sections, activeSection, onSectionClick }: MobileMe
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
             >
               <div className="p-4 flex flex-col">
-                {/* Theme Toggle */}
+                {/* Theme Toggle & Language */}
                 <div className="flex justify-between items-center pb-3 mb-3 border-b border-border">
-                  <span className="text-sm font-medium text-muted-foreground">Thème</span>
+                  <LanguageSelector />
                   <ThemeToggle />
                 </div>
 
@@ -94,7 +100,7 @@ export function MobileMenu({ sections, activeSection, onSectionClick }: MobileMe
                       transition={{ delay: index * 0.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      {sectionNames[section]}
+                      {getSectionName(section)}
                     </motion.button>
                   ))}
                 </nav>

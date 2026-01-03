@@ -2,9 +2,11 @@
 
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
+import { useLanguage } from "./language-context"
 
 export function PageLoader() {
   const [isLoading, setIsLoading] = useState(true)
+  const { t } = useLanguage()
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -71,7 +73,7 @@ export function PageLoader() {
             ease: "easeInOut",
           }}
         >
-          Chargement...
+          {t.misc.loading}
         </motion.p>
       </div>
     </motion.div>

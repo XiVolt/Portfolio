@@ -3,9 +3,11 @@
 import { motion } from "framer-motion"
 import { Mail, MessageCircle } from "lucide-react"
 import { useState } from "react"
+import { useLanguage } from "./language-context"
 
 export function FloatingContactButton() {
   const [isOpen, setIsOpen] = useState(false)
+  const { t } = useLanguage()
 
   const scrollToContact = () => {
     const element = document.getElementById("contact")
@@ -42,7 +44,7 @@ export function FloatingContactButton() {
           initial={{ x: 10 }}
           whileHover={{ x: 0 }}
         >
-          <span className="text-sm font-medium">Contactez-moi !</span>
+          <span className="text-sm font-medium">{t.hero.contactMe} !</span>
         </motion.div>
 
         {/* Ping effect */}

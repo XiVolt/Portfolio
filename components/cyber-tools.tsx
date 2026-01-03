@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { Shield, Terminal, Network, Lock, Eye, Zap, Wifi, Database } from "lucide-react"
 import { Card } from "@/components/ui/card"
+import { useLanguage } from "./language-context"
 
 const cyberTools = [
   { name: "Wireshark", icon: Network, category: "Network Analysis", color: "from-blue-500 to-cyan-500" },
@@ -16,6 +17,8 @@ const cyberTools = [
 ]
 
 export function CyberToolsShowcase() {
+  const { t } = useLanguage()
+
   return (
     <section className="py-20 relative z-10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,11 +30,11 @@ export function CyberToolsShowcase() {
         >
           <h2 className="text-4xl font-bold mb-4 font-poppins">
             <span className="bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">
-              Arsenal Cybersécurité
+              {t.cyberTools.title}
             </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Maîtrise des outils professionnels de sécurité informatique et d'analyse réseau
+            {t.cyberTools.subtitle}
           </p>
         </motion.div>
 
@@ -92,7 +95,7 @@ export function CyberToolsShowcase() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h3 className="text-2xl font-semibold mb-6 font-poppins">Certifications Visées</h3>
+          <h3 className="text-2xl font-semibold mb-6 font-poppins">{t.cyberTools.targetCertifications}</h3>
           <div className="flex flex-wrap justify-center gap-4">
             {["CEH", "Security+", "OSCP", "CCNA", "Network+"].map((cert, index) => (
               <motion.div
