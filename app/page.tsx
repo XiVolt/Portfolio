@@ -337,6 +337,26 @@ export default function Portfolio() {
     { name: "Linux Administration", level: 85, category: "Outils" },
     { name: "Docker & Virtualisation", level: 10, category: "Outils" },
     { name: "Git / GitHub", level: 80, category: "Outils" },
+
+      {name: "Java", level: 75, category: "Langages" },
+      {name: "JavaScript / TypeScript", level: 85, category: "Langages" },
+      {name: "HTML5 & CSS3", level: 80, category: "Langages" },
+      {name: "C", level: 20, category: "Langages" },
+      {name: "SQL", level: 70, category: "Langages" },
+      {name: "PHP", level: 65, category: "Langages" },
+      {name: "Next.js & React", level: 70, category: "Langages" },
+      {name: "Node.js", level: 40, category: "Langages" },
+      {name: "Python", level: 85, category: "Langages" },
+
+      {name : "Tailwind CSS", level: 80, category: "Frameworks" },
+      {name : "JavaFX", level: 75, category: "Frameworks" },
+      {name : "Express.js", level: 20, category: "Frameworks" },
+      {name : "Bootstrap", level: 40, category: "Frameworks" },
+      {name : "Vite", level: 20, category: "Frameworks" },
+      {name : "Vue", level: 25, category: "Frameworks" },
+      {name : "Laravel", level: 60, category: "Frameworks" },
+      {name : "Flask", level: 20, category: "Frameworks" },
+      {name : "React Native", level: 50, category: "Frameworks" },
     
     // Soft Skills
     { name: "Analyse & Résolution", level: 75, category: "Soft Skills" },
