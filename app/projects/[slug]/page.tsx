@@ -42,7 +42,6 @@ export default function ProjectDetail() {
             className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 rounded-lg px-2 py-1"
             aria-label="Retour à la liste des projets"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" />
             {t.projectDetails.backToProjects}
           </Link>
           <div className="flex items-center gap-3">
